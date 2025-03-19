@@ -11,13 +11,14 @@
     color: #b23cff;
 }
 
-body {
+html, body {
     background: linear-gradient(to bottom, #0a1a3d, #1a2a5d) !important; /* Темно-синий градиент */
     background-image: url('https://www.transparenttextures.com/patterns/noise-pattern-with-crosslines.png') !important;
     background-blend-mode: overlay;
     background-size: 200px;
     overflow-x: hidden;
     position: relative;
+    min-height: 100vh;
 }
 
 #particles {
@@ -98,12 +99,12 @@ p {
     display: flex;
     justify-content: center;
     position: relative;
-    height: 300px; /* Увеличиваем высоту для больших карт */
+    height: 300px;
     margin-top: 20px;
 }
 
 .nft-card {
-    width: 200px; /* Увеличиваем размер */
+    width: 200px;
     height: 280px;
     object-fit: cover;
     border-radius: 10px;
@@ -119,12 +120,12 @@ p {
 }
 
 .nft-card[data-position="right"] {
-    transform: translateX(100px) rotate(10deg) scale(0.9); /* Справа с наклоном */
+    transform: translateX(100px) rotate(10deg) scale(0.9);
     z-index: 2;
 }
 
 .nft-card[data-position="left"] {
-    transform: translateX(-100px) rotate(-10deg) scale(0.9); /* Слева с наклоном */
+    transform: translateX(-100px) rotate(-10deg) scale(0.9);
     z-index: 2;
 }
 
@@ -165,24 +166,19 @@ p {
         transform: translateX(0) scale(1) rotate(0deg);
         z-index: 3;
     }
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .hero-logo { max-width: 400px; }
-    h2 { font-size: 2.2rem; }
-    p { font-size: 1.1rem; }
-    .nft-card { width: 160px; height: 224px; }
-    .nft-card[data-position="right"] { transform: translateX(80px) rotate(10deg) scale(0.9); }
-    .nft-card[data-position="left"] { transform: translateX(-80px) rotate(-10deg) scale(0.9); }
-}
-
-@media (max-width: 768px) {
-    .hero-logo { max-width: 300px; }
-    h2 { font-size: 2rem; }
-    p { font-size: 1rem; }
-    .nft-cards { flex-direction: column; align-items: center; height: auto; }
-    .nft-card { width: 200px; height: 280px; transform: none; margin: 10px 0; position: relative; }
+    .nft-cards {
+        height: 300px; /* Оставляем горизонтальное расположение */
+    }
+    .nft-card {
+        width: 150px;
+        height: 210px;
+    }
+    .nft-card[data-position="right"] {
+        transform: translateX(80px) rotate(10deg) scale(0.9);
+    }
+    .nft-card[data-position="left"] {
+        transform: translateX(-80px) rotate(-10deg) scale(0.9);
+    }
 }
 
 @media (max-width: 480px) {
@@ -190,7 +186,9 @@ p {
     h2 { font-size: 1.8rem; }
     p { font-size: 0.9rem; }
     .section-card { padding: 20px; }
-    .nft-card { width: 160px; height: 224px; }
+    .nft-card { width: 120px; height: 168px; }
+    .nft-card[data-position="right"] { transform: translateX(60px) rotate(10deg) scale(0.9); }
+    .nft-card[data-position="left"] { transform: translateX(-60px) rotate(-10deg) scale(0.9); }
 }
 
 @media (min-width: 1200px) {
