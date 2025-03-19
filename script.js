@@ -45,7 +45,7 @@ document.addEventListener('mousemove', (e) => {
         const distance = Math.sqrt((mouseX - particleX) ** 2 + (mouseY - particleY) ** 2);
         if (distance < 100) {
             const angle = Math.atan2(mouseY - particleY, mouseX - particleX);
-            const pullStrength = (100 - distance) / 100 * 40; // Увеличиваем силу притяжения до 40px
+            const pullStrength = (100 - distance) / 100 * 40;
             gsap.to(particle, {
                 x: Math.cos(angle) * pullStrength,
                 y: Math.sin(angle) * pullStrength,
@@ -74,7 +74,7 @@ document.addEventListener('touchmove', (e) => {
         const distance = Math.sqrt((touchX - particleX) ** 2 + (touchY - particleY) ** 2);
         if (distance < 100) {
             const angle = Math.atan2(touchY - particleY, touchX - particleX);
-            const pullStrength = (100 - distance) / 100 * 40; // Увеличиваем силу притяжения
+            const pullStrength = (100 - distance) / 100 * 40;
             gsap.to(particle, {
                 x: Math.cos(angle) * pullStrength,
                 y: Math.sin(angle) * pullStrength,
@@ -87,6 +87,32 @@ document.addEventListener('touchmove', (e) => {
 
     lastTouchX = touchX;
     lastTouchY = touchY;
+});
+
+// NFT Cards Animation
+const nftCards = document.querySelectorAll('.nft-card');
+let positions = ['center', 'right', 'left'];
+
+nftCards.forEach(card => {
+    const updatePosition = (newPosition) => {
+        card.setAttribute('data-position', newPosition);
+    };
+
+    // На ПК: при наведении
+    card.addEventListener('mouseenter', () => {
+        positions = positions.slice(1).concat(positions[0]); // Циклический сдвиг
+        nftCards.forEach((c, index) => {
+            c.setAttribute('data-position', positions[index]);
+        });
+    });
+
+    // На мобильных: при касании
+    card.addEventListener('touchstart', () => {
+        positions = positions.slice(1).concat(positions[0]);
+        nftCards.forEach((c, index) => {
+            c.setAttribute('data-position', positions[index]);
+        });
+    });
 });
 
 // Hero Logo Pulse Animation
