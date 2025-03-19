@@ -4,8 +4,9 @@ gsap.registerPlugin(ScrollTrigger);
 const particlesDiv = document.getElementById('particles');
 const particles = [];
 
-for (let i = 0; i < 150; i++) {
+for (let i = 0; i < 50; i++) { // Уменьшаем количество частиц до 50
     const particle = document.createElement('div');
+    particle.classList.add('particle'); // Добавляем класс для отладки
     particle.style.cssText = `
         position: absolute;
         width: 3px;
@@ -23,8 +24,8 @@ for (let i = 0; i < 150; i++) {
     particle.style.top = `${y}px`;
 
     gsap.to(particle, {
-        x: '+=50',
-        y: '+=50',
+        x: '+=30', // Уменьшаем амплитуду движения
+        y: '+=30',
         opacity: Math.random() * 0.5 + 0.2,
         duration: 5 + Math.random() * 5,
         repeat: -1,
@@ -38,7 +39,7 @@ document.addEventListener('mousemove', (e) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
-    particles.forEach((particle, index) => {
+    particles.forEach(particle => {
         const rect = particle.getBoundingClientRect();
         const particleX = rect.left + rect.width / 2;
         const particleY = rect.top + rect.height / 2;
@@ -54,33 +55,11 @@ document.addEventListener('mousemove', (e) => {
                 ease: 'power2.out',
                 overwrite: 'auto'
             });
-
-            // Притяжение между звездами
-            particles.forEach((otherParticle, otherIndex) => {
-                if (index !== otherIndex) {
-                    const otherRect = otherParticle.getBoundingClientRect();
-                    const otherX = otherRect.left + otherRect.width / 2;
-                    const otherY = otherRect.top + otherRect.height / 2;
-
-                    const distanceBetween = Math.sqrt((particleX - otherX) ** 2 + (particleY - otherY) ** 2);
-                    if (distanceBetween < 50) {
-                        const angleBetween = Math.atan2(otherY - particleY, otherX - particleX);
-                        const pullStrengthBetween = (50 - distanceBetween) / 50 * 10;
-                        gsap.to(particle, {
-                            x: Math.cos(angleBetween) * pullStrengthBetween,
-                            y: Math.sin(angleBetween) * pullStrengthBetween,
-                            duration: 0.5,
-                            ease: 'power2.out',
-                            overwrite: 'auto'
-                        });
-                        gsap.to(particle, {
-                            boxShadow: '0 0 15px rgba(0, 204, 255, 0.8)',
-                            duration: 0.5,
-                            ease: 'power2.out',
-                            overwrite: 'auto'
-                        });
-                    }
-                }
+            gsap.to(particle, {
+                boxShadow: '0 0 15px rgba(0, 204, 255, 0.8)',
+                duration: 0.5,
+                ease: 'power2.out',
+                overwrite: 'auto'
             });
         }
     });
@@ -95,7 +74,7 @@ document.addEventListener('touchmove', (e) => {
     const touchX = touch.clientX;
     const touchY = touch.clientY;
 
-    particles.forEach((particle, index) => {
+    particles.forEach(particle => {
         const rect = particle.getBoundingClientRect();
         const particleX = rect.left + rect.width / 2;
         const particleY = rect.top + rect.height / 2;
@@ -111,33 +90,11 @@ document.addEventListener('touchmove', (e) => {
                 ease: 'power2.out',
                 overwrite: 'auto'
             });
-
-            // Притяжение между звездами
-            particles.forEach((otherParticle, otherIndex) => {
-                if (index !== otherIndex) {
-                    const otherRect = otherParticle.getBoundingClientRect();
-                    const otherX = otherRect.left + otherRect.width / 2;
-                    const otherY = otherRect.top + otherRect.height / 2;
-
-                    const distanceBetween = Math.sqrt((particleX - otherX) ** 2 + (particleY - otherY) ** 2);
-                    if (distanceBetween < 50) {
-                        const angleBetween = Math.atan2(otherY - particleY, otherX - particleX);
-                        const pullStrengthBetween = (50 - distanceBetween) / 50 * 10;
-                        gsap.to(particle, {
-                            x: Math.cos(angleBetween) * pullStrengthBetween,
-                            y: Math.sin(angleBetween) * pullStrengthBetween,
-                            duration: 0.5,
-                            ease: 'power2.out',
-                            overwrite: 'auto'
-                        });
-                        gsap.to(particle, {
-                            boxShadow: '0 0 15px rgba(0, 204, 255, 0.8)',
-                            duration: 0.5,
-                            ease: 'power2.out',
-                            overwrite: 'auto'
-                        });
-                    }
-                }
+            gsap.to(particle, {
+                boxShadow: '0 0 15px rgba(0, 204, 255, 0.8)',
+                duration: 0.5,
+                ease: 'power2.out',
+                overwrite: 'auto'
             });
         }
     });
