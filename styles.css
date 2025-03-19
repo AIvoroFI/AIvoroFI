@@ -12,8 +12,8 @@
 }
 
 body {
-    background: linear-gradient(to bottom, #1a0033, #330066);
-    background-image: url('https://www.transparenttextures.com/patterns/noise-pattern-with-crosslines.png');
+    background: linear-gradient(to bottom, #1a0033, #330066) !important; /* Гарантируем темный фон */
+    background-image: url('https://www.transparenttextures.com/patterns/noise-pattern-with-crosslines.png') !important;
     background-blend-mode: overlay;
     background-size: 200px;
     overflow-x: hidden;
@@ -38,7 +38,7 @@ body {
     height: 3px;
     background: #b23cff;
     border-radius: 50%;
-    transition: all 0.2s ease; /* Для плавности */
+    transition: all 0.2s ease;
 }
 
 /* Hero Section */
@@ -97,7 +97,8 @@ p {
 .nft-cards {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    position: relative;
+    height: 220px; /* Высота для стопки карт */
     margin-top: 20px;
 }
 
@@ -108,12 +109,13 @@ p {
     border-radius: 10px;
     border: 1px solid #00ccff;
     box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
-    position: relative;
-    transition: transform 0.5s;
+    position: absolute;
+    transition: transform 0.5s, z-index 0.5s;
 }
 
-.nft-card:nth-child(2) { transform: translateX(-20px) scale(0.9); z-index: -1; }
-.nft-card:nth-child(3) { transform: translateX(-40px) scale(0.8); z-index: -2; }
+.nft-card:nth-child(1) { transform: translateX(0); z-index: 3; }
+.nft-card:nth-child(2) { transform: translateX(20px) scale(0.9); z-index: 2; }
+.nft-card:nth-child(3) { transform: translateX(40px) scale(0.8); z-index: 1; }
 
 /* Footer */
 .footer {
@@ -138,8 +140,8 @@ p {
         box-shadow: 0 0 30px rgba(178, 60, 255, 0.7);
     }
     .nft-card:hover {
-        transform: scale(1.1) translateX(0);
-        z-index: 1;
+        transform: translateX(0) scale(1);
+        z-index: 3;
     }
 }
 
@@ -149,8 +151,8 @@ p {
         box-shadow: 0 0 30px rgba(178, 60, 255, 0.7);
     }
     .nft-card:active {
-        transform: scale(1.1) translateX(0);
-        z-index: 1;
+        transform: translateX(0) scale(1);
+        z-index: 3;
     }
 }
 
@@ -166,8 +168,8 @@ p {
     .hero-logo { max-width: 300px; }
     h2 { font-size: 2rem; }
     p { font-size: 1rem; }
-    .nft-cards { flex-direction: column; align-items: center; }
-    .nft-card { width: 150px; height: 200px; transform: none; margin: 10px 0; }
+    .nft-cards { flex-direction: column; align-items: center; height: auto; }
+    .nft-card { width: 150px; height: 200px; transform: none; margin: 10px 0; position: relative; }
 }
 
 @media (max-width: 480px) {
