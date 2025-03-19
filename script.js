@@ -93,6 +93,11 @@ document.addEventListener('touchmove', (e) => {
 const nftCards = document.querySelectorAll('.nft-card');
 let positions = ['center', 'right', 'left'];
 
+// Инициализация начальных позиций
+nftCards.forEach((card, index) => {
+    card.setAttribute('data-position', positions[index]);
+});
+
 nftCards.forEach(card => {
     const updatePosition = (newPosition) => {
         card.setAttribute('data-position', newPosition);
