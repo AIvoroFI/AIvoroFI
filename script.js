@@ -10,7 +10,8 @@ for (let i = 0; i < 150; i++) {
         position: absolute;
         width: 3px;
         height: 3px;
-        background: #b23cff;
+        background: linear-gradient(45deg, #b23cff, #00ccff, #b23cff);
+        background-size: 200%;
         border-radius: 50%;
     `;
     particlesDiv.appendChild(particle);
@@ -37,21 +38,49 @@ document.addEventListener('mousemove', (e) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
-    particles.forEach(particle => {
+    particles.forEach((particle, index) => {
         const rect = particle.getBoundingClientRect();
         const particleX = rect.left + rect.width / 2;
         const particleY = rect.top + rect.height / 2;
 
-        const distance = Math.sqrt((mouseX - particleX) ** 2 + (mouseY - particleY) ** 2);
-        if (distance < 100) {
+        const distanceToMouse = Math.sqrt((mouseX - particleX) ** 2 + (mouseY - particleY) ** 2);
+        if (distanceToMouse < 100) {
             const angle = Math.atan2(mouseY - particleY, mouseX - particleX);
-            const pullStrength = (100 - distance) / 100 * 40;
+            const pullStrength = (100 - distanceToMouse) / 100 * 40;
             gsap.to(particle, {
                 x: Math.cos(angle) * pullStrength,
                 y: Math.sin(angle) * pullStrength,
                 duration: 0.3,
                 ease: 'power2.out',
                 overwrite: 'auto'
+            });
+
+            // Притяжение между звездами
+            particles.forEach((otherParticle, otherIndex) => {
+                if (index !== otherIndex) {
+                    const otherRect = otherParticle.getBoundingClientRect();
+                    const otherX = otherRect.left + otherRect.width / 2;
+                    const otherY = otherRect.top + otherRect.height / 2;
+
+                    const distanceBetween = Math.sqrt((particleX - otherX) ** 2 + (particleY - otherY) ** 2);
+                    if (distanceBetween < 50) {
+                        const angleBetween = Math.atan2(otherY - particleY, otherX - particleX);
+                        const pullStrengthBetween = (50 - distanceBetween) / 50 * 10;
+                        gsap.to(particle, {
+                            x: Math.cos(angleBetween) * pullStrengthBetween,
+                            y: Math.sin(angleBetween) * pullStrengthBetween,
+                            duration: 0.5,
+                            ease: 'power2.out',
+                            overwrite: 'auto'
+                        });
+                        gsap.to(particle, {
+                            boxShadow: '0 0 15px rgba(0, 204, 255, 0.8)',
+                            duration: 0.5,
+                            ease: 'power2.out',
+                            overwrite: 'auto'
+                        });
+                    }
+                }
             });
         }
     });
@@ -66,21 +95,49 @@ document.addEventListener('touchmove', (e) => {
     const touchX = touch.clientX;
     const touchY = touch.clientY;
 
-    particles.forEach(particle => {
+    particles.forEach((particle, index) => {
         const rect = particle.getBoundingClientRect();
         const particleX = rect.left + rect.width / 2;
         const particleY = rect.top + rect.height / 2;
 
-        const distance = Math.sqrt((touchX - particleX) ** 2 + (touchY - particleY) ** 2);
-        if (distance < 100) {
+        const distanceToTouch = Math.sqrt((touchX - particleX) ** 2 + (touchY - particleY) ** 2);
+        if (distanceToTouch < 100) {
             const angle = Math.atan2(touchY - particleY, touchX - particleX);
-            const pullStrength = (100 - distance) / 100 * 40;
+            const pullStrength = (100 - distanceToTouch) / 100 * 40;
             gsap.to(particle, {
                 x: Math.cos(angle) * pullStrength,
                 y: Math.sin(angle) * pullStrength,
                 duration: 0.3,
                 ease: 'power2.out',
                 overwrite: 'auto'
+            });
+
+            // Притяжение между звездами
+            particles.forEach((otherParticle, otherIndex) => {
+                if (index !== otherIndex) {
+                    const otherRect = otherParticle.getBoundingClientRect();
+                    const otherX = otherRect.left + otherRect.width / 2;
+                    const otherY = otherRect.top + otherRect.height / 2;
+
+                    const distanceBetween = Math.sqrt((particleX - otherX) ** 2 + (particleY - otherY) ** 2);
+                    if (distanceBetween < 50) {
+                        const angleBetween = Math.atan2(otherY - particleY, otherX - particleX);
+                        const pullStrengthBetween = (50 - distanceBetween) / 50 * 10;
+                        gsap.to(particle, {
+                            x: Math.cos(angleBetween) * pullStrengthBetween,
+                            y: Math.sin(angleBetween) * pullStrengthBetween,
+                            duration: 0.5,
+                            ease: 'power2.out',
+                            overwrite: 'auto'
+                        });
+                        gsap.to(particle, {
+                            boxShadow: '0 0 15px rgba(0, 204, 255, 0.8)',
+                            duration: 0.5,
+                            ease: 'power2.out',
+                            overwrite: 'auto'
+                        });
+                    }
+                }
             });
         }
     });
@@ -105,7 +162,7 @@ nftCards.forEach(card => {
 
     // На ПК: при наведении
     card.addEventListener('mouseenter', () => {
-        positions = positions.slice(1).concat(positions[0]); // Циклический сдвиг
+        positions = positions.slice(1).concat(positions[0]);
         nftCards.forEach((c, index) => {
             c.setAttribute('data-position', positions[index]);
         });
