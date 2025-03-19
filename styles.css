@@ -12,7 +12,7 @@
 }
 
 html, body {
-    background: linear-gradient(to bottom, #0a1a3d, #1a2a5d) !important; /* Темно-синий градиент */
+    background: #000000 !important; /* Черный фон */
     background-image: url('https://www.transparenttextures.com/patterns/noise-pattern-with-crosslines.png') !important;
     background-blend-mode: overlay;
     background-size: 200px;
@@ -29,7 +29,7 @@ html, body {
     height: 100%;
     pointer-events: none;
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.7; /* Чуть ярче */
 }
 
 /* Particles */
@@ -37,9 +37,16 @@ html, body {
     position: absolute;
     width: 3px;
     height: 3px;
-    background: #b23cff;
+    background: linear-gradient(45deg, #b23cff, #00ccff, #b23cff); /* Неоновый перелив */
+    background-size: 200%;
     border-radius: 50%;
+    animation: glow 3s infinite alternate;
     transition: all 0.2s ease;
+}
+
+@keyframes glow {
+    0% { background-position: 0%; box-shadow: 0 0 5px rgba(178, 60, 255, 0.5); }
+    100% { background-position: 200%; box-shadow: 0 0 10px rgba(0, 204, 255, 0.8); }
 }
 
 /* Hero Section */
@@ -99,13 +106,13 @@ p {
     display: flex;
     justify-content: center;
     position: relative;
-    height: 300px;
+    height: 400px; /* Увеличиваем высоту для больших карт */
     margin-top: 20px;
 }
 
 .nft-card {
-    width: 200px;
-    height: 280px;
+    width: 250px; /* Увеличиваем размер */
+    height: 350px;
     object-fit: cover;
     border-radius: 10px;
     border: 1px solid #00ccff;
@@ -120,12 +127,12 @@ p {
 }
 
 .nft-card[data-position="right"] {
-    transform: translateX(100px) rotate(10deg) scale(0.9);
+    transform: translateX(120px) rotate(10deg) scale(0.9); /* Увеличиваем смещение */
     z-index: 2;
 }
 
 .nft-card[data-position="left"] {
-    transform: translateX(-100px) rotate(-10deg) scale(0.9);
+    transform: translateX(-120px) rotate(-10deg) scale(0.9);
     z-index: 2;
 }
 
@@ -167,17 +174,17 @@ p {
         z-index: 3;
     }
     .nft-cards {
-        height: 300px; /* Оставляем горизонтальное расположение */
+        height: 400px;
     }
     .nft-card {
-        width: 150px;
-        height: 210px;
+        width: 200px;
+        height: 280px;
     }
     .nft-card[data-position="right"] {
-        transform: translateX(80px) rotate(10deg) scale(0.9);
+        transform: translateX(100px) rotate(10deg) scale(0.9);
     }
     .nft-card[data-position="left"] {
-        transform: translateX(-80px) rotate(-10deg) scale(0.9);
+        transform: translateX(-100px) rotate(-10deg) scale(0.9);
     }
 }
 
@@ -186,9 +193,9 @@ p {
     h2 { font-size: 1.8rem; }
     p { font-size: 0.9rem; }
     .section-card { padding: 20px; }
-    .nft-card { width: 120px; height: 168px; }
-    .nft-card[data-position="right"] { transform: translateX(60px) rotate(10deg) scale(0.9); }
-    .nft-card[data-position="left"] { transform: translateX(-60px) rotate(-10deg) scale(0.9); }
+    .nft-card { width: 160px; height: 224px; }
+    .nft-card[data-position="right"] { transform: translateX(80px) rotate(10deg) scale(0.9); }
+    .nft-card[data-position="left"] { transform: translateX(-80px) rotate(-10deg) scale(0.9); }
 }
 
 @media (min-width: 1200px) {
