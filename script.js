@@ -5,7 +5,7 @@ const particlesDiv = document.getElementById('particles');
 const particles = [];
 
 console.log('Creating particles...'); // Отладка
-for (let i = 0; i < 20; i++) { // Уменьшаем до 20 частиц
+for (let i = 0; i < 20; i++) {
     const particle = document.createElement('div');
     particle.classList.add('particle');
     particle.style.cssText = `
@@ -26,6 +26,103 @@ for (let i = 0; i < 20; i++) { // Уменьшаем до 20 частиц
 
     particle.style.animation = `float ${5 + Math.random() * 5}s infinite ease-in-out, glow 3s infinite alternate`;
 }
+
+// Mouse Interaction (ПК)
+document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    particles.forEach((particle, index) => {
+        const rect = particle.getBoundingClientRect();
+        const particleX = rect.left + rect.width / 2;
+        const particleY = rect.top + rect.height / 2;
+
+        // Притяжение к курсору
+        const distanceToMouse = Math.sqrt((mouseX - particleX) ** 2 + (mouseY - particleY) ** 2);
+        if (distanceToMouse < 100) {
+            const angle = Math.atan2(mouseY - particleY, mouseX - particleX);
+            const pullStrength = (100 - distanceToMouse) / 100 * 40;
+            const translateX = Math.cos(angle) * pullStrength;
+            const translateY = Math.sin(angle) * pullStrength;
+            particle.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            particle.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.8)';
+        } else {
+            particle.style.transform = 'translate(0, 0)';
+            particle.style.boxShadow = '0 0 5px rgba(178, 60, 255, 0.5)';
+        }
+
+        // Притяжение между звездами (эффект слияния галактик)
+        particles.forEach((otherParticle, otherIndex) => {
+            if (index !== otherIndex) {
+                const otherRect = otherParticle.getBoundingClientRect();
+                const otherX = otherRect.left + otherRect.width / 2;
+                const otherY = otherRect.top + otherRect.height / 2;
+
+                const distanceBetween = Math.sqrt((particleX - otherX) ** 2 + (particleY - otherY) ** 2);
+                if (distanceBetween < 50) {
+                    const angleBetween = Math.atan2(otherY - particleY, otherX - particleX);
+                    const pullStrengthBetween = (50 - distanceBetween) / 50 * 10;
+                    const translateXBetween = Math.cos(angleBetween) * pullStrengthBetween;
+                    const translateYBetween = Math.sin(angleBetween) * pullStrengthBetween;
+                    particle.style.transform = `translate(${translateXBetween}px, ${translateYBetween}px)`;
+                    particle.style.boxShadow = '0 0 20px rgba(0, 204, 255, 1)';
+                }
+            }
+        });
+    });
+});
+
+// Touch Interaction (Мобильные)
+let lastTouchX = 0;
+let lastTouchY = 0;
+
+document.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    const touchX = touch.clientX;
+    const touchY = touch.clientY;
+
+    particles.forEach((particle, index) => {
+        const rect = particle.getBoundingClientRect();
+        const particleX = rect.left + rect.width / 2;
+        const particleY = rect.top + rect.height / 2;
+
+        // Притяжение к пальцу
+        const distanceToTouch = Math.sqrt((touchX - particleX) ** 2 + (touchY - particleY) ** 2);
+        if (distanceToTouch < 100) {
+            const angle = Math.atan2(touchY - particleY, touchX - particleX);
+            const pullStrength = (100 - distanceToTouch) / 100 * 40;
+            const translateX = Math.cos(angle) * pullStrength;
+            const translateY = Math.sin(angle) * pullStrength;
+            particle.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            particle.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.8)';
+        } else {
+            particle.style.transform = 'translate(0, 0)';
+            particle.style.boxShadow = '0 0 5px rgba(178, 60, 255, 0.5)';
+        }
+
+        // Притяжение между звездами
+        particles.forEach((otherParticle, otherIndex) => {
+            if (index !== otherIndex) {
+                const otherRect = otherParticle.getBoundingClientRect();
+                const otherX = otherRect.left + otherRect.width / 2;
+                const otherY = otherRect.top + otherRect.height / 2;
+
+                const distanceBetween = Math.sqrt((particleX - otherX) ** 2 + (particleY - otherY) ** 2);
+                if (distanceBetween < 50) {
+                    const angleBetween = Math.atan2(otherY - particleY, otherX - particleX);
+                    const pullStrengthBetween = (50 - distanceBetween) / 50 * 10;
+                    const translateXBetween = Math.cos(angleBetween) * pullStrengthBetween;
+                    const translateYBetween = Math.sin(angleBetween) * pullStrengthBetween;
+                    particle.style.transform = `translate(${translateXBetween}px, ${translateYBetween}px)`;
+                    particle.style.boxShadow = '0 0 20px rgba(0, 204, 255, 1)';
+                }
+            }
+        });
+    });
+
+    lastTouchX = touchX;
+    lastTouchY = touchY;
+});
 
 // NFT Cards Animation
 const nftCards = document.querySelectorAll('.nft-card');
