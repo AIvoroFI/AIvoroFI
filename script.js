@@ -25,12 +25,13 @@ for (let i = 0; i < 50; i++) {
     particle.style.top = `${y}px`;
 
     const randomFloat = floatAnimations[Math.floor(Math.random() * floatAnimations.length)];
-    particle.style.animation = `${randomFloat} ${5 + Math.random() * 5}s infinite ease-in-out, glow 3s infinite alternate`;
+    particle.style.animation = `${randomFloat} ${5 + Math.random() * 5}s infinite ease-in-out, glow 2s infinite alternate`;
 }
 
 const nftCards = document.querySelectorAll('.nft-card');
 let positions = ['center', 'right', 'left'];
 let startX = 0;
+let hasSwapped = false;
 const threshold = 50;
 
 nftCards.forEach((card, index) => {
@@ -54,41 +55,50 @@ let isDragging = false;
 nftContainer.addEventListener('mousedown', (e) => {
     isDragging = true;
     startX = e.clientX;
+    hasSwapped = false;
 });
 
 nftContainer.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
+    if (!isDragging || hasSwapped) return;
     const currentX = e.clientX;
     const deltaX = currentX - startX;
 
     if (Math.abs(deltaX) > threshold) {
         const direction = deltaX > 0 ? 'right' : 'left';
         updatePositions(direction);
-        startX = currentX;
+        hasSwapped = true;
     }
 });
 
 nftContainer.addEventListener('mouseup', () => {
     isDragging = false;
+    hasSwapped = false;
 });
 
 nftContainer.addEventListener('mouseleave', () => {
     isDragging = false;
+    hasSwapped = false;
 });
 
 nftContainer.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
+    hasSwapped = false;
 });
 
 nftContainer.addEventListener('touchmove', (e) => {
+    if (hasSwapped) return;
     const currentX = e.touches[0].clientX;
     const deltaX = currentX - startX;
 
     if (Math.abs(deltaX) > threshold) {
         const direction = deltaX > 0 ? 'right' : 'left';
         updatePositions(direction);
-        startX = currentX;
+        hasSwapped = true;
     }
+});
+
+nftContainer.addEventListener('touchend', () => {
+    hasSwapped = false;
 });
 
 gsap.to('.hero-logo', {
