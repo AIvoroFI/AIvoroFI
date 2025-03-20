@@ -16,7 +16,7 @@ function throttle(func, limit) {
 const particlesDiv = document.getElementById('particles');
 const particles = [];
 
-console.log('Creating particles...'); // Отладка
+console.log('Creating particles...');
 for (let i = 0; i < 40; i++) {
     const particle = document.createElement('div');
     particle.classList.add('particle');
@@ -81,18 +81,15 @@ document.addEventListener('mousemove', throttle((e) => {
 
         const distanceToMouse = Math.sqrt((mouseX - particleX) ** 2 + (mouseY - particleY) ** 2);
         if (distanceToMouse < 100) {
-            const angle = Math.atan2(mouseY - particleYoffunction (mouseX - particleX) ** 2 + (mouseY - particleY) ** 2);
-            if (distanceToMouse < 100) {
-                const angle = Math.atan2(mouseY - particleY, mouseX - particleX);
-                const pullStrength = (100 - distanceToMouse) / 100 * 40;
-                const translateX = Math.cos(angle) * pullStrength;
-                const translateY = Math.sin(angle) * pullStrength;
-                particle.style.transform = `translate(${translateX}px, ${translateY}px)`;
-                particle.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.8)';
-            } else {
-                particle.style.transform = 'translate(0, 0)';
-                particle.style.boxShadow = '0 0 5px rgba(178, 60, 255, 0.5)';
-            }
+            const angle = Math.atan2(mouseY - particleY, mouseX - particleX);
+            const pullStrength = (100 - distanceToMouse) / 100 * 40;
+            const translateX = Math.cos(angle) * pullStrength;
+            const translateY = Math.sin(angle) * pullStrength;
+            particle.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            particle.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.8)';
+        } else {
+            particle.style.transform = 'translate(0, 0)';
+            particle.style.boxShadow = '0 0 5px rgba(178, 60, 255, 0.5)';
         }
     });
 
@@ -117,7 +114,7 @@ document.addEventListener('touchmove', throttle((e) => {
             const pullStrength = (100 - distanceToTouch) / 100 * 40;
             const translateX = Math.cos(angle) * pullStrength;
             const translateY = Math.sin(angle) * pullStrength;
-            particle.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            particle.style.transform = `translate(${translateX}px, ${translateYBetween}px)`;
             particle.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.8)';
         } else {
             particle.style.transform = 'translate(0, 0)';
@@ -130,6 +127,7 @@ document.addEventListener('touchmove', throttle((e) => {
 
 // Эффект "засасывания" для звезд
 document.addEventListener('click', (e) => {
+    console.log('Click event triggered for vortex effect'); // Отладочный лог
     const vortexX = e.clientX;
     const vortexY = e.clientY;
 
@@ -168,7 +166,8 @@ gsap.to('html', {
         trigger: 'html',
         start: 'top top',
         end: 'bottom bottom',
-        scrub: true
+        scrub: true,
+        onUpdate: () => console.log('Background animation triggered') // Отладочный лог
     },
     backgroundPosition: '100% 100%',
     ease: 'none'
@@ -238,8 +237,9 @@ nftContainer.addEventListener('touchmove', throttle((e) => {
 
 // Гироскоп для параллакса на мобильных
 window.addEventListener('deviceorientation', throttle((e) => {
-    const tiltX = e.gamma / 10; // Наклон влево/вправо
-    const tiltY = e.beta / 10;  // Наклон вперед/назад
+    console.log('Device orientation event triggered'); // Отладочный лог
+    const tiltX = e.gamma / 10;
+    const tiltY = e.beta / 10;
 
     nftCards.forEach(card => {
         gsap.to(card, {
@@ -252,30 +252,12 @@ window.addEventListener('deviceorientation', throttle((e) => {
     });
 }, 100));
 
-// Modal for NFT Gallery
-const modal = document.getElementById('nft-modal');
-const exploreBtn = document.querySelector('.explore-nfts-btn');
-const closeModal = document.querySelector('.close-modal');
-
-exploreBtn.addEventListener('click', () => {
-    modal.style.display = 'flex';
-});
-
-closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
 // Navbar Toggle
 const navbarToggle = document.querySelector('.navbar-toggle');
 const navbarMenu = document.querySelector('.navbar-menu');
 
 navbarToggle.addEventListener('click', () => {
+    console.log('Navbar toggle clicked'); // Отладочный лог
     navbarMenu.classList.toggle('active');
 });
 
@@ -318,7 +300,7 @@ gsap.utils.toArray('.section-card').forEach(card => {
 gsap.utils.toArray('.roadmap-item').forEach(item => {
     gsap.from(item, {
         scrollTrigger: { trigger: item, start: 'top 90%' },
-        x: item.classList.contains('odd') ? -50 : 50,
+        x: -50,
         opacity: 0,
         duration: 1,
         ease: 'power3.out'
