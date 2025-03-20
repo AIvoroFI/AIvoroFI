@@ -255,10 +255,13 @@ p {
     display: none;
     overflow: hidden;
     animation: flicker 0.5s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .glitch-overlay.active {
-    display: block;
+    display: flex;
 }
 
 @keyframes flicker {
@@ -268,10 +271,6 @@ p {
 }
 
 .glitch-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     font-size: 64px;
     font-family: 'Aviano Sans', sans-serif;
     background: linear-gradient(45deg, #b23cff, #00ccff);
@@ -285,17 +284,17 @@ p {
 }
 
 @keyframes glitch-appear {
-    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-    50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); }
-    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
 }
 
 @keyframes glitch {
-    0% { transform: translate(-50%, -50%) skew(0deg); }
-    5% { transform: translate(-50%, -50%) skew(5deg); }
-    10% { transform: translate(-50%, -50%) skew(-5deg); }
-    15% { transform: translate(-50%, -50%) skew(0deg); }
-    100% { transform: translate(-50%, -50%) skew(0deg); }
+    0% { transform: skew(0deg); }
+    5% { transform: skew(5deg); }
+    10% { transform: skew(-5deg); }
+    15% { transform: skew(0deg); }
+    100% { transform: skew(0deg); }
 }
 
 .matrix-rain {
@@ -316,12 +315,12 @@ p {
     background-clip: text;
     color: transparent;
     animation: fall linear infinite, glitch-char 0.3s infinite;
-    will-change: transform;
+    will-change: top;
 }
 
 @keyframes fall {
-    0% { transform: translateY(-100%); opacity: 0.7; }
-    100% { transform: translateY(100vh); opacity: 0; }
+    0% { top: -20px; opacity: 0.7; }
+    100% { top: 100%; opacity: 0; }
 }
 
 @keyframes glitch-char {
