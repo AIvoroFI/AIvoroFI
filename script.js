@@ -101,32 +101,6 @@ nftContainer.addEventListener('touchend', () => {
     hasSwapped = false;
 });
 
-const stayTrigger = document.querySelector('.stay-trigger');
-const glitchOverlay = document.querySelector('.glitch-overlay');
-const matrixRain = document.querySelector('.matrix-rain');
-
-document.addEventListener('DOMContentLoaded', () => {
-    glitchOverlay.classList.remove('active');
-
-    stayTrigger.addEventListener('click', () => {
-        if (!glitchOverlay.classList.contains('active')) {
-            glitchOverlay.classList.add('active');
-
-            matrixRain.innerHTML = '';
-
-            for (let i = 0; i < 50; i++) {
-                const char = document.createElement('span');
-                char.textContent = String.fromCharCode(33 + Math.random() * 94);
-                char.style.left = `${Math.random() * 100}%`;
-                char.style.top = `-20px`;
-                char.style.animationDuration = `${2 + Math.random() * 3}s`;
-                char.style.animationDelay = `${Math.random() * 2}s`;
-                matrixRain.appendChild(char);
-            }
-        }
-    });
-});
-
 gsap.to('.hero-logo', {
     scale: 1.05,
     opacity: 0.9,
