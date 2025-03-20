@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="assets/logo.png" alt="AIvoroFI Logo" class="nav-logo">
+        </div>
+        <div class="navbar-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#nfts">NFTs</a></li>
+            <li><a href="#somnia">Somnia</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#footer">Contact</a></li>
+        </ul>
+    </nav>
+
     <!-- Particles Background -->
     <div id="particles"></div>
 
@@ -39,27 +60,89 @@
             <h2>Our NFT Collection</h2>
             <p>A collection of 60,000 unique NFTs with 3 rarity tiers, enhancing your DeFi experience with exclusive utilities. Each NFT is uniquely personalized, ensuring everyone finds something that matches their style and mood. [Prototypes - Not Final]</p>
             <div class="nft-cards">
-                <img src="assets/nft1.png" alt="NFT Prototype 1" class="nft-card" data-position="center">
-                <img src="assets/nft2.png" alt="NFT Prototype 2" class="nft-card" data-position="right">
-                <img src="assets/nft3.png" alt="NFT Prototype 3" class="nft-card" data-position="left">
+                <img src="assets/nft1.png" alt="NFT Prototype 1 - Rare Tier" class="nft-card" data-position="center">
+                <img src="assets/nft2.png" alt="NFT Prototype 2 - Epic Tier" class="nft-card" data-position="right">
+                <img src="assets/nft3.png" alt="NFT Prototype 3 - Common Tier" class="nft-card" data-position="left">
             </div>
+            <button class="explore-nfts-btn">Explore NFTs</button>
         </div>
     </section>
+
+    <!-- NFT Modal -->
+    <div class="nft-modal" id="nft-modal">
+        <div class="nft-modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>NFT Gallery</h2>
+            <div class="nft-gallery">
+                <div class="nft-gallery-item">
+                    <img src="assets/nft1.png" alt="NFT Prototype 1 - Rare Tier">
+                    <p>Rare Tier - Access to Premium Pools</p>
+                </div>
+                <div class="nft-gallery-item">
+                    <img src="assets/nft2.png" alt="NFT Prototype 2 - Epic Tier">
+                    <p>Epic Tier - Staking Boost + Rental System</p>
+                </div>
+                <div class="nft-gallery-item">
+                    <img src="assets/nft3.png" alt="NFT Prototype 3 - Common Tier">
+                    <p>Common Tier - Basic Utilities</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Why Somnia Section -->
     <section class="somnia" id="somnia">
         <div class="section-card">
             <h2>Built on Somnia</h2>
             <p>Somnia is a next-generation blockchain designed for speed and scalability. It powers AIvoroFI with low fees, high throughput, and robust support for DeFi and NFT innovation—making it the perfect foundation for our vision.</p>
+            <div class="somnia-map">
+                <div class="somnia-feature" data-tooltip="Transactions cost less than a cent!">
+                    <span>Low Fees</span>
+                </div>
+                <div class="somnia-feature" data-tooltip="Process thousands of transactions per second.">
+                    <span>High Throughput</span>
+                </div>
+                <div class="somnia-feature" data-tooltip="Built for DeFi and NFT innovation.">
+                    <span>Robust Support</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap" id="roadmap">
+        <div class="section-card">
+            <h2>Our Roadmap</h2>
+            <div class="roadmap-timeline">
+                <div class="roadmap-item">
+                    <h3>Q1 2025</h3>
+                    <p>Launch of AIvoroFI Platform and Initial NFT Collection (10,000 NFTs).</p>
+                </div>
+                <div class="roadmap-item">
+                    <h3>Q2 2025</h3>
+                    <p>Integration with Additional Blockchains (Ethereum, Polygon).</p>
+                </div>
+                <div class="roadmap-item">
+                    <h3>Q3 2025</h3>
+                    <p>Full Release of 60,000 NFT Collection and Staking System.</p>
+                </div>
+                <div class="roadmap-item">
+                    <h3>Q4 2025</h3>
+                    <p>Launch of AIvoroFI Token and Governance System.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <h2>Stay Connected</h2>
         <p><a href="https://twitter.com/AIvoroFI">Twitter: @AIvoroFI</a></p>
         <p><a href="mailto:AIvoroFI@gmail.com">Email: AIvoroFI@gmail.com</a></p>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">↑</button>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
