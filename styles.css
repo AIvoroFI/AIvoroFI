@@ -12,9 +12,8 @@
 }
 
 html, body {
-    background: linear-gradient(180deg, #000000 0%, #2a004d 100%) !important; /* Увеличиваем контрастность градиента */
+    background: linear-gradient(180deg, #000000 0%, #1a0033 100%);
     background-attachment: fixed;
-    background-size: 100% 200%;
     overflow-x: hidden;
     position: relative;
     min-height: 100vh;
@@ -52,55 +51,6 @@ html, body {
     0% { transform: translate(0, 0); }
     50% { transform: translate(30px, 30px); }
     100% { transform: translate(0, 0); }
-}
-
-/* Navbar */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    border-bottom: 1px solid #b23cff; /* Отладочный стиль */
-}
-
-.nav-logo {
-    max-width: 100px;
-}
-
-.navbar-menu {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.navbar-menu li a {
-    text-decoration: none;
-    color: #00ccff;
-    font-size: 18px;
-    transition: color 0.3s;
-}
-
-.navbar-menu li a:hover {
-    color: #00ff99;
-}
-
-.navbar-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.navbar-toggle span {
-    width: 25px;
-    height: 3px;
-    background: #b23cff;
 }
 
 /* Hero Section */
@@ -177,7 +127,6 @@ p {
     box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
     position: absolute;
     transition: transform 0.5s ease, z-index 0.5s;
-    background: #ff0000; /* Отладочный стиль */
 }
 
 .nft-card[data-position="center"] {
@@ -195,46 +144,6 @@ p {
     z-index: 2;
 }
 
-/* Somnia Map */
-.somnia-map {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.somnia-feature {
-    position: relative;
-    padding: 10px 20px;
-    background: rgba(178, 60, 255, 0.2);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.somnia-feature:hover {
-    transform: scale(1.1);
-}
-
-.somnia-feature span {
-    color: #00ccff;
-}
-
-.somnia-feature:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    white-space: nowrap;
-    z-index: 10;
-}
-
 /* Roadmap */
 .roadmap-timeline {
     display: flex;
@@ -242,7 +151,7 @@ p {
     gap: 20px;
     margin-top: 20px;
     position: relative;
-    padding-left: 40px; /* Добавляем отступ для линии */
+    padding-left: 40px;
 }
 
 .roadmap-timeline::before {
@@ -299,49 +208,8 @@ p {
     color: #00ff99;
 }
 
-/* Back to Top Button */
-.back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(45deg, #b23cff, #00ccff);
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    color: #ffffff;
-    font-size: 24px;
-    cursor: pointer;
-    display: none;
-    z-index: 100;
-    transition: opacity 0.3s;
-}
-
-.back-to-top:hover {
-    opacity: 0.8;
-}
-
 /* Адаптация для мобильных */
 @media (max-width: 767px) {
-    .navbar-menu {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        padding: 20px;
-    }
-
-    .navbar-menu.active {
-        display: flex;
-    }
-
-    .navbar-toggle {
-        display: flex;
-    }
-
     .section-card {
         padding: 30px;
         max-width: 90%;
@@ -362,11 +230,6 @@ p {
 
     .nft-card[data-position="left"] {
         transform: translateX(-70px) rotate(-10deg) scale(0.9);
-    }
-
-    .somnia-map {
-        flex-direction: column;
-        align-items: center;
     }
 
     .roadmap-timeline {
