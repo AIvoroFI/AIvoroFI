@@ -1,23 +1,11 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// Throttle функция для оптимизации событий
-function throttle(func, limit) {
-    let inThrottle;
-    return function (...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => (inThrottle = false), limit);
-        }
-    };
-}
-
-// Particles Background
+// Particles Background (оптимизировано)
 const particlesDiv = document.getElementById('particles');
 const particles = [];
 
 console.log('Creating particles...');
-for (let i = 0; i < 100; i++) { // Увеличиваем количество звёзд до 100
+for (let i = 0; i < 80; i++) { // Уменьшаем до 80 звёзд
     const particle = document.createElement('div');
     particle.classList.add('particle');
     particle.style.cssText = `
@@ -39,38 +27,8 @@ for (let i = 0; i < 100; i++) { // Увеличиваем количество �
     particle.style.animation = `float ${5 + Math.random() * 5}s infinite ease-in-out, glow 3s infinite alternate`;
 }
 
-// Оптимизированное притяжение частиц
-const updateParticles = throttle(() => {
-    particles.forEach((particle, index) => {
-        const rect = particle.getBoundingClientRect();
-        const particleX = rect.left + rect.width / 2;
-        const particleY = rect.top + rect.height / 2;
-
-        if (particleY < 0 || particleY > window.innerHeight) return;
-
-        particles.forEach((otherParticle, otherIndex) => {
-            if (index !== otherIndex) {
-                const otherRect = otherParticle.getBoundingClientRect();
-                const otherX = otherRect.left + otherRect.width / 2;
-                const otherY = otherRect.top + otherRect.height / 2;
-
-                const distanceBetween = Math.sqrt((particleX - otherX) ** 2 + (particleY - otherY) ** 2);
-                if (distanceBetween < 50) {
-                    const angleBetween = Math.atan2(otherY - particleY, otherX - particleX);
-                    const pullStrengthBetween = (50 - distanceBetween) / 50 * 15;
-                    const translateXBetween = Math.cos(angleBetween) * pullStrengthBetween;
-                    const translateYBetween = Math.sin(angleBetween) * pullStrengthBetween;
-                    particle.style.transform = `translate(${translateXBetween}px, ${translateYBetween}px)`;
-                    particle.style.boxShadow = '0 0 20px rgba(0, 204, 255, 1)';
-                }
-            }
-        });
-    });
-}, 100);
-
-// Mouse Interaction (ПК)
-let lastMouseX = 0;
-document.addEventListener('mousemove', throttle((e) => {
+// Mouse Interaction (упрощено)
+document.addEventListener('mousemove', (e) => {
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
@@ -82,23 +40,20 @@ document.addEventListener('mousemove', throttle((e) => {
         const distanceToMouse = Math.sqrt((mouseX - particleX) ** 2 + (mouseY - particleY) ** 2);
         if (distanceToMouse < 100) {
             const angle = Math.atan2(mouseY - particleY, mouseX - particleX);
-            const pullStrength = (100 - distanceToMouse) / 100 * 40;
+            const pullStrength = (100 - distanceToMouse) / 100 * 20; // Уменьшаем силу притяжения
             const translateX = Math.cos(angle) * pullStrength;
             const translateY = Math.sin(angle) * pullStrength;
             particle.style.transform = `translate(${translateX}px, ${translateY}px)`;
-            particle.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.8)';
+            particle.style.boxShadow = '0 0 10px rgba(0, 204, 255, 0.8)';
         } else {
             particle.style.transform = 'translate(0, 0)';
             particle.style.boxShadow = '0 0 5px rgba(178, 60, 255, 0.5)';
         }
     });
+});
 
-    lastMouseX = mouseX;
-}, 50));
-
-// Touch Interaction (Мобильные)
-let lastTouchX = 0;
-document.addEventListener('touchmove', throttle((e) => {
+// Touch Interaction (упрощено)
+document.addEventListener('touchmove', (e) => {
     const touch = e.touches[0];
     const touchX = touch.clientX;
     const touchY = touch.clientY;
@@ -111,40 +66,35 @@ document.addEventListener('touchmove', throttle((e) => {
         const distanceToTouch = Math.sqrt((touchX - particleX) ** 2 + (touchY - particleY) ** 2);
         if (distanceToTouch < 100) {
             const angle = Math.atan2(touchY - particleY, touchX - particleX);
-            const pullStrength = (100 - distanceToTouch) / 100 * 40;
+            const pullStrength = (100 - distanceToTouch) / 100 * 20;
             const translateX = Math.cos(angle) * pullStrength;
             const translateY = Math.sin(angle) * pullStrength;
             particle.style.transform = `translate(${translateX}px, ${translateY}px)`;
-            particle.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.8)';
+            particle.style.boxShadow = '0 0 10px rgba(0, 204, 255, 0.8)';
         } else {
             particle.style.transform = 'translate(0, 0)';
             particle.style.boxShadow = '0 0 5px rgba(178, 60, 255, 0.5)';
         }
     });
-
-    lastTouchX = touchX;
-}, 50));
+});
 
 // NFT Cards Animation
 const nftCards = document.querySelectorAll('.nft-card');
 let positions = ['center', 'right', 'left'];
-let lastNFTMouseX = 0;
-let lastNFTTouchX = 0;
-let mouseStartX = 0;
-let touchStartX = 0;
-const threshold = 50; // Порог для переключения (в пикселях)
+let startX = 0;
+const threshold = 50; // Порог для переключения
 
 // Инициализация начальных позиций
 nftCards.forEach((card, index) => {
     card.setAttribute('data-position', positions[index]);
 });
 
-// Функция для обновления позиций
+// Функция для обновления позиций (работает в обе стороны)
 const updatePositions = (direction) => {
     if (direction === 'right') {
-        positions = positions.slice(1).concat(positions[0]);
+        positions = positions.slice(1).concat(positions[0]); // Вправо
     } else if (direction === 'left') {
-        positions = [positions[2], positions[0], positions[1]];
+        positions = [positions[2], ...positions.slice(0, 2)]; // Влево
     }
     nftCards.forEach((card, index) => {
         card.setAttribute('data-position', positions[index]);
@@ -153,43 +103,47 @@ const updatePositions = (direction) => {
 
 // На ПК: движение курсора для NFT
 const nftContainer = document.querySelector('.nft-cards');
+let isDragging = false;
+
 nftContainer.addEventListener('mousedown', (e) => {
-    mouseStartX = e.clientX;
+    isDragging = true;
+    startX = e.clientX;
 });
 
-nftContainer.addEventListener('mousemove', throttle((e) => {
-    const mouseX = e.clientX;
-    const deltaX = mouseX - mouseStartX;
+nftContainer.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const currentX = e.clientX;
+    const deltaX = currentX - startX;
 
     if (Math.abs(deltaX) > threshold) {
         const direction = deltaX > 0 ? 'right' : 'left';
         updatePositions(direction);
-        mouseStartX = mouseX; // Сбрасываем начальную позицию
+        startX = currentX; // Обновляем начальную позицию
     }
-}, 300));
+});
 
 nftContainer.addEventListener('mouseup', () => {
-    mouseStartX = 0; // Сбрасываем начальную позицию
+    isDragging = false;
+});
+
+nftContainer.addEventListener('mouseleave', () => {
+    isDragging = false;
 });
 
 // На мобильных: свайп для NFT
 nftContainer.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
+    startX = e.touches[0].clientX;
 });
 
-nftContainer.addEventListener('touchmove', throttle((e) => {
-    const touchX = e.touches[0].clientX;
-    const deltaX = touchX - touchStartX;
+nftContainer.addEventListener('touchmove', (e) => {
+    const currentX = e.touches[0].clientX;
+    const deltaX = currentX - startX;
 
     if (Math.abs(deltaX) > threshold) {
         const direction = deltaX > 0 ? 'right' : 'left';
         updatePositions(direction);
-        touchStartX = touchX; // Сбрасываем начальную позицию
+        startX = currentX; // Обновляем начальную позицию
     }
-}, 300));
-
-nftContainer.addEventListener('touchend', () => {
-    touchStartX = 0; // Сбрасываем начальную позицию
 });
 
 // Hero Logo Pulse Animation
