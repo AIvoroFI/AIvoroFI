@@ -57,6 +57,7 @@ html, body {
 .hero {
     height: 100vh;
     display: flex;
+    flex-direction: column; /* Чтобы "Scroll Down" был под логотипом */
     justify-content: center;
     align-items: center;
     position: relative;
@@ -66,6 +67,22 @@ html, body {
 .hero-logo {
     max-width: 500px;
     width: 80%;
+}
+
+/* Scroll Down */
+.scroll-down {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #00ccff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
 }
 
 /* General Section Styles */
@@ -95,10 +112,8 @@ h2 {
     margin-bottom: 20px;
     background: linear-gradient(45deg, #b23cff, #00ccff);
     -webkit-background-clip: text;
-    -moz-background-clip: text;
     background-clip: text;
     color: transparent;
-    color: #b23cff; /* Fallback */
 }
 
 p {
@@ -238,6 +253,10 @@ p {
 
     .roadmap-item {
         width: 90%;
+    }
+
+    .scroll-down {
+        font-size: 14px;
     }
 }
 
