@@ -17,7 +17,7 @@ const particlesDiv = document.getElementById('particles');
 const particles = [];
 
 console.log('Creating particles...');
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 100; i++) { // Увеличиваем количество звёзд до 100
     const particle = document.createElement('div');
     particle.classList.add('particle');
     particle.style.cssText = `
@@ -130,6 +130,9 @@ const nftCards = document.querySelectorAll('.nft-card');
 let positions = ['center', 'right', 'left'];
 let lastNFTMouseX = 0;
 let lastNFTTouchX = 0;
+let mouseStartX = 0;
+let touchStartX = 0;
+const threshold = 50; // Порог для переключения (в пикселях)
 
 // Инициализация начальных позиций
 nftCards.forEach((card, index) => {
@@ -150,25 +153,44 @@ const updatePositions = (direction) => {
 
 // На ПК: движение курсора для NFT
 const nftContainer = document.querySelector('.nft-cards');
+nftContainer.addEventListener('mousedown', (e) => {
+    mouseStartX = e.clientX;
+});
+
 nftContainer.addEventListener('mousemove', throttle((e) => {
     const mouseX = e.clientX;
-    const direction = mouseX > lastNFTMouseX ? 'right' : 'left';
-    updatePositions(direction);
-    lastNFTMouseX = mouseX;
+    const deltaX = mouseX - mouseStartX;
+
+    if (Math.abs(deltaX) > threshold) {
+        const direction = deltaX > 0 ? 'right' : 'left';
+        updatePositions(direction);
+        mouseStartX = mouseX; // Сбрасываем начальную позицию
+    }
 }, 300));
 
+nftContainer.addEventListener('mouseup', () => {
+    mouseStartX = 0; // Сбрасываем начальную позицию
+});
+
 // На мобильных: свайп для NFT
-let touchStartX = 0;
 nftContainer.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
 });
 
 nftContainer.addEventListener('touchmove', throttle((e) => {
     const touchX = e.touches[0].clientX;
-    const direction = touchX > lastNFTTouchX ? 'right' : 'left';
-    updatePositions(direction);
-    lastNFTTouchX = touchX;
+    const deltaX = touchX - touchStartX;
+
+    if (Math.abs(deltaX) > threshold) {
+        const direction = deltaX > 0 ? 'right' : 'left';
+        updatePositions(direction);
+        touchStartX = touchX; // Сбрасываем начальную позицию
+    }
 }, 300));
+
+nftContainer.addEventListener('touchend', () => {
+    touchStartX = 0; // Сбрасываем начальную позицию
+});
 
 // Hero Logo Pulse Animation
 gsap.to('.hero-logo', {
