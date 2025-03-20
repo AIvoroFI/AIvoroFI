@@ -108,7 +108,7 @@ const matrixRain = document.querySelector('.matrix-rain');
 stayTrigger.addEventListener('click', () => {
     glitchOverlay.classList.add('active');
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
         const char = document.createElement('span');
         char.textContent = String.fromCharCode(33 + Math.random() * 94);
         char.style.left = `${Math.random() * 100}%`;
