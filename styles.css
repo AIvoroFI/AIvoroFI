@@ -37,6 +37,7 @@ html, body {
     background: linear-gradient(45deg, #b23cff, #00ccff, #b23cff);
     background-size: 200%;
     border-radius: 50%;
+    will-change: transform;
 }
 
 @keyframes glow {
@@ -153,6 +154,7 @@ p {
     box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
     position: absolute;
     transition: transform 0.5s ease, z-index 0.5s;
+    will-change: transform;
 }
 
 .nft-card[data-position="center"] {
@@ -268,18 +270,4 @@ p {
     }
 }
 
-@media (max-width: 480px) {
-    .hero-logo { max-width: 250px; }
-    h2 { font-size: 28px; }
-    p { font-size: 14px; }
-    .section-card { padding: 20px; max-width: 95%; }
-    .nft-card { width: 120px; height: 168px; }
-    .nft-card[data-position="right"] { transform: translateX(60px) rotate(10deg) scale(0.9); }
-    .nft-card[data-position="left"] { transform: translateX(-60px) rotate(-10deg) scale(0.9); }
-}
-
-@media (min-width: 1200px) {
-    .section-card { max-width: 1100px; }
-    h2 { font-size: 48px; }
-    p { font-size: 20px; }
-}
+@media
