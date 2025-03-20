@@ -112,6 +112,7 @@ stayTrigger.addEventListener('click', () => {
         const char = document.createElement('span');
         char.textContent = String.fromCharCode(33 + Math.random() * 94);
         char.style.left = `${Math.random() * 100}%`;
+        char.style.top = `-20px`;
         char.style.animationDuration = `${2 + Math.random() * 3}s`;
         char.style.animationDelay = `${Math.random() * 2}s`;
         matrixRain.appendChild(char);
