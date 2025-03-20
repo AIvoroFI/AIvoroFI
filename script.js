@@ -114,7 +114,7 @@ document.addEventListener('touchmove', throttle((e) => {
             const pullStrength = (100 - distanceToTouch) / 100 * 40;
             const translateX = Math.cos(angle) * pullStrength;
             const translateY = Math.sin(angle) * pullStrength;
-            particle.style.transform = `translate(${translateX}px, ${translateYBetween}px)`;
+            particle.style.transform = `translate(${translateX}px, ${translateY}px)`;
             particle.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.8)';
         } else {
             particle.style.transform = 'translate(0, 0)';
@@ -125,55 +125,7 @@ document.addEventListener('touchmove', throttle((e) => {
     lastTouchX = touchX;
 }, 50));
 
-// Эффект "засасывания" для звезд
-document.addEventListener('click', (e) => {
-    console.log('Click event triggered for vortex effect'); // Отладочный лог
-    const vortexX = e.clientX;
-    const vortexY = e.clientY;
-
-    particles.forEach(particle => {
-        const rect = particle.getBoundingClientRect();
-        const particleX = rect.left + rect.width / 2;
-        const particleY = rect.top + rect.height / 2;
-
-        const distanceToVortex = Math.sqrt((vortexX - particleX) ** 2 + (vortexY - particleY) ** 2);
-        if (distanceToVortex < 200) {
-            const angle = Math.atan2(vortexY - particleY, vortexX - particleX);
-            const pullStrength = (200 - distanceToVortex) / 200 * 100;
-            const translateX = Math.cos(angle) * pullStrength;
-            const translateY = Math.sin(angle) * pullStrength;
-            gsap.to(particle, {
-                x: translateX,
-                y: translateY,
-                duration: 0.5,
-                ease: 'power2.in',
-                onComplete: () => {
-                    gsap.to(particle, {
-                        x: 0,
-                        y: 0,
-                        duration: 1,
-                        ease: 'elastic.out(1, 0.3)'
-                    });
-                }
-            });
-        }
-    });
-});
-
-// Динамический фон при скролле
-gsap.to('html', {
-    scrollTrigger: {
-        trigger: 'html',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: true,
-        onUpdate: () => console.log('Background animation triggered') // Отладочный лог
-    },
-    backgroundPosition: '100% 100%',
-    ease: 'none'
-});
-
-// NFT Cards Animation with Parallax
+// NFT Cards Animation
 const nftCards = document.querySelectorAll('.nft-card');
 let positions = ['center', 'right', 'left'];
 let lastNFTMouseX = 0;
@@ -203,26 +155,9 @@ nftContainer.addEventListener('mousemove', throttle((e) => {
     const direction = mouseX > lastNFTMouseX ? 'right' : 'left';
     updatePositions(direction);
     lastNFTMouseX = mouseX;
-
-    // Parallax эффект
-    const containerRect = nftContainer.getBoundingClientRect();
-    const centerX = containerRect.left + containerRect.width / 2;
-    const centerY = containerRect.top + containerRect.height / 2;
-    const moveX = (mouseX - centerX) / 50;
-    const moveY = (e.clientY - centerY) / 50;
-
-    nftCards.forEach(card => {
-        gsap.to(card, {
-            x: moveX,
-            y: moveY,
-            rotation: moveX / 10,
-            duration: 0.3,
-            ease: 'power2.out'
-        });
-    });
 }, 300));
 
-// На мобильных: свайп и гироскоп для NFT
+// На мобильных: свайп для NFT
 let touchStartX = 0;
 nftContainer.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
@@ -234,46 +169,6 @@ nftContainer.addEventListener('touchmove', throttle((e) => {
     updatePositions(direction);
     lastNFTTouchX = touchX;
 }, 300));
-
-// Гироскоп для параллакса на мобильных
-window.addEventListener('deviceorientation', throttle((e) => {
-    console.log('Device orientation event triggered'); // Отладочный лог
-    const tiltX = e.gamma / 10;
-    const tiltY = e.beta / 10;
-
-    nftCards.forEach(card => {
-        gsap.to(card, {
-            x: tiltX * 10,
-            y: tiltY * 10,
-            rotation: tiltX,
-            duration: 0.3,
-            ease: 'power2.out'
-        });
-    });
-}, 100));
-
-// Navbar Toggle
-const navbarToggle = document.querySelector('.navbar-toggle');
-const navbarMenu = document.querySelector('.navbar-menu');
-
-navbarToggle.addEventListener('click', () => {
-    console.log('Navbar toggle clicked'); // Отладочный лог
-    navbarMenu.classList.toggle('active');
-});
-
-// Back to Top Button
-const backToTop = document.getElementById('back-to-top');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTop.style.display = 'block';
-    } else {
-        backToTop.style.display = 'none';
-    }
-});
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
 
 // Hero Logo Pulse Animation
 gsap.to('.hero-logo', {
