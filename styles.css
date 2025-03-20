@@ -250,14 +250,21 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     z-index: 1000;
     display: none;
     overflow: hidden;
+    animation: flicker 0.5s infinite;
 }
 
 .glitch-overlay.active {
     display: block;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.95; }
+    50% { opacity: 0.85; }
+    100% { opacity: 0.95; }
 }
 
 .glitch-text {
@@ -265,20 +272,30 @@ p {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 48px;
-    color: #00ff00;
+    font-size: 64px;
+    font-family: 'Aviano Sans', sans-serif;
+    background: linear-gradient(45deg, #b23cff, #00ccff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     text-transform: uppercase;
     letter-spacing: 5px;
-    animation: glitch 1s linear infinite;
+    opacity: 0;
+    animation: glitch-appear 1s ease-in forwards 2s, glitch 0.5s linear infinite;
+}
+
+@keyframes glitch-appear {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
 @keyframes glitch {
-    2% { transform: translate(-2px, 2px); }
-    4% { transform: translate(2px, -2px); }
-    6% { transform: translate(-2px, 2px); }
-    8% { transform: translate(2px, -2px); }
-    10% { transform: translate(0, 0); }
-    100% { transform: translate(0, 0); }
+    0% { transform: translate(-50%, -50%) skew(0deg); }
+    5% { transform: translate(-50%, -50%) skew(5deg); }
+    10% { transform: translate(-50%, -50%) skew(-5deg); }
+    15% { transform: translate(-50%, -50%) skew(0deg); }
+    100% { transform: translate(-50%, -50%) skew(0deg); }
 }
 
 .matrix-rain {
@@ -292,16 +309,27 @@ p {
 
 .matrix-rain span {
     position: absolute;
-    color: #00ff00;
     font-size: 20px;
     opacity: 0.7;
-    animation: fall linear infinite;
+    background: linear-gradient(45deg, #b23cff, #00ccff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: fall linear infinite, glitch-char 0.3s infinite;
     will-change: transform;
 }
 
 @keyframes fall {
     0% { transform: translateY(-100%); opacity: 0.7; }
     100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes glitch-char {
+    0% { transform: skew(0deg); }
+    10% { transform: skew(3deg); }
+    20% { transform: skew(-3deg); }
+    30% { transform: skew(0deg); }
+    100% { transform: skew(0deg); }
 }
 
 @media (max-width: 767px) {
@@ -341,7 +369,12 @@ p {
     }
 
     .glitch-text {
-        font-size: 24px;
+        font-size: 36px;
+        letter-spacing: 3px;
+    }
+
+    .matrix-rain span {
+        font-size: 16px;
     }
 }
 
@@ -353,10 +386,24 @@ p {
     .nft-card { width: 120px; height: 168px; }
     .nft-card[data-position="right"] { transform: translateX(60px) rotate(10deg) scale(0.9); }
     .nft-card[data-position="left"] { transform: translateX(-60px) rotate(-10deg) scale(0.9); }
+
+    .glitch-text {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+
+    .matrix-rain span {
+        font-size: 14px;
+    }
 }
 
 @media (min-width: 1200px) {
     .section-card { max-width: 1100px; }
     h2 { font-size: 48px; }
     p { font-size: 20px; }
+
+    .glitch-text {
+        font-size: 80px;
+        letter-spacing: 8px;
+    }
 }
