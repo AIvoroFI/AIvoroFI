@@ -92,29 +92,20 @@ section {
 }
 
 h2 {
-    font-size: 40px; /* Используем px вместо rem */
+    font-size: 40px;
     text-align: center;
     margin-bottom: 20px;
-    position: relative;
-    color: #b23cff; /* Fallback для Android */
-    display: inline-block;
-}
-
-h2::before {
-    content: attr(data-text); /* Используем текст из атрибута data-text */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background: linear-gradient(45deg, #b23cff, #00ccff);
     -webkit-background-clip: text;
+    -moz-background-clip: text;
     background-clip: text;
     color: transparent;
+    /* Fallback для старых браузеров */
+    color: #b23cff;
 }
 
 p {
-    font-size: 18px; /* Используем px */
+    font-size: 18px;
     line-height: 1.8;
     text-align: center;
     padding: 10px 20px;
@@ -175,8 +166,8 @@ p {
 /* Адаптация для Android и iPhone */
 @media (max-width: 767px) {
     .section-card {
-        padding: 30px; /* Уменьшаем padding для Android */
-        max-width: 90%; /* Более узкий блок */
+        padding: 30px;
+        max-width: 90%;
     }
     .section-card:active {
         transform: scale(1.05);
@@ -216,7 +207,7 @@ p {
 /* Тонкая настройка для Android */
 @media (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (pointer: coarse) {
     .section-card {
-        padding: 25px; /* Корректируем для Android */
+        padding: 25px;
         max-width: 85%;
     }
 }
