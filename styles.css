@@ -57,7 +57,7 @@ html, body {
 .hero {
     height: 100vh;
     display: flex;
-    flex-direction: column; /* Чтобы "Scroll Down" был под логотипом */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -110,7 +110,7 @@ h2 {
     font-size: 40px;
     text-align: center;
     margin-bottom: 20px;
-    background: linear-gradient(45deg, #b23cff, #00ccff);
+    background: linear-gradient(45deg, #ff00ff, #00ffff); /* Более контрастный градиент */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
