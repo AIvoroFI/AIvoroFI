@@ -11,11 +11,17 @@ const terminalOverlay = document.getElementById('terminal-overlay');
 const mainContent = document.getElementById('main-content');
 
 let typeSound = new Audio('assets/sounds/type.mp3');
-typeSound.preload = 'auto';
 typeSound.volume = 0.15;
+typeSound.onerror = () => {
+    console.error("Failed to load type.mp3. Check file path or file integrity.");
+    typeSound = new Audio('assets/sounds/click.mp3');
+    typeSound.volume = 0.15;
+};
+typeSound.oncanplaythrough = () => {
+    console.log("type.mp3 loaded successfully and ready to play.");
+};
 
 let backgroundSound = new Audio('assets/sounds/background_hum.mp3');
-backgroundSound.preload = 'auto';
 backgroundSound.volume = 0.03;
 backgroundSound.loop = true;
 
@@ -140,7 +146,6 @@ launchBtn.addEventListener('click', () => {
 
 function playSound(file) {
     const sound = new Audio('assets/sounds/' + file);
-    sound.preload = 'auto';
     sound.play();
 }
 
