@@ -1,7 +1,6 @@
 @font-face {
     font-family: 'Aviano Sans';
     src: url('fonts/aviano-sans.otf') format('opentype');
-    font-display: swap;
 }
 
 * {
@@ -144,7 +143,7 @@ p {
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 600px;
+    height: 600px; /* Увеличена высота для увеличенной карточки */
     margin: 20px 0;
     z-index: 10;
 }
@@ -186,11 +185,11 @@ p {
 }
 
 .nft-card.zoomed {
-    transform: scale(1.5);
+    transform: scale(1.5); /* Увеличен масштаб */
 }
 
 .nft-card.flipped {
-    transform: rotateY(180deg) scale(1.5);
+    transform: rotateY(180deg) scale(1.5); /* Увеличен масштаб */
 }
 
 .nft-front, .nft-back {
@@ -215,14 +214,14 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 10px; /* Уменьшен padding */
     text-align: center;
 }
 
 .nft-back h3 {
-    font-size: 18px;
+    font-size: 18px; /* Уменьшен размер шрифта */
     color: #ffffff;
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* Уменьшен отступ */
     background: linear-gradient(45deg, #ff00ff, #00ffff);
     -webkit-background-clip: text;
     background-clip: text;
@@ -230,11 +229,11 @@ p {
 }
 
 .nft-back p {
-    font-size: 12px;
+    font-size: 12px; /* Уменьшен размер шрифта */
     color: #ffffff;
-    padding: 2px 5px;
-    line-height: 1.2;
-    margin: 2px 0;
+    padding: 2px 5px; /* Уменьшен padding */
+    line-height: 1.2; /* Уменьшен межстрочный интервал */
+    margin: 2px 0; /* Уменьшен margin */
 }
 
 .roadmap-timeline {
@@ -281,42 +280,64 @@ p {
         max-width: 90%;
         min-height: 350px;
     }
+
     .nft-cards {
-        height: 350px;
+        height: 350px; /* Увеличена высота */
         margin: 15px 0;
     }
+
     .nft-card {
         width: 160px;
         height: 224px;
     }
+
     .nft-position-wrapper[data-position="right"] {
         transform: translateX(80px) rotate(10deg) scale(0.9);
     }
+
     .nft-position-wrapper[data-position="left"] {
         transform: translateX(-80px) rotate(-10deg) scale(0.9);
     }
+
     .nft-back h3 {
-        font-size: 12px;
+        font-size: 14px; /* Уменьшен размер шрифта */
+        margin-bottom: 4px;
     }
+
     .nft-back p {
-        font-size: 8px;
-        padding: 1px 2px;
+        font-size: 10px; /* Уменьшен размер шрифта */
+        padding: 1px 4px;
+        line-height: 1.1;
+        margin: 1px 0;
     }
-    h2 {
-        font-size: 28px;
+
+    .roadmap-item {
+        width: 90%;
+        max-width: 500px;
     }
-    p {
+
+    .scroll-down {
         font-size: 14px;
     }
-    .roadmap-item {
-        padding: 10px;
-    }
-    section {
-        padding: 50px 10px;
-    }
-    .footer {
-        padding: 50px 10px;
-    }
+}
+
+@media (max-width: 480px) {
+    .hero-logo { max-width: 250px; }
+    h2 { font-size: 28px; }
+    p { font-size: 18px; }
+    .section-card { padding: 10px; max-width: 95%; min-height: 300px; }
+    .nft-cards { height: 300px; margin: 10px 0; }
+    .nft-card { width: 130px; height: 182px; }
+    .nft-position-wrapper[data-position="right"] { transform: translateX(65px) rotate(10deg) scale(0.9); }
+    .nft-position-wrapper[data-position="left"] { transform: translateX(-65px) rotate(-10deg) scale(0.9); }
+    .nft-back h3 { font-size: 12px; margin-bottom: 3px; }
+    .nft-back p { font-size: 8px; padding: 1px 3px; line-height: 1.1; margin: 1px 0; }
+}
+
+@media (min-width: 1200px) {
+    .section-card { max-width: 1100px; min-height: 450px; }
+    h2 { font-size: 48px; }
+    p { font-size: 18px; }
 }
 
 #terminal-overlay {
@@ -325,93 +346,133 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, #000000 0%, #1a0033 100%);
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
 }
 
 #start-screen {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
 }
 
 #start-screen h2 {
     font-size: 48px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     margin-bottom: 20px;
 }
 
 #start-screen p {
-    font-size: 24px;
-    margin-bottom: 40px;
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 20px;
 }
 
-#start-btn, #launch-btn {
+#start-screen button, #launch-btn {
+    background: linear-gradient(45deg, #b23cff, #00ccff);
+    color: #ffffff;
+    border: none;
     padding: 15px 30px;
     font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    background: linear-gradient(45deg, #b23cff, #00ccff);
-    border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-#start-btn:hover, #launch-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(0, 204, 255, 0.7);
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(178, 60, 255, 0.5);
+    outline: none;
 }
 
 .skip-container {
     position: absolute;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: center;
 }
 
 #skip-btn {
-    font-size: 16px;
     color: #00ccff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 16px;
+    text-decoration: underline;
     cursor: pointer;
     transition: color 0.3s;
 }
 
 #skip-btn:hover {
-    color: #b23cff;
+    color: #00ff99;
+}
+
+#start-screen button:focus, #launch-btn:focus, #skip-btn:focus {
+    outline: none;
+}
+
+#start-screen button:hover, #launch-btn:hover {
+    background: linear-gradient(45deg, #00ccff, #b23cff);
+    box-shadow: 0 0 15px rgba(0, 204, 255, 0.8);
 }
 
 #terminal {
-    width: 90%;
-    max-width: 800px;
-    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 #terminal-content p {
     font-size: 18px;
-    line-height: 1.5;
     color: #ffffff;
-    margin-bottom: 10px;
-    text-align: left;
-    padding: 0;
+    margin: 2px 0;
+    position: relative;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
-#terminal-content .cursor {
+.cursor {
     display: inline-block;
-    width: 10px;
-    height: 20px;
-    background: #00ccff;
-    vertical-align: middle;
+    color: #00ccff;
+    font-size: 18px;
 }
 
 #ready-message {
-    margin-top: 20px;
     text-align: center;
+    margin-top: 10px;
+    min-height: 60px;
 }
 
 #ready-message p {
-    font-size: 24px;
-    color: #00ccff;
-    }
+    font-size: 18px;
+    color: #ffffff;
+    margin: 2px 0;
+}
+
+@media (max-width: 767px) {
+    #start-screen h2 { font-size: 36px; }
+    #start-screen p { font-size: 18px; }
+    #terminal-content p { font-size: 18px; }
+    #ready-message p { font-size: 18px; }
+    #start-screen button, #launch-btn { padding: 12px 25px; font-size: 18px; }
+    #skip-btn { font-size: 14px; }
+    #ready-message { min-height: 50px; }
+}
+
+@media (max-width: 480px) {
+    #start-screen h2 { font-size: 28px; }
+    #start-screen p { font-size: 18px; }
+    #terminal-content p { font-size: 18px; }
+    #ready-message p { font-size: 18px; }
+    #start-screen button, #launch-btn { padding: 10px 20px; font-size: 18px; }
+    #skip-btn { font-size: 12px; }
+    #ready-message { min-height: 40px; }
+}
+
+@media (min-width: 1200px) {
+    #start-screen h2 { font-size: 56px; }
+    #terminal-content p { font-size: 18px; }
+    #ready-message p { font-size: 18px; }
+}
