@@ -1,5 +1,143 @@
 gsap.registerPlugin(ScrollTrigger);
 
+const startBtn = document.getElementById('start-btn');
+const skipBtn = document.getElementById('skip-btn');
+const terminal = document.getElementById('terminal');
+const startScreen = document.getElementById('start-screen');
+const terminalContent = document.getElementById('terminal-content');
+const readyMessage = document.getElementById('ready-message');
+const launchBtn = document.getElementById('launch-btn');
+const terminalOverlay = document.getElementById('terminal-overlay');
+const mainContent = document.getElementById('main-content');
+
+let typeSound = new Audio('assets/sounds/type.mp3');
+typeSound.volume = 0.15;
+let backgroundSound = new Audio('assets/sounds/background_hum.mp3');
+backgroundSound.volume = 0.03;
+backgroundSound.loop = true;
+
+const terminalLines = [
+    '> Initializing AIvoroFI Neural Core...',
+    '> Connecting to Somnia blockchain...',
+    '> Optimizing DeFi liquidity protocols...',
+    '> Syncing NFT utility contracts...',
+    '> Validating multi-chain aggregators...',
+    '> AIvoroFI deployment complete.'
+];
+
+function blinkCursor(element, callback) {
+    let cursorVisible = true;
+    const cursorInterval = setInterval(() => {
+        cursorVisible = !cursorVisible;
+        element.innerHTML = `<span class="cursor">${cursorVisible ? '_' : ' '}</span>`;
+    }, 350);
+    return () => clearInterval(cursorInterval);
+}
+
+function typeLine(element, text, callback) {
+    let index = 0;
+    element.innerHTML = '';
+    let cursorVisible = true;
+    const cursorInterval = setInterval(() => {
+        cursorVisible = !cursorVisible;
+        const cursorText = cursorVisible ? '_' : ' ';
+        element.innerHTML = text.slice(0, index) + `<span class="cursor">${cursorText}</span>`;
+    }, 350);
+
+    function typeChar() {
+        if (index < text.length) {
+            index++;
+            element.innerHTML = text.slice(0, index) + `<span class="cursor">${cursorVisible ? '_' : ' '}</span>`;
+            typeSound.play();
+            setTimeout(typeChar, 80);
+        } else {
+            clearInterval(cursorInterval);
+            element.innerHTML = text;
+            typeSound.pause();
+            typeSound.currentTime = 0;
+            callback();
+        }
+    }
+    typeChar();
+}
+
+startBtn.addEventListener('click', () => {
+    playSound('click.mp3');
+    backgroundSound.play();
+    gsap.to(startScreen, {
+        opacity: 0,
+        duration: 0.5,
+        onComplete: () => {
+            startScreen.style.display = 'none';
+            terminal.style.display = 'flex';
+            gsap.to(terminal, { opacity: 1, duration: 1, ease: 'power3.out' });
+
+            terminalContent.innerHTML = '';
+            let lineIndex = 0;
+
+            function typeNextLine() {
+                if (lineIndex < terminalLines.length) {
+                    const newLine = document.createElement('p');
+                    terminalContent.appendChild(newLine);
+                    typeLine(newLine, terminalLines[lineIndex], () => {
+                        const pauseLine = document.createElement('p');
+                        terminalContent.appendChild(pauseLine);
+                        const stopBlink = blinkCursor(pauseLine, () => {});
+                        setTimeout(() => {
+                            stopBlink();
+                            pauseLine.remove();
+                            lineIndex++;
+                            typeNextLine();
+                        }, 800);
+                    });
+                } else {
+                    typeSound.pause();
+                    typeSound.currentTime = 0;
+                    gsap.to(readyMessage.querySelector('p'), { opacity: 1, duration: 0.5 });
+                    gsap.to(launchBtn, { opacity: 1, duration: 0.5, delay: 0.5 });
+                }
+            }
+            typeNextLine();
+        }
+    });
+});
+
+skipBtn.addEventListener('click', () => {
+    playSound('click.mp3');
+    gsap.to(terminalOverlay, {
+        opacity: 0,
+        duration: 0.5,
+        onComplete: () => {
+            terminalOverlay.style.display = 'none';
+            mainContent.style.display = 'block';
+            gsap.fromTo(mainContent, { opacity: 0 }, { opacity: 1, duration: 1, ease: 'power3.out' });
+        }
+    });
+});
+
+launchBtn.addEventListener('click', () => {
+    playSound('confirm.mp3');
+    backgroundSound.pause();
+    backgroundSound.currentTime = 0;
+    gsap.to(terminalOverlay, {
+        opacity: 0,
+        duration: 0.5,
+        onStart: () => {
+            playSound('confirm.mp3');
+        },
+        onComplete: () => {
+            terminalOverlay.style.display = 'none';
+            mainContent.style.display = 'block';
+            gsap.fromTo(mainContent, { opacity: 0 }, { opacity: 1, duration: 1, ease: 'power3.out' });
+        }
+    });
+});
+
+function playSound(file) {
+    const sound = new Audio('assets/sounds/' + file);
+    sound.play();
+}
+
 const particlesDiv = document.getElementById('particles');
 const particles = [];
 
@@ -28,14 +166,20 @@ for (let i = 0; i < 50; i++) {
     particle.style.animation = `${randomFloat} ${5 + Math.random() * 5}s infinite ease-in-out, glow 2s infinite alternate`;
 }
 
+const nftPositionWrappers = document.querySelectorAll('.nft-position-wrapper');
 const nftCards = document.querySelectorAll('.nft-card');
 let positions = ['center', 'right', 'left'];
 let startX = 0;
 let hasSwapped = false;
 const threshold = 50;
 
-nftCards.forEach((card, index) => {
-    card.setAttribute('data-position', positions[index]);
+// Добавляем состояние кликов для каждой карточки
+nftCards.forEach(card => {
+    card.dataset.clickState = '0'; // 0 - начальное, 1 - увеличено, 2 - повёрнуто
+});
+
+nftPositionWrappers.forEach((wrapper, index) => {
+    wrapper.setAttribute('data-position', positions[index]);
 });
 
 const updatePositions = (direction) => {
@@ -44,8 +188,12 @@ const updatePositions = (direction) => {
     } else if (direction === 'left') {
         positions = [positions[2], ...positions.slice(0, 2)];
     }
-    nftCards.forEach((card, index) => {
-        card.setAttribute('data-position', positions[index]);
+    nftPositionWrappers.forEach((wrapper, index) => {
+        wrapper.setAttribute('data-position', positions[index]);
+        // Сбрасываем состояние кликов при свайпе
+        const card = wrapper.querySelector('.nft-card');
+        card.dataset.clickState = '0';
+        card.classList.remove('zoomed', 'flipped');
     });
 };
 
@@ -53,6 +201,9 @@ const nftContainer = document.querySelector('.nft-cards');
 let isDragging = false;
 
 nftContainer.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.nft-position-wrapper') && e.target.closest('.nft-position-wrapper').getAttribute('data-position') === 'center') {
+        return; // Allow click on center card without triggering drag
+    }
     isDragging = true;
     startX = e.clientX;
     hasSwapped = false;
@@ -99,6 +250,30 @@ nftContainer.addEventListener('touchmove', (e) => {
 
 nftContainer.addEventListener('touchend', () => {
     hasSwapped = false;
+});
+
+// Handle click on center card with new mechanics
+nftCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const parentWrapper = card.closest('.nft-position-wrapper');
+        if (parentWrapper && parentWrapper.getAttribute('data-position') === 'center') {
+            let clickState = parseInt(card.dataset.clickState);
+
+            if (clickState === 0) {
+                // Первый клик: увеличение
+                card.classList.add('zoomed');
+                card.dataset.clickState = '1';
+            } else if (clickState === 1) {
+                // Второй клик: разворот
+                card.classList.add('flipped');
+                card.dataset.clickState = '2';
+            } else if (clickState === 2) {
+                // Третий клик: разворот обратно и уменьшение
+                card.classList.remove('flipped', 'zoomed');
+                card.dataset.clickState = '0';
+            }
+        }
+    });
 });
 
 gsap.to('.hero-logo', {
