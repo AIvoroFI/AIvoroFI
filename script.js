@@ -12,6 +12,15 @@ const mainContent = document.getElementById('main-content');
 
 let typeSound = new Audio('assets/sounds/type.mp3');
 typeSound.volume = 0.15;
+typeSound.onerror = () => {
+    console.error("Failed to load type.mp3. Check file path or file integrity.");
+    typeSound = new Audio('assets/sounds/click.mp3');
+    typeSound.volume = 0.15;
+};
+typeSound.oncanplaythrough = () => {
+    console.log("type.mp3 loaded successfully and ready to play.");
+};
+
 let backgroundSound = new Audio('assets/sounds/background_hum.mp3');
 backgroundSound.volume = 0.03;
 backgroundSound.loop = true;
@@ -48,7 +57,9 @@ function typeLine(element, text, callback) {
         if (index < text.length) {
             index++;
             element.innerHTML = text.slice(0, index) + `<span class="cursor">${cursorVisible ? '_' : ' '}</span>`;
-            typeSound.play();
+            typeSound.play().catch(error => {
+                console.error("Error playing type.mp3:", error);
+            });
             setTimeout(typeChar, 80);
         } else {
             clearInterval(cursorInterval);
@@ -173,9 +184,8 @@ let startX = 0;
 let hasSwapped = false;
 const threshold = 50;
 
-// Добавляем состояние кликов для каждой карточки
 nftCards.forEach(card => {
-    card.dataset.clickState = '0'; // 0 - начальное, 1 - увеличено, 2 - повёрнуто
+    card.dataset.clickState = '0';
 });
 
 nftPositionWrappers.forEach((wrapper, index) => {
@@ -190,7 +200,6 @@ const updatePositions = (direction) => {
     }
     nftPositionWrappers.forEach((wrapper, index) => {
         wrapper.setAttribute('data-position', positions[index]);
-        // Сбрасываем состояние кликов при свайпе
         const card = wrapper.querySelector('.nft-card');
         card.dataset.clickState = '0';
         card.classList.remove('zoomed', 'flipped');
@@ -202,7 +211,7 @@ let isDragging = false;
 
 nftContainer.addEventListener('mousedown', (e) => {
     if (e.target.closest('.nft-position-wrapper') && e.target.closest('.nft-position-wrapper').getAttribute('data-position') === 'center') {
-        return; // Allow click on center card without triggering drag
+        return;
     }
     isDragging = true;
     startX = e.clientX;
@@ -252,7 +261,6 @@ nftContainer.addEventListener('touchend', () => {
     hasSwapped = false;
 });
 
-// Handle click on center card with new mechanics
 nftCards.forEach(card => {
     card.addEventListener('click', () => {
         const parentWrapper = card.closest('.nft-position-wrapper');
@@ -260,15 +268,12 @@ nftCards.forEach(card => {
             let clickState = parseInt(card.dataset.clickState);
 
             if (clickState === 0) {
-                // Первый клик: увеличение
                 card.classList.add('zoomed');
                 card.dataset.clickState = '1';
             } else if (clickState === 1) {
-                // Второй клик: разворот
                 card.classList.add('flipped');
                 card.dataset.clickState = '2';
             } else if (clickState === 2) {
-                // Третий клик: разворот обратно и уменьшение
                 card.classList.remove('flipped', 'zoomed');
                 card.dataset.clickState = '0';
             }
