@@ -1,4 +1,5 @@
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin); // Добавляем ScrollToPlugin
 gsap.ticker.fps(60);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -139,11 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
                 gsap.to(window, {
-                    scrollTo: targetElement,
+                    scrollTo: { y: targetElement, offsetY: 50 },
                     duration: 1,
                     ease: 'power2.inOut'
                 });
                 menuOverlay.style.display = 'none';
+            } else {
+                console.error(`Element with ID ${targetId} not found`);
             }
         });
     });
