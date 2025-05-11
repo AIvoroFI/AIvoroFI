@@ -48,13 +48,10 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1001;
+    position: relative;
+    margin-bottom: 40px;
     padding: 0;
+    width: 100%;
 }
 
 .hero-logo {
@@ -78,23 +75,6 @@ body::before {
     z-index: 1;
 }
 
-.menu-toggle {
-    position: absolute;
-    right: 15px;
-    top: 0;
-    background: none;
-    border: none;
-    font-size: 80px;
-    line-height: 80px;
-    color: #d1d1d1;
-    cursor: pointer;
-    z-index: 1002;
-}
-
-.menu-toggle:hover {
-    color: #00ccff;
-}
-
 .hero-slogan {
     font-size: 36px;
     background: linear-gradient(45deg, #ff00ff, #00ffff);
@@ -105,66 +85,8 @@ body::before {
     letter-spacing: 2px;
     text-align: center;
     width: 100%;
-    margin-top: 140px;
+    margin-top: 120px;
     position: relative;
-}
-
-.menu-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.menu-content {
-    position: relative;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    padding: 40px 20px;
-}
-
-.menu-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: #d1d1d1;
-    font-size: 30px;
-    cursor: pointer;
-}
-
-.menu-close:hover {
-    color: #00ccff;
-}
-
-.menu-links {
-    list-style: none;
-    padding: 0;
-}
-
-.menu-links li {
-    margin: 30px 0;
-}
-
-.menu-link {
-    font-size: 24px;
-    color: #d1d1d1;
-    text-decoration: none;
-    background: linear-gradient(45deg, #ff00ff, #00ffff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    transition: transform 0.3s ease;
-}
-
-.menu-link:hover {
-    transform: scale(1.05);
 }
 
 section {
@@ -175,7 +97,6 @@ section {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px; /* Добавлено, чтобы учесть фиксированную шапку */
 }
 
 h2 {
@@ -494,21 +415,14 @@ p.visible {
         margin-top: 70px;
     }
 
-    .menu-toggle {
-        right: 10px;
-        font-size: 60px;
-        line-height: 60px;
-    }
-
     .hero-slogan {
         font-size: 20px;
-        margin-top: 120px;
+        margin-top: 100px;
     }
 
     section {
         padding: 20px 10px;
         margin-bottom: 40px;
-        margin-top: 40px;
     }
 
     .nft-cards {
@@ -544,18 +458,6 @@ p.visible {
     .roadmap-box {
         max-width: 300px;
     }
-
-    .menu-content {
-        padding: 30px 15px;
-    }
-
-    .menu-links li {
-        margin: 20px 0;
-    }
-
-    .menu-link {
-        font-size: 20px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -568,15 +470,9 @@ p.visible {
         margin-top: 50px;
     }
 
-    .menu-toggle {
-        right: 8px;
-        font-size: 40px;
-        line-height: 40px;
-    }
-
     .hero-slogan { 
         font-size: 16px; 
-        margin-top: 100px;
+        margin-top: 80px;
     }
 
     h2 { 
@@ -592,7 +488,6 @@ p.visible {
     section { 
         padding: 15px 10px; 
         margin-bottom: 30px;
-        margin-top: 30px;
     }
 
     .nft-cards { 
@@ -623,17 +518,5 @@ p.visible {
         padding: 1px 3px; 
         line-height: 1.1; 
         margin: 1px 0; 
-    }
-
-    .menu-content {
-        padding: 20px 10px;
-    }
-
-    .menu-links li {
-        margin: 15px 0;
-    }
-
-    .menu-link {
-        font-size: 18px;
     }
 }
