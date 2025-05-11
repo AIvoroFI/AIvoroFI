@@ -118,6 +118,7 @@ section {
     z-index: 1;
     transition: transform 0.3s, box-shadow 0.3s;
     overflow: visible;
+    backdrop-filter: blur(10px);
 }
 
 h2 {
@@ -143,7 +144,7 @@ p {
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 600px; /* Увеличена высота для увеличенной карточки */
+    height: 600px;
     margin: 20px 0;
     z-index: 10;
 }
@@ -185,11 +186,11 @@ p {
 }
 
 .nft-card.zoomed {
-    transform: scale(1.5); /* Увеличен масштаб */
+    transform: scale(1.5);
 }
 
 .nft-card.flipped {
-    transform: rotateY(180deg) scale(1.5); /* Увеличен масштаб */
+    transform: rotateY(180deg) scale(1.5);
 }
 
 .nft-front, .nft-back {
@@ -214,26 +215,42 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px; /* Уменьшен padding */
+    padding: 10px;
     text-align: center;
 }
 
 .nft-back h3 {
-    font-size: 18px; /* Уменьшен размер шрифта */
-    color: #ffffff;
-    margin-bottom: 5px; /* Уменьшен отступ */
+    font-size: 18px;
     background: linear-gradient(45deg, #ff00ff, #00ffff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    margin-bottom: 5px;
 }
 
 .nft-back p {
-    font-size: 12px; /* Уменьшен размер шрифта */
+    font-size: 12px;
     color: #ffffff;
-    padding: 2px 5px; /* Уменьшен padding */
-    line-height: 1.2; /* Уменьшен межстрочный интервал */
-    margin: 2px 0; /* Уменьшен margin */
+    padding: 2px 5px;
+    line-height: 1.2;
+    margin: 2px 0;
+}
+
+.mint-btn {
+    display: block;
+    margin: 30px auto 10px auto;
+    padding: 15px 40px;
+    background: linear-gradient(45deg, #b23cff, #00ccff);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background 0.3s;
+}
+
+.mint-btn:hover {
+    background: linear-gradient(45deg, #00ccff, #b23cff);
 }
 
 .roadmap-timeline {
@@ -274,6 +291,39 @@ p {
     color: #00ff99;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background: #1a0033;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #00ccff;
+    width: 70%;
+    text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    color: #00ccff;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 @media (max-width: 767px) {
     .section-card {
         padding: 15px;
@@ -282,7 +332,7 @@ p {
     }
 
     .nft-cards {
-        height: 350px; /* Увеличена высота */
+        height: 350px;
         margin: 15px 0;
     }
 
@@ -300,12 +350,12 @@ p {
     }
 
     .nft-back h3 {
-        font-size: 14px; /* Уменьшен размер шрифта */
+        font-size: 14px;
         margin-bottom: 4px;
     }
 
     .nft-back p {
-        font-size: 10px; /* Уменьшен размер шрифта */
+        font-size: 10px;
         padding: 1px 4px;
         line-height: 1.1;
         margin: 1px 0;
@@ -338,141 +388,4 @@ p {
     .section-card { max-width: 1100px; min-height: 450px; }
     h2 { font-size: 48px; }
     p { font-size: 18px; }
-}
-
-#terminal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#start-screen {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100%;
-}
-
-#start-screen h2 {
-    font-size: 48px;
-    background: linear-gradient(45deg, #ff00ff, #00ffff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 20px;
-}
-
-#start-screen p {
-    font-size: 18px;
-    color: #ffffff;
-    margin-bottom: 20px;
-}
-
-#start-screen button, #launch-btn {
-    background: linear-gradient(45deg, #b23cff, #00ccff);
-    color: #ffffff;
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(178, 60, 255, 0.5);
-    outline: none;
-}
-
-.skip-container {
-    position: absolute;
-    bottom: 20px;
-    text-align: center;
-}
-
-#skip-btn {
-    color: #00ccff;
-    font-size: 16px;
-    text-decoration: underline;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-#skip-btn:hover {
-    color: #00ff99;
-}
-
-#start-screen button:focus, #launch-btn:focus, #skip-btn:focus {
-    outline: none;
-}
-
-#start-screen button:hover, #launch-btn:hover {
-    background: linear-gradient(45deg, #00ccff, #b23cff);
-    box-shadow: 0 0 15px rgba(0, 204, 255, 0.8);
-}
-
-#terminal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-#terminal-content p {
-    font-size: 18px;
-    color: #ffffff;
-    margin: 2px 0;
-    position: relative;
-    white-space: normal;
-    word-wrap: break-word;
-}
-
-.cursor {
-    display: inline-block;
-    color: #00ccff;
-    font-size: 18px;
-}
-
-#ready-message {
-    text-align: center;
-    margin-top: 10px;
-    min-height: 60px;
-}
-
-#ready-message p {
-    font-size: 18px;
-    color: #ffffff;
-    margin: 2px 0;
-}
-
-@media (max-width: 767px) {
-    #start-screen h2 { font-size: 36px; }
-    #start-screen p { font-size: 18px; }
-    #terminal-content p { font-size: 18px; }
-    #ready-message p { font-size: 18px; }
-    #start-screen button, #launch-btn { padding: 12px 25px; font-size: 18px; }
-    #skip-btn { font-size: 14px; }
-    #ready-message { min-height: 50px; }
-}
-
-@media (max-width: 480px) {
-    #start-screen h2 { font-size: 28px; }
-    #start-screen p { font-size: 18px; }
-    #terminal-content p { font-size: 18px; }
-    #ready-message p { font-size: 18px; }
-    #start-screen button, #launch-btn { padding: 10px 20px; font-size: 18px; }
-    #skip-btn { font-size: 12px; }
-    #ready-message { min-height: 40px; }
-}
-
-@media (min-width: 1200px) {
-    #start-screen h2 { font-size: 56px; }
-    #terminal-content p { font-size: 18px; }
-    #ready-message p { font-size: 18px; }
 }
