@@ -63,6 +63,22 @@ body::before {
     top: 0;
 }
 
+.menu-toggle {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #d1d1d1;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle:hover {
+    color: #00ccff;
+}
+
 .hero-slogan {
     font-size: 36px;
     background: linear-gradient(45deg, #ff00ff, #00ffff);
@@ -73,7 +89,74 @@ body::before {
     letter-spacing: 2px;
     text-align: center;
     width: 100%;
-    margin-top: 90px;
+    margin-top: 150px;
+    position: relative;
+}
+
+.hero-slogan::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    margin: 20px auto 0;
+}
+
+.menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-content {
+    position: relative;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.menu-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #d1d1d1;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.menu-close:hover {
+    color: #00ccff;
+}
+
+.menu-links {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-links li {
+    margin: 20px 0;
+}
+
+.menu-link {
+    font-size: 24px;
+    color: #d1d1d1;
+    text-decoration: none;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.menu-link:hover {
+    transform: scale(1.05);
 }
 
 section {
@@ -398,9 +481,14 @@ p.visible {
         margin-left: 10px;
     }
 
+    .menu-toggle {
+        right: 10px;
+        font-size: 24px;
+    }
+
     .hero-slogan {
         font-size: 20px;
-        margin-top: 70px;
+        margin-top: 120px;
     }
 
     section {
@@ -441,6 +529,10 @@ p.visible {
     .roadmap-box {
         max-width: 300px;
     }
+
+    .menu-link {
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -448,9 +540,13 @@ p.visible {
         height: 40px; 
         margin-left: 8px;
     }
+    .menu-toggle {
+        right: 8px;
+        font-size: 20px;
+    }
     .hero-slogan { 
         font-size: 16px; 
-        margin-top: 50px;
+        margin-top: 100px;
     }
     h2 { 
         font-size: 24px; 
@@ -487,5 +583,8 @@ p.visible {
         padding: 1px 3px; 
         line-height: 1.1; 
         margin: 1px 0; 
+    }
+    .menu-link {
+        font-size: 18px;
     }
 }
