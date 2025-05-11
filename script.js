@@ -140,21 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 1000);
 
-    gsap.utils.toArray('.section-card').forEach(card => {
-        gsap.from(card, {
-            scrollTrigger: { trigger: card, start: 'top 90%' },
-            x: -100,
-            duration: 1,
-            ease: 'power3.out'
+    // Intersection Observer для плавного появления блоков
+    const elementsToReveal = document.querySelectorAll('.section-card, .roadmap-item, p');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
         });
-    });
+    }, { threshold: 0.1 });
 
-    gsap.utils.toArray('.roadmap-item').forEach(item => {
-        gsap.from(item, {
-            scrollTrigger: { trigger: item, start: 'top 90%' },
-            x: -50,
-            duration: 1,
-            ease: 'power3.out'
-        });
+    elementsToReveal.forEach(element => {
+        observer.observe(element);
     });
 });
