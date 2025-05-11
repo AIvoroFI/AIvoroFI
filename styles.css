@@ -9,9 +9,8 @@
 
 html, body {
     background: url('assets/background.jpg') !important;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
-    background-repeat: repeat;
     background-attachment: fixed;
     overflow-x: hidden;
     position: relative;
@@ -23,36 +22,33 @@ html, body {
     padding: 40px 20px;
     z-index: 1;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .hero-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
     position: relative;
     width: 100%;
 }
 
+.hero-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .hero-logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
     max-width: 100px;
 }
 
 .hero-slogan {
     font-size: 36px;
-    color: #ffffff;
     background: linear-gradient(45deg, #ffffff, #00ccff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-align: center;
 }
 
 .hero-subheading {
@@ -61,37 +57,15 @@ html, body {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-top: 10px;
+    margin-top: 20px;
     text-align: center;
     line-height: 1.8;
 }
 
-.content-sections {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
+section {
     padding: 40px 20px;
-    gap: 20px;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-}
-
-.section-wrapper {
-    background: linear-gradient(135deg, rgba(10, 0, 20, 0.2), rgba(0, 0, 0, 0.5));
-    box-shadow: inset 0 0 15px rgba(178, 60, 255, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-    min-width: 400px;
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.section-wrapper.visible {
-    opacity: 1;
-    transform: translateY(0);
+    position: relative;
+    z-index: 1;
 }
 
 h2 {
@@ -103,6 +77,14 @@ h2 {
     background-clip: text;
     color: transparent;
     letter-spacing: 2px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+h2.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 p {
@@ -244,8 +226,6 @@ p.visible {
 }
 
 .roadmap-item {
-    background: linear-gradient(135deg, rgba(10, 0, 20, 0.2), rgba(0, 0, 0, 0.5));
-    box-shadow: inset 0 0 15px rgba(178, 60, 255, 0.5);
     padding: 20px;
     border-radius: 10px;
     width: 80%;
@@ -377,12 +357,18 @@ p.visible {
 @media (max-width: 767px) {
     html, body {
         background-attachment: fixed;
-        background-size: contain;
+        background-size: cover;
     }
 
     .hero {
         padding: 20px;
         min-height: 80vh;
+    }
+
+    .hero-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 
     .hero-logo {
@@ -397,14 +383,8 @@ p.visible {
         font-size: 14px;
     }
 
-    .content-sections {
+    section {
         padding: 20px;
-        gap: 15px;
-    }
-
-    .section-wrapper {
-        min-width: 300px;
-        padding: 15px;
     }
 
     .nft-cards {
@@ -449,18 +429,11 @@ p.visible {
     .hero-subheading { font-size: 12px; }
     h2 { font-size: 24px; }
     p { font-size: 14px; }
-    .content-sections { padding: 10px; gap: 10px; }
-    .section-wrapper { min-width: 250px; padding: 10px; }
+    section { padding: 10px; }
     .nft-cards { height: 300px; margin: 10px 0; }
     .nft-card { width: 130px; height: 182px; }
     .nft-position-wrapper[data-position="right"] { transform: translateX(65px) rotate(10deg) scale(0.9); }
     .nft-position-wrapper[data-position="left"] { transform: translateX(-65px) rotate(-10deg) scale(0.9); }
     .nft-back h3 { font-size: 12px; margin-bottom: 3px; }
     .nft-back p { font-size: 8px; padding: 1px 3px; line-height: 1.1; margin: 1px 0; }
-}
-
-@media (min-width: 1200px) {
-    .section-wrapper { min-width: 450px; }
-    h2 { font-size: 48px; }
-    p { font-size: 20px; }
 }
