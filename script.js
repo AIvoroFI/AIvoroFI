@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Intersection Observer для плавного появления секций
-    const elementsToReveal = document.querySelectorAll('.section-wrapper, .roadmap-item, p');
+    const elementsToReveal = document.querySelectorAll('h2, p, .roadmap-item');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
