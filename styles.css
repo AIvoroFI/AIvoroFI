@@ -48,10 +48,13 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    margin-bottom: 40px;
-    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    padding: 0;
 }
 
 .hero-logo {
@@ -85,7 +88,7 @@ body::before {
     line-height: 80px;
     color: #d1d1d1;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 1002;
 }
 
 .menu-toggle:hover {
@@ -102,7 +105,7 @@ body::before {
     letter-spacing: 2px;
     text-align: center;
     width: 100%;
-    margin-top: 120px;
+    margin-top: 140px;
     position: relative;
 }
 
@@ -172,6 +175,7 @@ section {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 50px; /* Добавлено, чтобы учесть фиксированную шапку */
 }
 
 h2 {
@@ -498,12 +502,13 @@ p.visible {
 
     .hero-slogan {
         font-size: 20px;
-        margin-top: 100px;
+        margin-top: 120px;
     }
 
     section {
         padding: 20px 10px;
         margin-bottom: 40px;
+        margin-top: 40px;
     }
 
     .nft-cards {
@@ -571,7 +576,7 @@ p.visible {
 
     .hero-slogan { 
         font-size: 16px; 
-        margin-top: 80px;
+        margin-top: 100px;
     }
 
     h2 { 
@@ -586,7 +591,8 @@ p.visible {
 
     section { 
         padding: 15px 10px; 
-        margin-bottom: 30px; 
+        margin-bottom: 30px;
+        margin-top: 30px;
     }
 
     .nft-cards { 
@@ -630,4 +636,4 @@ p.visible {
     .menu-link {
         font-size: 18px;
     }
-                     }
+}
