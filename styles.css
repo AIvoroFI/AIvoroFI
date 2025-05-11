@@ -45,16 +45,20 @@ body::before {
 .hero-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    position: relative;
     margin-bottom: 40px;
     padding: 0;
     width: 100%;
 }
 
 .hero-logo {
-    height: 48px;
+    height: 80px;
     width: auto;
     margin-left: 15px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .hero-slogan {
@@ -65,7 +69,8 @@ body::before {
     color: transparent;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-right: 15px;
+    text-align: center;
+    width: 100%;
 }
 
 section {
@@ -386,13 +391,12 @@ p.visible {
     }
 
     .hero-logo {
-        height: 24px;
+        height: 60px;
         margin-left: 10px;
     }
 
     .hero-slogan {
         font-size: 24px;
-        margin-right: 10px;
     }
 
     section {
@@ -437,12 +441,11 @@ p.visible {
 
 @media (max-width: 480px) {
     .hero-logo { 
-        height: 18px; 
+        height: 40px; 
         margin-left: 8px;
     }
     .hero-slogan { 
         font-size: 18px; 
-        margin-right: 8px;
     }
     h2 { 
         font-size: 24px; 
