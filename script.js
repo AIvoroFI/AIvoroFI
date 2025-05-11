@@ -2,7 +2,6 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.ticker.fps(60);
 
 document.addEventListener('DOMContentLoaded', () => {
-    // NFT Carousel Logic
     const nftPositionWrappers = document.querySelectorAll('.nft-position-wrapper');
     const nftCards = document.querySelectorAll('.nft-card');
     let positions = ['center', 'right', 'left'];
@@ -107,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Mint Modal Logic
     const mintBtn = document.getElementById('mint-btn');
     const mintModal = document.getElementById('mint-modal');
     const closeModal = document.getElementById('close-modal');
@@ -120,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mintModal.style.display = 'none';
     });
 
-    // Chat Assistant Logic
     const assistantIcon = document.querySelector('.assistant-icon');
     const chatOverlay = document.getElementById('chat-overlay');
     const chatClose = document.getElementById('chat-close');
@@ -154,7 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index < text.length) {
                 element.textContent += text.charAt(index);
                 index++;
-                setTimeout(type, 30); // Скорость печати (30ms на символ)
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                setTimeout(type, 30);
             } else if (callback) {
                 callback();
             }
@@ -174,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentStep < monologue.length) {
             addMessage(monologue[currentStep], () => {
                 currentStep++;
-                setTimeout(showNextMessage, 2000); // Пауза между сообщениями (2 секунды)
+                setTimeout(showNextMessage, 2000);
             });
         }
     };
@@ -198,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentStep = 0;
     });
 
-    // Intersection Observer for Section Animations
     const elementsToReveal = document.querySelectorAll('h2, p, .roadmap-item');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
