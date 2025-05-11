@@ -9,7 +9,7 @@
 
 html, body {
     background: url('assets/background.jpg') !important;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -20,7 +20,7 @@ html, body {
 
 .hero {
     position: relative;
-    padding: 80px 20px;
+    padding: 40px 20px;
     z-index: 1;
     min-height: 100vh;
 }
@@ -36,19 +36,17 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    padding: 0 20px;
 }
 
 .hero-logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    max-width: 100px;
+    max-width: 80px;
 }
 
 .hero-slogan {
     font-size: 36px;
-    background: linear-gradient(45deg, #ffffff, #00ccff);
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -58,7 +56,7 @@ html, body {
 
 .hero-subheading {
     font-size: 18px;
-    background: linear-gradient(45deg, #ffffff, #b3e5fc);
+    background: linear-gradient(45deg, #ffffff, #00ccff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -67,17 +65,17 @@ html, body {
 }
 
 section {
-    padding: 80px 20px;
+    padding: 60px 20px;
     position: relative;
     z-index: 1;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 h2 {
     font-size: 36px;
     text-align: center;
     margin-bottom: 20px;
-    background: linear-gradient(45deg, #ffffff, #00ccff);
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -96,7 +94,7 @@ p {
     font-size: 18px;
     line-height: 1.8;
     text-align: center;
-    background: linear-gradient(45deg, #ffffff, #b3e5fc);
+    background: linear-gradient(45deg, #ffffff, #00ccff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -248,7 +246,7 @@ p.visible {
 
 .roadmap-item h3 {
     margin-bottom: 10px;
-    background: linear-gradient(45deg, #ffffff, #00ccff);
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -347,7 +345,8 @@ p.visible {
     color: #ffffff;
     font-size: 18px;
     text-align: center;
-    width: 100%;
+    margin: 0 auto;
+    padding: 0;
 }
 
 .close {
@@ -365,13 +364,13 @@ p.visible {
 
 @media (max-width: 767px) {
     html, body {
-        background-attachment: fixed;
         background-size: contain;
+        background-attachment: fixed;
         background-repeat: no-repeat;
     }
 
     .hero {
-        padding: 40px 20px;
+        padding: 20px 20px;
         min-height: 80vh;
     }
 
@@ -380,11 +379,12 @@ p.visible {
         align-items: flex-start;
         justify-content: flex-start;
         margin-bottom: 20px;
+        padding: 0;
     }
 
     .hero-logo {
-        position: static;
-        max-width: 80px;
+        max-width: 60px;
+        margin-bottom: 20px;
     }
 
     .hero-slogan {
@@ -437,12 +437,12 @@ p.visible {
 }
 
 @media (max-width: 480px) {
-    .hero-logo { max-width: 80px; }
+    .hero-logo { max-width: 60px; }
     .hero-slogan { font-size: 18px; }
     .hero-subheading { font-size: 12px; }
     h2 { font-size: 24px; }
     p { font-size: 14px; }
-    section { padding: 20px; margin-bottom: 10px; }
+    section { padding: 20px 20px; margin-bottom: 10px; }
     .nft-cards { height: 300px; margin: 10px 0; }
     .nft-card { width: 130px; height: 182px; }
     .nft-position-wrapper[data-position="right"] { transform: translateX(65px) rotate(10deg) scale(0.9); }
