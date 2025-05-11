@@ -9,29 +9,7 @@
 <body>
     <div id="particles"></div>
 
-    <div id="terminal-overlay">
-        <div id="start-screen">
-            <h2>AIvoroFI Terminal</h2>
-            <p>Prepare for launch...</p>
-            <button id="start-btn">Start</button>
-            <div class="skip-container">
-                <span id="skip-btn">Skip Animation</span>
-            </div>
-        </div>
-
-        <div id="terminal" style="display: none;">
-            <div class="section-card">
-                <div id="terminal-content">
-                </div>
-                <div id="ready-message">
-                    <p style="opacity: 0;">AIvoroFI system ready.</p>
-                    <button id="launch-btn" style="opacity: 0;">Continue</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="main-content" style="display: none;">
+    <div id="main-content">
         <section class="hero">
             <img src="assets/logo.png" alt="AIvoroFI Logo" class="hero-logo">
             <div class="scroll-down">Scroll Down</div>
@@ -48,7 +26,7 @@
             <div class="section-card">
                 <h2>What We Offer</h2>
                 <p>- <strong>AI-Driven Aggregator:</strong> Seamlessly connects multi-chain liquidity pools, using real-time AI analysis to boost your returns.</p>
-                <p>- <strong>NFT Utilities:</strong> Our NFTs grant access to premium pools, staking opportunities, and a rental system—unlocking benefits without ownership barriers.</p>
+                <p>- <strong>NFT Utilities:</strong> Our NFTs grant access to premium pools, staking opportunities, and a rental system-unlocking benefits without ownership barriers.</p>
                 <p>- <strong>Partnered Ecosystems:</strong> Integration with top NFT projects expands liquidity and creates a thriving DeFi network.</p>
             </div>
         </section>
@@ -68,7 +46,7 @@
                                     <p><strong>Who:</strong> A visionary from a bygone era</p>
                                     <p><strong>Role:</strong> Inventor & Master of Illusions</p>
                                     <p><strong>Perk:</strong> Monocle reveals the true nature of people and objects</p>
-                                    <p><strong>Style:</strong> Steampunk elegance — top hat, long coat</p>
+                                    <p><strong>Style:</strong> Steampunk elegance - top hat, long coat</p>
                                     <p><strong>Weakness:</strong> A mysterious past that haunts him still</p>
                                     <p><strong>Special:</strong> Premium Pool AIvoroFI Aggregator</p>
                                 </div>
@@ -85,9 +63,9 @@
                                     <h3>Cybernetic Fighter</h3>
                                     <p><strong>Who:</strong> A protector forged in a digital realm</p>
                                     <p><strong>Role:</strong> Cyber Guardian</p>
-                                    <p><strong>Perk:</strong> Combat visor with predictive AI — spots danger before it happens</p>
+                                    <p><strong>Perk:</strong> Combat visor with predictive AI - spots danger before it happens</p>
                                     <p><strong>Style:</strong> Tech armor, neon purple highlights</p>
-                                    <p><strong>Weakness:</strong> Hates water — causes system glitches</p>
+                                    <p><strong>Weakness:</strong> Hates water - causes system glitches</p>
                                     <p><strong>Special:</strong> Premium Pool AIvoroFI Aggregator</p>
                                 </div>
                             </div>
@@ -103,7 +81,7 @@
                                     <h3>Data Archivist</h3>
                                     <p><strong>Who:</strong> A keeper of infinite knowledge</p>
                                     <p><strong>Role:</strong> Data Archivist</p>
-                                    <p><strong>Perk:</strong> Remembers everything — even what you ate two years ago</p>
+                                    <p><strong>Perk:</strong> Remembers everything - even what you ate two years ago</p>
                                     <p><strong>Style:</strong> Mustache, suspenders, business casual</p>
                                     <p><strong>Weakness:</strong> Crashes when exposed to sarcasm</p>
                                     <p><strong>Special:</strong> Premium Pool AIvoroFI Aggregator</p>
@@ -112,6 +90,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="mint-btn" id="mint-btn">MINT</button>
                 <p>A collection of 60,000 unique NFTs with 3 rarity tiers, enhancing your DeFi experience with exclusive utilities. Each NFT is uniquely personalized, ensuring everyone finds something that matches their style and mood. Click the center card to view its attributes!</p>
             </div>
         </section>
@@ -119,7 +98,7 @@
         <section class="somnia">
             <div class="section-card">
                 <h2>Built on Somnia</h2>
-                <p>Somnia is a next-generation blockchain designed for speed and scalability. It powers AIvoroFI with low fees, high throughput, and robust support for DeFi and NFT innovation—making it the perfect foundation for our vision.</p>
+                <p>Somnia is a next-generation blockchain designed for speed and scalability. It powers AIvoroFI with low fees, high throughput, and robust support for DeFi and NFT innovation-making it the perfect foundation for our vision.</p>
             </div>
         </section>
 
@@ -144,6 +123,13 @@
             <p><a href="https://twitter.com/AIvoroFI">Twitter: @AIvoroFI</a></p>
             <p><a href="mailto:AIvoroFI@gmail.com">Email: AIvoroFI@gmail.com</a></p>
         </footer>
+    </div>
+
+    <div id="mint-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <p>Mint will be available soon</p>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
