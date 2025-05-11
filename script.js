@@ -118,30 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
         mintModal.style.display = 'none';
     });
 
-    const logo = document.querySelector('.hero-logo');
-    logo.addEventListener('load', () => {
-        gsap.to('.hero-logo', {
-            scale: 1.05,
-            duration: 2,
-            repeat: -1,
-            yoyo: true,
-            ease: 'power1.inOut'
-        });
-    });
-
-    // Резервный запуск анимации
-    setTimeout(() => {
-        gsap.to('.hero-logo', {
-            scale: 1.05,
-            duration: 2,
-            repeat: -1,
-            yoyo: true,
-            ease: 'power1.inOut'
-        });
-    }, 1000);
-
-    // Intersection Observer для плавного появления блоков
-    const elementsToReveal = document.querySelectorAll('.section-card, .roadmap-item, p');
+    // Intersection Observer для плавного появления секций
+    const elementsToReveal = document.querySelectorAll('.section-wrapper, .roadmap-item, p');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
