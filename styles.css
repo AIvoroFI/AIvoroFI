@@ -9,61 +9,14 @@
 }
 
 html, body {
-    background: linear-gradient(180deg, #000000 0%, #1a0033 100%);
+    background: linear-gradient(180deg, #1a0033 0%, #0a1a3d 100%);
+    background-image: url('assets/noise.png');
+    background-size: 512px 512px;
+    background-repeat: repeat;
     background-attachment: fixed;
     overflow-x: hidden;
     position: relative;
     min-height: 100vh;
-}
-
-#particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.7;
-}
-
-#particles div {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: linear-gradient(45deg, #b23cff, #00ccff, #b23cff);
-    background-size: 200%;
-    border-radius: 50%;
-    will-change: transform;
-}
-
-@keyframes glow {
-    0% { background-position: 0%; box-shadow: 0 0 3px rgba(178, 60, 255, 0.5); }
-    100% { background-position: 200%; box-shadow: 0 0 6px rgba(0, 204, 255, 0.8); }
-}
-
-@keyframes float1 {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(20px, 10px); }
-    100% { transform: translate(0, 0); }
-}
-
-@keyframes float2 {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(-15px, 25px); }
-    100% { transform: translate(0, 0); }
-}
-
-@keyframes float3 {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(10px, -20px); }
-    100% { transform: translate(0, 0); }
-}
-
-@keyframes float4 {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(-25px, -10px); }
-    100% { transform: translate(0, 0); }
 }
 
 .hero {
@@ -91,7 +44,7 @@ html, body {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); opacity: 0.7; }
+    0% {robot { transform: scale(1); opacity: 0.7; }
     50% { transform: scale(1.1); opacity: 1; }
     100% { transform: scale(1); opacity: 0.7; }
 }
@@ -104,9 +57,8 @@ section {
 
 .section-card {
     background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(3px);
     border: 2px solid #b23cff;
-    box-shadow: 0 0 20px rgba(178, 60, 255, 0.5);
     padding: 20px;
     border-radius: 15px;
     margin: 0 auto;
@@ -114,7 +66,7 @@ section {
     min-height: 400px;
     position: relative;
     z-index: 1;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s;
     overflow: visible;
 }
 
@@ -152,7 +104,7 @@ p {
     will-change: transform;
 }
 
-.nft-position-wrapper[data-position="center"] {
+.nft-position-wrapper[data-position="center Keine Ergebnisse"] {
     transform: translateX(0);
     z-index: 10;
 }
@@ -180,14 +132,15 @@ p {
     transition: transform 0.5s ease;
     transform-style: preserve-3d;
     cursor: pointer;
+    will-change: transform;
 }
 
 .nft-card.zoomed {
-    transform: scale(1.5);
+    transform: scale(1.3);
 }
 
 .nft-card.flipped {
-    transform: rotateY(180deg) scale(1.5);
+    transform: rotateY(180deg) scale(1.3);
 }
 
 .nft-front, .nft-back {
