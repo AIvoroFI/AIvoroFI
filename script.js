@@ -1,5 +1,4 @@
 gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(ScrollToPlugin); // Добавляем ScrollToPlugin
 gsap.ticker.fps(60);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -117,38 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeModal.addEventListener('click', () => {
         mintModal.style.display = 'none';
-    });
-
-    // Меню
-    const menuToggle = document.getElementById('menu-toggle');
-    const menuOverlay = document.getElementById('menu-overlay');
-    const menuClose = document.getElementById('menu-close');
-    const menuLinks = document.querySelectorAll('.menu-link');
-
-    menuToggle.addEventListener('click', () => {
-        menuOverlay.style.display = 'flex';
-    });
-
-    menuClose.addEventListener('click', () => {
-        menuOverlay.style.display = 'none';
-    });
-
-    menuLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                gsap.to(window, {
-                    scrollTo: { y: targetElement, offsetY: 50 },
-                    duration: 1,
-                    ease: 'power2.inOut'
-                });
-                menuOverlay.style.display = 'none';
-            } else {
-                console.error(`Element with ID ${targetId} not found`);
-            }
-        });
     });
 
     // Intersection Observer для плавного появления секций
