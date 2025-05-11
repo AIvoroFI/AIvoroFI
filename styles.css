@@ -5,14 +5,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
-    color: #b23cff;
 }
 
 html, body {
     background: linear-gradient(180deg, #1a0033 0%, #0a1a3d 100%);
-    background-image: url('assets/noise.png');
-    background-size: 512px 512px;
-    background-repeat: repeat;
     background-attachment: fixed;
     overflow-x: hidden;
     position: relative;
@@ -44,7 +40,7 @@ html, body {
 }
 
 @keyframes pulse {
-    0% {robot { transform: scale(1); opacity: 0.7; }
+    0% { transform: scale(1); opacity: 0.7; }
     50% { transform: scale(1.1); opacity: 1; }
     100% { transform: scale(1); opacity: 0.7; }
 }
@@ -104,7 +100,7 @@ p {
     will-change: transform;
 }
 
-.nft-position-wrapper[data-position="center Keine Ergebnisse"] {
+.nft-position-wrapper[data-position="center"] {
     transform: translateX(0);
     z-index: 10;
 }
@@ -171,7 +167,6 @@ p {
 
 .nft-back h3 {
     font-size: 18px;
-    color: #ffffff;
     margin-bottom: 5px;
     background: linear-gradient(45deg, #ff00ff, #00ffff);
     -webkit-background-clip: text;
@@ -335,7 +330,7 @@ p {
 @media (max-width: 480px) {
     .hero-logo { max-width: 250px; }
     h2 { font-size: 28px; }
-    p { font-size: 18px; }
+    p { font-size: 16px; }
     .section-card { padding: 10px; max-width: 95%; min-height: 300px; }
     .nft-cards { height: 300px; margin: 10px 0; }
     .nft-card { width: 130px; height: 182px; }
