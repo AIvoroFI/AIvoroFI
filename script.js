@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     assistantIcon.addEventListener('click', () => {
         chatOverlay.style.display = 'flex';
+        document.body.classList.add('no-scroll'); // Блокируем прокрутку сайта
         chatMessages.innerHTML = '';
         currentStep = 0;
         setTimeout(() => {
@@ -189,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     chatClose.addEventListener('click', () => {
         chatOverlay.style.display = 'none';
+        document.body.classList.remove('no-scroll'); // Разблокируем прокрутку сайта
         chatMessages.innerHTML = '';
         chatButtons.innerHTML = '';
         currentStep = 0;
