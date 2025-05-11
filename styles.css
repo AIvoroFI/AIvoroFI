@@ -8,12 +8,11 @@
 }
 
 html, body {
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url('assets/background.jpg'), linear-gradient(180deg, #2a0055 0%, #0a1a3d 100%) !important;
+    background: url('assets/background.jpg') !important;
     background-size: contain;
     background-position: center;
     background-repeat: repeat;
-    background-attachment: scroll;
-    background-blend-mode: overlay;
+    background-attachment: fixed;
     overflow-x: hidden;
     position: relative;
     min-height: 100vh;
@@ -21,87 +20,103 @@ html, body {
 
 .hero {
     position: relative;
-    padding: 20px;
+    padding: 40px 20px;
     z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    position: relative;
+    width: 100%;
 }
 
 .hero-logo {
-    max-width: 150px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    max-width: 100px;
 }
 
 .hero-slogan {
-    margin-top: 10px;
-    font-size: 20px;
-    color: #00ccff;
+    font-size: 36px;
+    color: #ffffff;
+    background: linear-gradient(45deg, #ffffff, #00ccff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+    letter-spacing: 2px;
+    text-align: center;
 }
 
-section {
-    padding: 50px 20px;
-    position: relative;
-    z-index: 1;
+.hero-subheading {
+    font-size: 18px;
+    background: linear-gradient(45deg, #ffffff, #b3e5fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-top: 10px;
+    text-align: center;
+    line-height: 1.8;
 }
 
-.section-card {
-    background: rgba(10, 0, 20, 0.3);
-    border: 4px solid transparent;
-    border-image: linear-gradient(45deg, #b23cff, #00ccff) 1;
-    box-shadow: 0 0 20px rgba(178, 60, 255, 0.5), 0 0 20px rgba(0, 204, 255, 0.5), inset 0 0 15px rgba(178, 60, 255, 0.5);
+.content-sections {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 40px 20px;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.section-wrapper {
+    background: linear-gradient(135deg, rgba(10, 0, 20, 0.2), rgba(0, 0, 0, 0.5));
+    box-shadow: inset 0 0 15px rgba(178, 60, 255, 0.5);
     padding: 20px;
     border-radius: 10px;
-    margin: 0 auto;
-    max-width: 1000px;
-    min-height: 400px;
-    position: relative;
-    z-index: 1;
+    min-width: 400px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.section-card:hover {
-    background: rgba(10, 0, 20, 0.5);
-}
-
-.section-card.visible {
+.section-wrapper.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
 h2 {
-    font-size: 40px;
+    font-size: 36px;
     text-align: center;
     margin-bottom: 20px;
-    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    background: linear-gradient(45deg, #ffffff, #00ccff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 0 8px rgba(255, 0, 255, 0.7);
     letter-spacing: 2px;
 }
 
 p {
     font-size: 18px;
-    line-height: 2.2;
+    line-height: 1.8;
     text-align: center;
-    padding: 10px 20px;
     background: linear-gradient(45deg, #ffffff, #b3e5fc);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    margin-bottom: 20px;
 }
 
 p.visible {
@@ -114,7 +129,6 @@ p.visible {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
 }
 
 .nft-cards {
@@ -139,7 +153,7 @@ p.visible {
 }
 
 .nft-position-wrapper[data-position="center"] .nft-card {
-    box-shadow: 0 0 30px rgba(0, 204, 255, 1);
+    box-shadow: inset 0 0 20px rgba(0, 204, 255, 0.8);
 }
 
 .nft-position-wrapper[data-position="right"] {
@@ -162,9 +176,8 @@ p.visible {
     width: 270px;
     height: 378px;
     border-radius: 10px;
-    border: 2px solid transparent;
-    border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1;
-    box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+    background: linear-gradient(135deg, rgba(10, 0, 20, 0.2), rgba(0, 0, 0, 0.5));
+    box-shadow: inset 0 0 15px rgba(0, 204, 255, 0.5);
     transition: transform 0.5s ease;
     transform-style: preserve-3d;
     cursor: pointer;
@@ -231,8 +244,8 @@ p.visible {
 }
 
 .roadmap-item {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid #00ccff;
+    background: linear-gradient(135deg, rgba(10, 0, 20, 0.2), rgba(0, 0, 0, 0.5));
+    box-shadow: inset 0 0 15px rgba(178, 60, 255, 0.5);
     padding: 20px;
     border-radius: 10px;
     width: 80%;
@@ -254,12 +267,10 @@ p.visible {
 }
 
 .footer {
-    padding: 100px 20px;
+    padding: 50px 20px;
     text-align: center;
     z-index: 1;
-    border-top: 2px solid transparent;
-    border-image: linear-gradient(90deg, #b23cff, #00ccff) 1;
-    background: linear-gradient(180deg, rgba(10, 0, 20, 0.5), rgba(0, 0, 0, 0.8));
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .footer h2 {
@@ -272,9 +283,10 @@ p.visible {
 
 .footer a {
     text-decoration: none;
-    color: #00ccff;
+    color: #ffffff;
     position: relative;
     font-size: 20px;
+    transition: transform 0.3s ease;
 }
 
 .footer a::after {
@@ -282,7 +294,7 @@ p.visible {
     position: absolute;
     width: 0;
     height: 1px;
-    background: #00ff99;
+    background: #00ccff;
     bottom: -2px;
     left: 0;
     transition: width 0.3s ease;
@@ -293,7 +305,8 @@ p.visible {
 }
 
 .footer a:hover {
-    color: #00ff99;
+    color: #00ccff;
+    transform: scale(1.05);
 }
 
 .mint-btn {
@@ -303,16 +316,17 @@ p.visible {
     color: #ffffff;
     border: none;
     padding: 15px 30px;
-    font-size: 22px;
+    font-size: 24px;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 0 15px rgba(178, 60, 255, 0.7), 0 0 15px rgba(0, 204, 255, 0.7);
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
     letter-spacing: 2px;
 }
 
 .mint-btn:hover {
     background: linear-gradient(45deg, #00ccff, #b23cff);
+    transform: scale(1.05);
 }
 
 .modal {
@@ -336,11 +350,15 @@ p.visible {
     position: relative;
     max-width: 400px;
     width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-content p {
     color: #ffffff;
     font-size: 18px;
+    text-align: center;
 }
 
 .close {
@@ -358,26 +376,35 @@ p.visible {
 
 @media (max-width: 767px) {
     html, body {
-        background-attachment: scroll;
+        background-attachment: fixed;
         background-size: contain;
     }
 
-    section {
-        padding: 10px 20px;
+    .hero {
+        padding: 20px;
+        min-height: 80vh;
     }
 
     .hero-logo {
-        max-width: 120px;
+        max-width: 80px;
     }
 
     .hero-slogan {
-        font-size: 16px;
+        font-size: 24px;
     }
 
-    .section-card {
+    .hero-subheading {
+        font-size: 14px;
+    }
+
+    .content-sections {
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .section-wrapper {
+        min-width: 300px;
         padding: 15px;
-        max-width: 90%;
-        min-height: 350px;
     }
 
     .nft-cards {
@@ -417,11 +444,13 @@ p.visible {
 }
 
 @media (max-width: 480px) {
-    .hero-logo { max-width: 120px; }
-    .hero-slogan { font-size: 14px; }
-    h2 { font-size: 28px; }
-    p { font-size: 16px; }
-    .section-card { padding: 10px; max-width: 95%; min-height: 300px; }
+    .hero-logo { max-width: 80px; }
+    .hero-slogan { font-size: 18px; }
+    .hero-subheading { font-size: 12px; }
+    h2 { font-size: 24px; }
+    p { font-size: 14px; }
+    .content-sections { padding: 10px; gap: 10px; }
+    .section-wrapper { min-width: 250px; padding: 10px; }
     .nft-cards { height: 300px; margin: 10px 0; }
     .nft-card { width: 130px; height: 182px; }
     .nft-position-wrapper[data-position="right"] { transform: translateX(65px) rotate(10deg) scale(0.9); }
@@ -431,7 +460,7 @@ p.visible {
 }
 
 @media (min-width: 1200px) {
-    .section-card { max-width: 1100px; min-height: 450px; }
+    .section-wrapper { min-width: 450px; }
     h2 { font-size: 48px; }
-    p { font-size: 18px; }
+    p { font-size: 20px; }
 }
