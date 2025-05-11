@@ -1,6 +1,5 @@
 gsap.registerPlugin(ScrollTrigger);
 gsap.ticker.fps(60);
-ScrollTrigger.config({ limitCallbacks: true });
 
 const nftPositionWrappers = document.querySelectorAll('.nft-position-wrapper');
 const nftCards = document.querySelectorAll('.nft-card');
@@ -129,6 +128,18 @@ logo.addEventListener('load', () => {
         ease: 'power1.inOut'
     });
 });
+
+// Резервный запуск анимации, если событие load не сработало
+setTimeout(() => {
+    gsap.to('.hero-logo', {
+        scale: 1.05,
+        opacity: 0.9,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1.inOut'
+    });
+}, 1000);
 
 gsap.utils.toArray('.section-card').forEach(card => {
     gsap.from(card, {
