@@ -8,7 +8,7 @@
 }
 
 html, body {
-    background: linear-gradient(180deg, #1a0033 0%, #0a1a3d 100%);
+    background: linear-gradient(180deg, #1a0033 0%, #0a1a3d 100%) !important;
     background-attachment: fixed;
     overflow-x: hidden;
     position: relative;
@@ -23,6 +23,7 @@ html, body {
     align-items: center;
     position: relative;
     z-index: 1;
+    background: linear-gradient(180deg, #1a0033 0%, #0a1a3d 100%);
 }
 
 .hero-logo {
@@ -52,8 +53,7 @@ section {
 }
 
 .section-card {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(3px);
+    background: rgba(26, 0, 51, 0.6);
     border: 2px solid #b23cff;
     padding: 20px;
     border-radius: 15px;
@@ -64,6 +64,7 @@ section {
     z-index: 1;
     transition: transform 0.3s;
     overflow: visible;
+    will-change: transform;
 }
 
 h2 {
