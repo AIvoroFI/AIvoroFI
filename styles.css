@@ -16,6 +16,10 @@ html, body {
     width: 100%;
 }
 
+body.no-scroll {
+    overflow: hidden;
+}
+
 body::before {
     content: '';
     position: fixed;
@@ -76,7 +80,7 @@ body::before {
 }
 
 .assistant-icon {
-    height: 80px;
+    height: 120px;
     width: auto;
     position: absolute;
     right: 15px;
@@ -147,10 +151,11 @@ body::before {
     flex: 1;
     overflow-y: auto;
     padding: 20px;
-    padding-bottom: 220px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-bottom: 400px; /* Увеличенный отступ снизу, чтобы учесть размер персонажа */
 }
 
 .message {
@@ -176,13 +181,17 @@ body::before {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    width: 200px;
-    height: 200px;
+    width: 350px;
+    height: 350px;
     opacity: 1;
     z-index: 1000;
 }
 
 .chat-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 390px; /* Учитываем ширину персонажа + отступ */
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -527,7 +536,7 @@ p.visible {
     }
 
     .assistant-icon {
-        height: 60px;
+        height: 90px;
         right: 10px;
     }
 
@@ -542,12 +551,17 @@ p.visible {
 
     .chat-messages {
         padding: 15px;
-        padding-bottom: 170px;
+        padding-bottom: 15px;
+        margin-bottom: 300px;
     }
 
     .ai-character {
-        width: 150px;
-        height: 150px;
+        width: 250px;
+        height: 250px;
+    }
+
+    .chat-buttons {
+        right: 290px;
     }
 
     .chat-button {
@@ -602,7 +616,7 @@ p.visible {
     }
 
     .assistant-icon {
-        height: 40px;
+        height: 60px;
         right: 8px;
     }
 
@@ -617,7 +631,8 @@ p.visible {
 
     .chat-messages {
         padding: 10px;
-        padding-bottom: 120px;
+        padding-bottom: 10px;
+        margin-bottom: 200px;
     }
 
     .message {
@@ -626,8 +641,12 @@ p.visible {
     }
 
     .ai-character {
-        width: 100px;
-        height: 100px;
+        width: 180px;
+        height: 180px;
+    }
+
+    .chat-buttons {
+        right: 200px;
     }
 
     .chat-button {
