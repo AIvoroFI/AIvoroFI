@@ -1,16 +1,47 @@
-gsap.registerPlugin(ScrollTrigger);
+@font-face { font-family: 'Aviano Sans'; src: url('fonts/aviano-sans.otf') format('opentype'); }
 
-gsap.utils.toArray('.section-card').forEach(card => { gsap.from(card, { scrollTrigger: { trigger: card, start: 'top 90%' }, x: -100, opacity: 0, duration: 1, ease: 'power3.out' }); });
+{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Aviano Sans', sans-serif; color: #b23cff; }
 
-gsap.utils.toArray('.roadmap-item').forEach(item => { gsap.from(item, { scrollTrigger: { trigger: item, start: 'top 90%' }, x: -50, opacity: 0, duration: 1, ease: 'power3.out' }); });
 
-gsap.to('.hero-logo', { scale: 1.05, opacity: 0.9, duration: 2, repeat: -1, yoyo: true, ease: 'power1.inOut' });
+html, body { background: linear-gradient(180deg, #000000 0%, #1a0033 100%); background-attachment: fixed; overflow-x: hidden; position: relative; min-height: 100vh; }
 
-const mintBtn = document.querySelector('.mint-btn'); const modal = document.getElementById('mint-modal'); const closeBtn = modal.querySelector('.close');
+#particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.7; }
 
-mintBtn.addEventListener('click', () => { modal.style.display = 'flex'; });
+section { padding: 100px 20px; position: relative; z-index: 1; }
 
-closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+.section-card { background: rgba(0, 0, 0, 0.3); border: 2px solid #b23cff; box-shadow: 0 0 20px rgba(178, 60, 255, 0.5); padding: 20px; border-radius: 15px; margin: 0 auto; max-width: 1000px; min-height: 400px; backdrop-filter: blur(10px); transition: transform 0.3s, box-shadow 0.3s; overflow: visible; }
 
-window.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; } });
+h2 { font-size: 40px; text-align: center; margin-bottom: 20px; background: linear-gradient(45deg, #ff00ff, #00ffff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+p { font-size: 18px; line-height: 1.8; text-align: center; padding: 10px 20px; color: #ffffff; }
+
+.hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 1; }
+
+.hero-logo { max-width: 500px; width: 80%; }
+
+.scroll-down { margin-top: 20px; font-size: 18px; color: #00ccff; text-transform: uppercase; letter-spacing: 2px; animation: pulse 2s infinite ease-in-out; }
+
+@keyframes pulse { 0% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 0.7; } }
+
+.roadmap-timeline { display: flex; flex-direction: column; gap: 20px; margin-top: 20px; align-items: center; }
+
+.roadmap-item { background: rgba(0, 0, 0, 0.5); border: 1px solid #00ccff; padding: 20px; border-radius: 10px; width: 80%; max-width: 600px; text-align: center; }
+
+.roadmap-item h3 { color: #00ccff; margin-bottom: 10px; }
+
+.footer { padding: 100px 20px; text-align: center; z-index: 1; }
+
+.footer a { text-decoration: none; color: #00ccff; }
+
+.footer a:hover { color: #00ff99; }
+
+.mint-btn { background: linear-gradient(45deg, #b23cff, #00ccff); border: none; padding: 12px 24px; font-size: 18px; color: #fff; border-radius: 8px; cursor: pointer; margin-top: 20px; transition: all 0.3s ease; }
+
+.mint-btn:hover { background: linear-gradient(45deg, #00ccff, #b23cff); }
+
+.modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; }
+
+.modal-content { background: #1a0033; padding: 30px; border-radius: 12px; border: 2px solid #b23cff; text-align: center; color: #fff; position: relative; max-width: 300px; }
+
+.modal-content .close { position: absolute; top: 10px; right: 15px; color: #fff; font-size: 24px; cursor: pointer; }
 
