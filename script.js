@@ -1,32 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
-
-const particlesDiv = document.getElementById('particles');
-const particles = [];
-
-const floatAnimations = ['float1', 'float2', 'float3', 'float4'];
-
-for (let i = 0; i < 50; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    particle.style.cssText = `
-        position: absolute;
-        width: 5px;
-        height: 5px;
-        background: linear-gradient(45deg, #b23cff, #00ccff, #b23cff);
-        background-size: 200%;
-        border-radius: 50%;
-    `;
-    particlesDiv.appendChild(particle);
-    particles.push(particle);
-
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight;
-    particle.style.left = `${x}px`;
-    particle.style.top = `${y}px`;
-
-    const randomFloat = floatAnimations[Math.floor(Math.random() * floatAnimations.length)];
-    particle.style.animation = `${randomFloat} ${5 + Math.random() * 5}s infinite ease-in-out, glow 2s infinite alternate`;
-}
+gsap.ticker.fps(60);
+ScrollTrigger.config({ limitCallbacks: true });
 
 const nftPositionWrappers = document.querySelectorAll('.nft-position-wrapper');
 const nftCards = document.querySelectorAll('.nft-card');
@@ -144,13 +118,16 @@ closeModal.addEventListener('click', () => {
     mintModal.style.display = 'none';
 });
 
-gsap.to('.hero-logo', {
-    scale: 1.05,
-    opacity: 0.9,
-    duration: 2,
-    repeat: -1,
-    yoyo: true,
-    ease: 'power1.inOut'
+const logo = document.querySelector('.hero-logo');
+logo.addEventListener('load', () => {
+    gsap.to('.hero-logo', {
+        scale: 1.05,
+        opacity: 0.9,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1.inOut'
+    });
 });
 
 gsap.utils.toArray('.section-card').forEach(card => {
