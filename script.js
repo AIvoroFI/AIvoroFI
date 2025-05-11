@@ -118,6 +118,36 @@ document.addEventListener('DOMContentLoaded', () => {
         mintModal.style.display = 'none';
     });
 
+    // Меню
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const menuClose = document.getElementById('menu-close');
+    const menuLinks = document.querySelectorAll('.menu-link');
+
+    menuToggle.addEventListener('click', () => {
+        menuOverlay.style.display = 'flex';
+    });
+
+    menuClose.addEventListener('click', () => {
+        menuOverlay.style.display = 'none';
+    });
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                gsap.to(window, {
+                    scrollTo: targetElement,
+                    duration: 1,
+                    ease: 'power2.inOut'
+                });
+                menuOverlay.style.display = 'none';
+            }
+        });
+    });
+
     // Intersection Observer для плавного появления секций
     const elementsToReveal = document.querySelectorAll('h2, p, .roadmap-item');
     const observer = new IntersectionObserver((entries) => {
