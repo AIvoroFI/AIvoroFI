@@ -1,157 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 
-const startBtn = document.getElementById('start-btn');
-const skipBtn = document.getElementById('skip-btn');
-const terminal = document.getElementById('terminal');
-const startScreen = document.getElementById('start-screen');
-const terminalContent = document.getElementById('terminal-content');
-const readyMessage = document.getElementById('ready-message');
-const launchBtn = document.getElementById('launch-btn');
-const terminalOverlay = document.getElementById('terminal-overlay');
-const mainContent = document.getElementById('main-content');
-
-let typeSound = new Audio('assets/sounds/type.mp3');
-typeSound.volume = 0.15;
-typeSound.onerror = () => {
-    console.error("Failed to load type.mp3. Check file path or file integrity.");
-    typeSound = new Audio('assets/sounds/click.mp3');
-    typeSound.volume = 0.15;
-};
-typeSound.oncanplaythrough = () => {
-    console.log("type.mp3 loaded successfully and ready to play.");
-};
-
-let backgroundSound = new Audio('assets/sounds/background_hum.mp3');
-backgroundSound.volume = 0.03;
-backgroundSound.loop = true;
-
-const terminalLines = [
-    '> Initializing AIvoroFI Neural Core...',
-    '> Connecting to Somnia blockchain...',
-    '> Optimizing DeFi liquidity protocols...',
-    '> Syncing NFT utility contracts...',
-    '> Validating multi-chain aggregators...',
-    '> AIvoroFI deployment complete.'
-];
-
-function blinkCursor(element, callback) {
-    let cursorVisible = true;
-    const cursorInterval = setInterval(() => {
-        cursorVisible = !cursorVisible;
-        element.innerHTML = `<span class="cursor">${cursorVisible ? '_' : ' '}</span>`;
-    }, 350);
-    return () => clearInterval(cursorInterval);
-}
-
-function typeLine(element, text, callback) {
-    let index = 0;
-    element.innerHTML = '';
-    let cursorVisible = true;
-    const cursorInterval = setInterval(() => {
-        cursorVisible = !cursorVisible;
-        const cursorText = cursorVisible ? '_' : ' ';
-        element.innerHTML = text.slice(0, index) + `<span class="cursor">${cursorText}</span>`;
-    }, 350);
-
-    function typeChar() {
-        if (index < text.length) {
-            index++;
-            element.innerHTML = text.slice(0, index) + `<span class="cursor">${cursorVisible ? '_' : ' '}</span>`;
-            typeSound.play().catch(error => {
-                console.error("Error playing type.mp3:", error);
-            });
-            setTimeout(typeChar, 80);
-        } else {
-            clearInterval(cursorInterval);
-            element.innerHTML = text;
-            typeSound.pause();
-            typeSound.currentTime = 0;
-            callback();
-        }
-    }
-    typeChar();
-}
-
-startBtn.addEventListener('click', () => {
-    playSound('click.mp3');
-    backgroundSound.play();
-    gsap.to(startScreen, {
-        opacity: 0,
-        duration: 0.5,
-        onComplete: () => {
-            startScreen.style.display = 'none';
-            terminal.style.display = 'flex';
-            gsap.to(terminal, { opacity: 1, duration: 1, ease: 'power3.out' });
-
-            terminalContent.innerHTML = '';
-            let lineIndex = 0;
-
-            function typeNextLine() {
-                if (lineIndex < terminalLines.length) {
-                    const newLine = document.createElement('p');
-                    terminalContent.appendChild(newLine);
-                    typeLine(newLine, terminalLines[lineIndex], () => {
-                        const pauseLine = document.createElement('p');
-                        terminalContent.appendChild(pauseLine);
-                        const stopBlink = blinkCursor(pauseLine, () => {});
-                        setTimeout(() => {
-                            stopBlink();
-                            pauseLine.remove();
-                            lineIndex++;
-                            typeNextLine();
-                        }, 800);
-                    });
-                } else {
-                    typeSound.pause();
-                    typeSound.currentTime = 0;
-                    gsap.to(readyMessage.querySelector('p'), { opacity: 1, duration: 0.5 });
-                    gsap.to(launchBtn, { opacity: 1, duration: 0.5, delay: 0.5 });
-                }
-            }
-            typeNextLine();
-        }
-    });
-});
-
-skipBtn.addEventListener('click', () => {
-    playSound('click.mp3');
-    gsap.to(terminalOverlay, {
-        opacity: 0,
-        duration: 0.5,
-        onComplete: () => {
-            terminalOverlay.style.display = 'none';
-            mainContent.style.display = 'block';
-            gsap.fromTo(mainContent, { opacity: 0 }, { opacity: 1, duration: 1, ease: 'power3.out' });
-        }
-    });
-});
-
-launchBtn.addEventListener('click', () => {
-    playSound('confirm.mp3');
-    backgroundSound.pause();
-    backgroundSound.currentTime = 0;
-    gsap.to(terminalOverlay, {
-        opacity: 0,
-        duration: 0.5,
-        onStart: () => {
-            playSound('confirm.mp3');
-        },
-        onComplete: () => {
-            terminalOverlay.style.display = 'none';
-            mainContent.style.display = 'block';
-            gsap.fromTo(mainContent, { opacity: 0 }, { opacity: 1, duration: 1, ease: 'power3.out' });
-        }
-    });
-});
-
-function playSound(file) {
-    const sound = new Audio('assets/sounds/' + file);
-    sound.play();
-}
-
 const particlesDiv = document.getElementById('particles');
 const particles = [];
-
 const floatAnimations = ['float1', 'float2', 'float3', 'float4'];
 
 for (let i = 0; i < 50; i++) {
@@ -293,7 +143,7 @@ gsap.to('.hero-logo', {
 gsap.utils.toArray('.section-card').forEach(card => {
     gsap.from(card, {
         scrollTrigger: { trigger: card, start: 'top 90%' },
-        y: 50,
+        x: -80,
         opacity: 0,
         duration: 1,
         ease: 'power3.out'
@@ -308,4 +158,22 @@ gsap.utils.toArray('.roadmap-item').forEach(item => {
         duration: 1,
         ease: 'power3.out'
     });
+});
+
+const mintBtn = document.getElementById('mint-btn');
+const mintModal = document.getElementById('mint-modal');
+const closeModal = document.getElementById('close-modal');
+
+mintBtn.addEventListener('click', () => {
+    mintModal.style.display = 'block';
+});
+
+closeModal.addEventListener('click', () => {
+    mintModal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === mintModal) {
+        mintModal.style.display = 'none';
+    }
 });
