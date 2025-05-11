@@ -7,22 +7,28 @@
     font-family: 'Inter', sans-serif;
 }
 
-html, body {
-    background: url('assets/background.jpg') !important;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+body {
     overflow-x: hidden;
     position: relative;
     min-height: 100vh;
 }
 
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('assets/background.jpg') no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+}
+
 .hero {
     position: relative;
-    padding: 40px 20px;
+    padding: 10px 20px;
     z-index: 1;
-    min-height: 100vh;
 }
 
 .hero-content {
@@ -38,10 +44,11 @@ html, body {
     justify-content: space-between;
     margin-bottom: 20px;
     padding: 0 20px;
+    width: 100%;
 }
 
 .hero-logo {
-    max-width: 80px;
+    max-width: 60px;
 }
 
 .hero-slogan {
@@ -56,16 +63,13 @@ html, body {
 
 .hero-subheading {
     font-size: 18px;
-    background: linear-gradient(45deg, #ffffff, #00ccff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: #ffffff;
     text-align: center;
     line-height: 1.8;
 }
 
 section {
-    padding: 60px 20px;
+    padding: 20px 20px;
     position: relative;
     z-index: 1;
     margin-bottom: 20px;
@@ -94,10 +98,7 @@ p {
     font-size: 18px;
     line-height: 1.8;
     text-align: center;
-    background: linear-gradient(45deg, #ffffff, #00ccff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: #ffffff;
     margin-bottom: 15px;
     opacity: 0;
     transform: translateY(10px);
@@ -363,32 +364,16 @@ p.visible {
 }
 
 @media (max-width: 767px) {
-    html, body {
-        background-size: contain;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-    }
-
     .hero {
-        padding: 20px 20px;
-        min-height: 80vh;
-    }
-
-    .hero-top {
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-bottom: 20px;
-        padding: 0;
+        padding: 5px 20px;
     }
 
     .hero-logo {
-        max-width: 60px;
-        margin-bottom: 20px;
+        max-width: 40px;
     }
 
     .hero-slogan {
-        font-size: 24px;
+        font-size: 18px;
     }
 
     .hero-subheading {
@@ -396,7 +381,7 @@ p.visible {
     }
 
     section {
-        padding: 40px 20px;
+        padding: 10px 20px;
         margin-bottom: 20px;
     }
 
@@ -437,12 +422,12 @@ p.visible {
 }
 
 @media (max-width: 480px) {
-    .hero-logo { max-width: 60px; }
-    .hero-slogan { font-size: 18px; }
+    .hero-logo { max-width: 40px; }
+    .hero-slogan { font-size: 14px; }
     .hero-subheading { font-size: 12px; }
     h2 { font-size: 24px; }
     p { font-size: 14px; }
-    section { padding: 20px 20px; margin-bottom: 10px; }
+    section { padding: 5px 20px; margin-bottom: 10px; }
     .nft-cards { height: 300px; margin: 10px 0; }
     .nft-card { width: 130px; height: 182px; }
     .nft-position-wrapper[data-position="right"] { transform: translateX(65px) rotate(10deg) scale(0.9); }
