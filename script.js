@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const monologue = [
         "Let me tell you about AIvoroFI. We’re an innovative decentralized finance platform, building a smart liquidity aggregator that connects DeFi pools across multiple blockchains, powered by AI and enhanced with utility-driven NFTs.",
         "What sets us apart from other DeFi projects? Unlike most protocols that focus on single-chain or manual yield farming, we integrate multi-chain liquidity, automated AI-based optimization, NFT-based privileges, and an accessible interface for users of all levels.",
-        "Here’s how our aggregator works: you deposit funds and select a risk strategy — conservative, balanced, or aggressive. Our AI module then analyzes dozens of pools and automatically reallocates funds for maximum yield, all from a single interface.",
+        "Here’s how our aggregator works: you deposit funds and select a risk strategy — conservative, balanced, or aggressive. Our AI module antren analyzes dozens of pools and automatically reallocates funds for maximum yield, all from a single interface.",
         "Our NFTs play a big role. AIvoroFI NFTs provide real utility: access to premium pools with higher yields, lower fees, and exclusive tools. They can also be staked or rented to generate passive income.",
         "Don’t worry if you don’t own an NFT — you can still use the aggregator! While NFTs unlock more features and better rates, users can participate and earn without owning one.",
         "Speaking of NFT rentals, here’s how it works: users can temporarily rent NFTs and gain all associated benefits without buying. NFT owners earn passive income from rentals, and the process is safe, fully managed by smart contracts.",
@@ -142,13 +142,45 @@ document.addEventListener('DOMContentLoaded', () => {
         "That’s all I wanted to share! If you’d like to learn more, stay tuned for our updates."
     ];
 
-    const addMessage = (text) => {
+    const typeMessage = (text, element, callback) => {
+        let index = 0;
+        element.textContent = '';
+        const type = () => {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                index++;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                setTimeout(type, 30);
+            } else if (callback) {
+                callback();
+            }
+        };
+        type();
+    };
+
+    const addMessage = (text, useTyping = false, callback) => {
         const message = document.createElement('div');
         message.classList.add('message');
-        message.textContent = text;
         chatMessages.appendChild(message);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        sessionStorage.setItem('chatMessages', chatMessages.innerHTML);
+        if (useTyping) {
+            typeMessage(text, message, () => {
+                sessionStorage.setItem('chatMessages', chatMessages.innerHTML);
+                if (callback) callback();
+            });
+        } else {
+            message.textContent = text;
+            sessionStorage.setItem('chatMessages', chatMessages.innerHTML);
+            if (callback) callback();
+        }
+    };
+
+    const showNextMessage = (currentStep) => {
+        if (currentStep < monologue.length) {
+            addMessage(monologue[currentStep], true, () => {
+                setTimeout(() => showNextMessage(currentStep + 1), 2000);
+            });
+        }
     };
 
     const loadMessages = () => {
@@ -157,11 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
             chatMessages.innerHTML = savedMessages;
             chatMessages.scrollTop = chatMessages.scrollHeight;
         } else {
-            addMessage("Hi, my name is Evangelina, your AI assistant. I’ll help you learn more about the AIvoroFI project.");
-            monologue.forEach((text, index) => {
-                setTimeout(() => {
-                    addMessage(text);
-                }, (index + 1) * 2500);
+            addMessage("Hi, my name is Evangelina, your AI assistant. I’ll help you learn more about the AIvoroFI project.", true, () => {
+                setTimeout(() => showNextMessage(0), 2000);
             });
         }
     };
