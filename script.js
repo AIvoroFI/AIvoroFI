@@ -142,6 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "That’s all I wanted to share! If you’d like to learn more, stay tuned for our updates."
     ];
 
+    let currentStep = 0;
+
     const typeMessage = (text, element, callback) => {
         let index = 0;
         element.textContent = '';
@@ -158,39 +160,19 @@ document.addEventListener('DOMContentLoaded', () => {
         type();
     };
 
-    const addMessage = (text, useTyping = false, callback) => {
+    const addMessage = (text, callback) => {
         const message = document.createElement('div');
         message.classList.add('message');
         chatMessages.appendChild(message);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        if (useTyping) {
-            typeMessage(text, message, () => {
-                sessionStorage.setItem('chatMessages', chatMessages.innerHTML);
-                if (callback) callback();
-            });
-        } else {
-            message.textContent = text;
-            sessionStorage.setItem('chatMessages', chatMessages.innerHTML);
-            if (callback) callback();
-        }
+        typeMessage(text, message, callback);
     };
 
-    const showNextMessage = (currentStep) => {
+    const showNextMessage = () => {
         if (currentStep < monologue.length) {
-            addMessage(monologue[currentStep], true, () => {
-                setTimeout(() => showNextMessage(currentStep + 1), 2000);
-            });
-        }
-    };
-
-    const loadMessages = () => {
-        const savedMessages = sessionStorage.getItem('chatMessages');
-        if (savedMessages) {
-            chatMessages.innerHTML = savedMessages;
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        } else {
-            addMessage("Hi, my name is Evangelina, your AI assistant. I’ll help you learn more about the AIvoroFI project.", true, () => {
-                setTimeout(() => showNextMessage(0), 2000);
+            addMessage(monologue[currentStep], () => {
+                currentStep++;
+                setTimeout(showNextMessage, 2000);
             });
         }
     };
@@ -198,12 +180,20 @@ document.addEventListener('DOMContentLoaded', () => {
     assistantIcon.addEventListener('click', () => {
         chatOverlay.style.display = 'flex';
         document.body.classList.add('no-scroll');
-        loadMessages();
+        chatMessages.innerHTML = '';
+        currentStep = 0;
+        setTimeout(() => {
+            addMessage("Hi, my name is Evangelina, your AI assistant. I’ll help you learn more about the AIvoroFI project.", () => {
+                setTimeout(showNextMessage, 2000);
+            });
+        }, 500);
     });
 
     chatClose.addEventListener('click', () => {
         chatOverlay.style.display = 'none';
         document.body.classList.remove('no-scroll');
+        chatMessages.innerHTML = '';
+        currentStep = 0;
     });
 
     const elementsToReveal = document.querySelectorAll('h2, p, .roadmap-item');
