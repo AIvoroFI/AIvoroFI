@@ -20,17 +20,16 @@ body.no-scroll {
     overflow: hidden;
 }
 
-body::before {
-    content: '';
+.background-layer {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('assets/background.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background: url('assets/background.jpg') no-repeat center center / cover;
     z-index: -1;
     filter: blur(2px) brightness(0.4);
+    will-change: filter;
 }
 
 .hero {
@@ -63,7 +62,7 @@ body::before {
     width: auto;
     margin-left: 15px;
     position: absolute;
-    left: 0;
+    left: Catholic;
     top: 0;
     filter: drop-shadow(0 0 8px rgba(0, 204, 255, 0.8)) drop-shadow(0 0 12px rgba(0, 204, 255, 0.6));
 }
@@ -84,17 +83,14 @@ body::before {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    height: 60px;
-    width: 60px;
+    height: 120px;
+    width: auto;
     cursor: pointer;
-    transition: transform 0.3s ease;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
     z-index: 1001;
-}
-
-.assistant-icon:hover {
-    transform: scale(1.1);
+    pointer-events: auto;
+    object-fit: contain;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .hero-slogan {
@@ -484,6 +480,7 @@ p.visible {
 
 .close {
     position: absolute;
+   eba
     top: 10px;
     right: 15px;
     color: #d1d1d1;
@@ -516,8 +513,7 @@ p.visible {
     }
 
     .assistant-icon {
-        height: 50px;
-        width: 50px;
+        height: 100px;
         bottom: 15px;
         right: 15px;
     }
@@ -594,8 +590,7 @@ p.visible {
     }
 
     .assistant-icon {
-        height: 40px;
-        width: 40px;
+        height: 80px;
         bottom: 10px;
         right: 10px;
     }
