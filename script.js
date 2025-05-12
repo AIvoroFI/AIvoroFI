@@ -142,37 +142,26 @@ document.addEventListener('DOMContentLoaded', () => {
         "That’s all I wanted to share! If you’d like to learn more, stay tuned for our updates."
     ];
 
-    let currentStep = 0;
-
-    const typeMessage = (text, element, callback) => {
-        let index = 0;
-        element.textContent = '';
-        const type = () => {
-            if (index < text.length) {
-                element.textContent += text.charAt(index);
-                index++;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                setTimeout(type, 30);
-            } else if (callback) {
-                callback();
-            }
-        };
-        type();
-    };
-
-    const addMessage = (text, callback) => {
+    const addMessage = (text) => {
         const message = document.createElement('div');
         message.classList.add('message');
+        message.textContent = text;
         chatMessages.appendChild(message);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        typeMessage(text, message, callback);
+        sessionStorage.setItem('chatMessages', chatMessages.innerHTML);
     };
 
-    const showNextMessage = () => {
-        if (currentStep < monologue.length) {
-            addMessage(monologue[currentStep], () => {
-                currentStep++;
-                setTimeout(showNextMessage, 2000);
+    const loadMessages = () => {
+        const savedMessages = sessionStorage.getItem('chatMessages');
+        if (savedMessages) {
+            chatMessages.innerHTML = savedMessages;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        } else {
+            addMessage("Hi, my name is Evangelina, your AI assistant. I’ll help you learn more about the AIvoroFI project.");
+            monologue.forEach((text, index) => {
+                setTimeout(() => {
+                    addMessage(text);
+                }, (index + 1) * 2500);
             });
         }
     };
@@ -180,20 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
     assistantIcon.addEventListener('click', () => {
         chatOverlay.style.display = 'flex';
         document.body.classList.add('no-scroll');
-        chatMessages.innerHTML = '';
-        currentStep = 0;
-        setTimeout(() => {
-            addMessage("Hi, my name is Evangelina, your AI assistant. I’ll help you learn more about the AIvoroFI project.", () => {
-                setTimeout(showNextMessage, 2000);
-            });
-        }, 500);
+        loadMessages();
     });
 
     chatClose.addEventListener('click', () => {
         chatOverlay.style.display = 'none';
         document.body.classList.remove('no-scroll');
-        chatMessages.innerHTML = '';
-        currentStep = 0;
     });
 
     const elementsToReveal = document.querySelectorAll('h2, p, .roadmap-item');
