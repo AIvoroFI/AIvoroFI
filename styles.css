@@ -50,21 +50,18 @@ body::before {
 
 .hero-top {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    position: relative;
-    margin-bottom: 40px;
-    padding: 0;
+    justify-content: space-between;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 15px;
 }
 
 .hero-logo {
     height: 80px;
     width: auto;
-    margin-left: 15px;
-    position: absolute;
-    left: 0;
-    top: 0;
     filter: drop-shadow(0 0 8px rgba(0, 204, 255, 0.8)) drop-shadow(0 0 12px rgba(0, 204, 255, 0.6));
 }
 
@@ -74,20 +71,97 @@ body::before {
     width: 100%;
     height: 2px;
     background: linear-gradient(45deg, #ff00ff, #00ffff);
-    margin-top: 90px;
     position: absolute;
+    bottom: 0;
     left: 0;
     z-index: 1;
 }
 
-.assistant-icon {
-    height: 120px;
-    width: auto;
-    position: absolute;
-    right: 15px;
-    top: -20px;
+/* Стили для бургер-меню с тремя полосками */
+.nav-menu {
+    position: relative;
+}
+
+.burger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
     cursor: pointer;
     transition: transform 0.3s ease;
+}
+
+.burger-icon:hover {
+    transform: scale(1.1);
+}
+
+.burger-line {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    border-radius: 2px;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+    z-index: 1000;
+}
+
+.menu-content.active {
+    display: block;
+}
+
+.nav-link {
+    display: block;
+    color: #d1d1d1;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #00ccff;
+}
+
+/* Стили для выбора языка */
+.language-selector {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#language-switcher {
+    background: #333;
+    color: #d1d1d1;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#language-switcher:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+}
+
+.assistant-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 120px;
+    width: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 1000;
 }
 
 .assistant-icon:hover {
@@ -106,7 +180,7 @@ body::before {
     text-align: center;
     width: 100%;
     max-width: 80%;
-    margin: 120px auto 0 auto;
+    margin: 90px auto 0 auto;
     position: relative;
 }
 
@@ -497,19 +571,18 @@ p.visible {
         padding: 10px 0;
     }
 
+    .hero-top {
+        padding: 10px;
+    }
+
     .hero-logo {
         height: 60px;
-        margin-left: 10px;
     }
 
     .assistant-icon {
         height: 90px;
-        right: 10px;
-        top: -15px;
-    }
-
-    .hero-top::after {
-        margin-top: 70px;
+        bottom: 15px;
+        right: 15px;
     }
 
     .hero-slogan {
@@ -574,23 +647,22 @@ p.visible {
 }
 
 @media (max-width: 480px) {
-    .hero-logo { 
-        height: 40px; 
-        margin-left: 8px;
+    .hero-top {
+        padding: 8px;
+    }
+
+    .hero-logo {
+        height: 40px;
     }
 
     .assistant-icon {
         height: 60px;
-        right: 8px;
-        top: -10px;
+        bottom: 10px;
+        right: 10px;
     }
 
-    .hero-top::after {
-        margin-top: 50px;
-    }
-
-    .hero-slogan { 
-        font-size: 16px; 
+    .hero-slogan {
+        font-size: 16px;
         margin-top: 80px;
         max-width: 90%;
     }
@@ -610,48 +682,48 @@ p.visible {
         height: 300px;
     }
 
-    h2 { 
-        font-size: 24px; 
-        margin-bottom: 30px; 
-    }
-
-    p { 
-        font-size: 14px; 
-        margin-bottom: 15px; 
-    }
-
-    section { 
-        padding: 15px 10px; 
+    h2 {
+        font-size: 24px;
         margin-bottom: 30px;
     }
 
-    .nft-cards { 
-        height: 300px; 
-        margin: 15px 0; 
+    p {
+        font-size: 14px;
+        margin-bottom: 15px;
     }
 
-    .nft-card { 
-        width: 130px; 
-        height: 182px; 
+    section {
+        padding: 15px 10px;
+        margin-bottom: 30px;
     }
 
-    .nft-position-wrapper[data-position="right"] { 
-        transform: translateX(65px) rotate(10deg) scale(0.9); 
+    .nft-cards {
+        height: 300px;
+        margin: 15px 0;
     }
 
-    .nft-position-wrapper[data-position="left"] { 
-        transform: translateX(-65px) rotate(-10deg) scale(0.9); 
+    .nft-card {
+        width: 130px;
+        height: 182px;
     }
 
-    .nft-back h3 { 
-        font-size: 12px; 
-        margin-bottom: 3px; 
+    .nft-position-wrapper[data-position="right"] {
+        transform: translateX(65px) rotate(10deg) scale(0.9);
     }
 
-    .nft-back p { 
-        font-size: 8px; 
-        padding: 1px 3px; 
-        line-height: 1.1; 
-        margin: 1px 0; 
+    .nft-position-wrapper[data-position="left"] {
+        transform: translateX(-65px) rotate(-10deg) scale(0.9);
+    }
+
+    .nft-back h3 {
+        font-size: 12px;
+        margin-bottom: 3px;
+    }
+
+    .nft-back p {
+        font-size: 8px;
+        padding: 1px 3px;
+        line-height: 1.1;
+        margin: 1px 0;
     }
 }
