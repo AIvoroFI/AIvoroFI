@@ -107,16 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const mintBtn = document.getElementById('mint-btn');
-    const mintModal = document.getElementById('mint-modal');
-    const closeModal = document.getElementById('close-modal');
-
-    mintBtn.addEventListener('click', () => {
-        mintModal.style.display = 'flex';
-    });
-
-    closeModal.addEventListener('click', () => {
-        mintModal.style.display = 'none';
-    });
+    if (mintBtn) {
+        mintBtn.addEventListener('click', () => {
+            window.location.href = 'nft.html';
+        });
+    }
 
     const assistantIcon = document.querySelector('.assistant-icon');
     const chatOverlay = document.getElementById('chat-overlay');
@@ -208,4 +203,37 @@ document.addEventListener('DOMContentLoaded', () => {
     elementsToReveal.forEach(element => {
         observer.observe(element);
     });
+
+    const connectWalletBtn = document.getElementById('connect-wallet-btn');
+    const walletModal = document.getElementById('wallet-modal');
+    const closeWalletModal = document.getElementById('close-wallet-modal');
+    const walletButtons = document.querySelectorAll('.wallet-btn');
+
+    if (connectWalletBtn && walletModal && closeWalletModal) {
+        connectWalletBtn.addEventListener('click', () => {
+            walletModal.style.display = 'flex';
+        });
+
+        closeWalletModal.addEventListener('click', () => {
+            walletModal.style.display = 'none';
+        });
+
+        walletButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const wallet = button.dataset.wallet;
+                console.log(`Connecting to ${wallet}`);
+                connectWalletBtn.textContent = 'Connected';
+                walletModal.style.display = 'none';
+            });
+        });
+    }
+
+    const mintModal = document.getElementById('mint-modal');
+    const closeMintModal = document.getElementById('close-mint-modal');
+
+    if (mintModal && closeMintModal) {
+        closeMintModal.addEventListener('click', () => {
+            mintModal.style.display = 'none';
+        });
+    }
 });
