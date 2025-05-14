@@ -57,7 +57,7 @@ metaMaskBtn.addEventListener('click', async () => {
 walletConnectBtn.addEventListener('click', async () => {
     try {
         const walletConnectProvider = new window.WalletConnectEthereumProvider.default({
-            projectId: '579babf9819ef731eae1b8b4b0784036',
+            projectId: 'f9b7841db816aa2c7eed858793aeb629',
             chains: [1],
             showQrModal: true
         });
