@@ -211,10 +211,6 @@ p {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.benefits-list li {
-    color: #222 !important;
-}
-
 .message {
     color: #1a0033 !important;
 }
