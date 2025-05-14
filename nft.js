@@ -1,11 +1,11 @@
-const connectBtn = document.getElementById('connectWallet');
-const walletModal = document.getElementById('walletModal');
-const walletClose = document.getElementById('walletClose');
-const metaMaskBtn = document.getElementById('metaMaskBtn');
-const walletConnectBtn = document.getElementById('walletConnectBtn');
-const mintBtn = document.getElementById('mintNow');
-const mintModal = document.getElementById('mintModal');
-const mintClose = document.getElementById('mintClose');
+const connectBtn = document.getElementById('connect-wallet-btn');
+const walletModal = document.getElementById('wallet-modal');
+const walletClose = document.getElementById('close-wallet-modal');
+const metaMaskBtn = document.getElementById('metamask-btn');
+const walletConnectBtn = document.getElementById('walletconnect-btn');
+const mintBtn = document.getElementById('mint-btn');
+const mintModal = document.getElementById('mint-modal');
+const mintClose = document.getElementById('close-mint-modal');
 
 let provider;
 
