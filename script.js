@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = document.getElementById('close-modal');
 
     mintBtn.addEventListener('click', () => {
-        mintModal.style.display = 'flex';
-    });
+    window.location.href = 'nft.html';
+});
 
     closeModal.addEventListener('click', () => {
         mintModal.style.display = 'none';
