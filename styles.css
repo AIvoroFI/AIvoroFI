@@ -113,13 +113,14 @@ body.no-scroll {
 .chat-content {
     position: relative;
 .chat-content {
+.chat-content {
     position: relative;
     width: 90%;
     height: 90%;
     max-width: 90%;
     max-height: 90%;
     background: linear-gradient(45deg, #e6b3ff, #ffccff);
-    border-radius: 20px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     padding: 20px;
