@@ -207,10 +207,81 @@ document.addEventListener('DOMContentLoaded', () => {
     const connectWalletBtn = document.getElementById('connect-wallet-btn');
     const walletModal = document.getElementById('wallet-modal');
     const closeWalletModal = document.getElementById('close-wallet-modal');
+    const modalMessage = document.getElementById('modal-message');
     const walletButtons = document.querySelectorAll('.wallet-btn');
+    let provider;
+
+    const formatAddress = (address) => {
+        return address ? `${address.slice(0, 6)}...${address.slice(-4)}` : '';
+    };
+
+    const checkNetwork = async (provider) => {
+        const network = await provider.getNetwork();
+        if (network.chainId !== 1) {
+            try {
+                await provider.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: '0x1' }],
+                });
+            } catch (error) {
+                modalMessage.textContent = 'Please switch to Ethereum Mainnet';
+                return false;
+            }
+        }
+        return true;
+    };
+
+    const connectMetaMask = async () => {
+        if (!window.ethereum) {
+            modalMessage.textContent = 'MetaMask not installed';
+            return;
+        }
+
+        try {
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            provider = new ethers.providers.Web3Provider(window.ethereum);
+            if (await checkNetwork(provider)) {
+                const address = accounts[0];
+                connectWalletBtn.textContent = formatAddress(address);
+                walletModal.style.display = 'none';
+            }
+        } catch (error) {
+            if (error.code === 4001) {
+                modalMessage.textContent = 'Connection rejected';
+            } else {
+                modalMessage.textContent = 'Error connecting to MetaMask';
+            }
+        }
+    };
+
+    const connectWalletConnect = async () => {
+        try {
+            const wcProvider = await EthereumProvider.init({
+                projectId: 'YOUR_WALLETCONNECT_PROJECT_ID',
+                chains: [1],
+                showQrModal: true,
+            });
+
+            await wcProvider.enable();
+            provider = new ethers.providers.Web3Provider(wcProvider);
+            if (await checkNetwork(provider)) {
+                const accounts = await provider.listAccounts();
+                const address = accounts[0];
+                connectWalletBtn.textContent = formatAddress(address);
+                walletModal.style.display = 'none';
+            }
+        } catch (error) {
+            if (error.message.includes('User closed modal')) {
+                modalMessage.textContent = 'Connection rejected';
+            } else {
+                modalMessage.textContent = 'Error connecting to WalletConnect';
+            }
+        }
+    };
 
     if (connectWalletBtn && walletModal && closeWalletModal) {
         connectWalletBtn.addEventListener('click', () => {
+            modalMessage.textContent = 'Select a wallet to connect';
             walletModal.style.display = 'flex';
         });
 
@@ -219,19 +290,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         walletButtons.forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', async () => {
                 const wallet = button.dataset.wallet;
-                console.log(`Connecting to ${wallet}`);
-                connectWalletBtn.textContent = 'Connected';
-                walletModal.style.display = 'none';
+                if (wallet === 'metamask') {
+                    await connectMetaMask();
+                } else if (wallet === 'walletconnect') {
+                    await connectWalletConnect();
+                }
             });
         });
     }
 
     const mintModal = document.getElementById('mint-modal');
     const closeMintModal = document.getElementById('close-mint-modal');
+    const mintBtn = document.getElementById('mint-btn');
 
-    if (mintModal && closeMintModal) {
+    if (mintModal && closeMintModal && mintBtn) {
+        mintBtn.addEventListener('click', () => {
+            mintModal.style.display = 'flex';
+        });
+
         closeMintModal.addEventListener('click', () => {
             mintModal.style.display = 'none';
         });
