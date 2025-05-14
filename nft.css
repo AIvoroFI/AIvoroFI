@@ -50,12 +50,12 @@ body {
 }
 
 .nft-image-full {
-    width: 100%;
-    max-width: 1000px;
+    width: 95vw;
+    max-width: 1100px;
     display: block;
     margin: 30px auto;
     border: none;
-    border-radius: 0;
+    border-radius: 10px;
 }
 
 .section {
