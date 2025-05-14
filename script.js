@@ -106,40 +106,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // === REPLACEMENT: MINT redirects to nft.html ===
     const mintBtn = document.getElementById('mint-btn');
-    const mintModal = document.getElementById('mint-modal');
-    const closeModal = document.getElementById('close-modal');
-
     mintBtn.addEventListener('click', () => {
-        mintModal.style.display = 'flex';
+        window.location.href = 'nft.html';
     });
 
-    closeModal.addEventListener('click', () => {
-        mintModal.style.display = 'none';
-    });
-
+    // === Assistant ===
     const assistantIcon = document.querySelector('.assistant-icon');
     const chatOverlay = document.getElementById('chat-overlay');
     const chatClose = document.getElementById('chat-close');
     const chatMessages = document.getElementById('chat-messages');
 
     const monologue = [
-        "Let me tell you about AIvoroFI. We’re an innovative decentralized finance platform, building a smart liquidity aggregator that connects DeFi pools across multiple blockchains, powered by AI and enhanced with utility-driven NFTs.",
-        "What sets us apart from other DeFi projects? Unlike most protocols that focus on single-chain or manual yield farming, we integrate multi-chain liquidity, automated AI-based optimization, NFT-based privileges, and an accessible interface for users of all levels.",
-        "Here’s how our aggregator works: you deposit funds and select a risk strategy — conservative, balanced, or aggressive. Our AI module then analyzes dozens of pools and automatically reallocates funds for maximum yield, all from a single interface.",
-        "Our NFTs play a big role. AIvoroFI NFTs provide real utility: access to premium pools with higher yields, lower fees, and exclusive tools. They can also be staked or rented to generate passive income.",
-        "Don’t worry if you don’t own an NFT — you can still use the aggregator! While NFTs unlock more features and better rates, users can participate and earn without owning one.",
-        "Speaking of NFT rentals, here’s how it works: users can temporarily rent NFTs and gain all associated benefits without buying. NFT owners earn passive income from rentals, and the process is safe, fully managed by smart contracts.",
-        "Let me explain what the AI does. It continuously monitors pool performance, risk, volatility, and your chosen strategy. Then, it rebalances funds across chains to achieve the best possible APR, automatically and transparently.",
-        "We support multiple blockchains to ensure broad access. Our base network is Somnia, but we plan to support Ethereum, Arbitrum, Polygon, BNB Chain, and others.",
-        "Wondering which wallets you can use? We support popular wallets like MetaMask, WalletConnect, and Tonkeeper. Mobile-friendly connection options will also be available for easy access.",
-        "Is it safe to use AIvoroFI? Absolutely. All core functionality is secured by smart contracts. We’ll have audits, a bug bounty program, and we never take custody of your keys — only you control your funds.",
-        "Your yield comes from yield-bearing DeFi pools, boosted by compounding and NFT-based bonuses. The AI ensures you’re always positioned for optimal yield based on your selected strategy.",
-        "Our platform fees are minimal and transparent. They only apply to profits, not deposits. NFT holders receive lower or zero fees depending on their pool access level.",
-        "You might be wondering if we’ll have a token. The answer is no. We chose not to issue a native token because most tokens are used as speculative assets, and many people lose money on them. AIvoroFI is focused on creating real, sustainable earning opportunities — not speculation.",
-        "Why are we called AIvoroFI? The name combines 'AI' for artificial intelligence and 'FI' for finance — reflecting our mission to build intelligent, transparent, and user-friendly financial tools for everyone.",
-        "What makes AIvoroFI truly unique? We combine smart automation, cross-chain liquidity, and NFT-based privileges into one seamless ecosystem. It’s designed to be both powerful and accessible, removing complexity from DeFi without sacrificing performance.",
-        "That’s all I wanted to share! If you’d like to learn more, stay tuned for our updates."
+        "Let me tell you about AIvoroFI. We’re an innovative decentralized finance platform...",
+        "What sets us apart from other DeFi projects? Unlike most protocols that focus on single-chain...",
+        "Here’s how our aggregator works: you deposit funds and select a risk strategy...",
+        "Our NFTs play a big role. AIvoroFI NFTs provide real utility...",
+        "Don’t worry if you don’t own an NFT — you can still use the aggregator!",
+        "Speaking of NFT rentals, here’s how it works...",
+        "Let me explain what the AI does...",
+        "We support multiple blockchains to ensure broad access...",
+        "Wondering which wallets you can use? We support popular wallets like MetaMask...",
+        "Is it safe to use AIvoroFI? Absolutely...",
+        "Your yield comes from yield-bearing DeFi pools...",
+        "Our platform fees are minimal and transparent...",
+        "You might be wondering if we’ll have a token. The answer is no...",
+        "Why are we called AIvoroFI? The name combines 'AI' and 'FI'...",
+        "What makes AIvoroFI truly unique?...",
+        "That’s all I wanted to share! Stay tuned!"
     ];
 
     let currentStep = 0;
