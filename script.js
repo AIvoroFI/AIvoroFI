@@ -106,9 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const mintBtn = document.getElementById('mint-btn');
-    if (mintBtn) {
-        mintBtn.addEventListener('click', () => {
+    const mintBtnIndex = document.querySelector('#mint-btn');
+    if (mintBtnIndex) {
+        mintBtnIndex.addEventListener('click', () => {
             window.location.href = 'nft.html';
         });
     }
