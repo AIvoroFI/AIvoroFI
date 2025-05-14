@@ -50,9 +50,8 @@ body::before {
 
 .hero-top {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     position: relative;
     margin-bottom: 40px;
     padding: 0;
@@ -63,6 +62,10 @@ body::before {
     height: 80px;
     width: auto;
     margin-left: 15px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    filter: drop-shadow(0 0 8px rgba(0, 204, 255, 0.8)) drop-shadow(0 0 12px rgba(0, 204, 255, 0.6));
 }
 
 .hero-top::after {
@@ -380,6 +383,7 @@ p.visible {
     padding: 60px 20px;
     text-align: center;
     z-index: 1;
+    background: rgba(0, 0, 0, 0.8);
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -394,7 +398,7 @@ p.visible {
 
 .footer a {
     text-decoration: none;
-    color: #FFFFFF;
+    color: #d1d1d1;
     position: relative;
     font-size: 20px;
     transition: transform 0.3s ease;
@@ -462,7 +466,6 @@ p.visible {
     max-width: 400px;
     width: 90%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
@@ -487,111 +490,6 @@ p.visible {
 
 .close:hover {
     color: #00ccff;
-}
-
-body.nft-page::before {
-    background: linear-gradient(45deg, #e6b3ff, #ffccff);
-    filter: none;
-}
-
-.nft-details {
-    text-align: center;
-}
-
-.subheading {
-    font-size: 18px;
-    color: #D6EAF8;
-    margin-bottom: 30px;
-}
-
-.nft-image img {
-    width: 270px;
-    height: 378px;
-    border: 2px solid #A3E4D7;
-    border-radius: 10px;
-    margin: 30px auto;
-    display: block;
-}
-
-.nft-text {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.nft-text h3 {
-    font-size: 24px;
-    color: #A3E4D7;
-    margin: 20px 0;
-}
-
-.nft-text ul {
-    list-style: none;
-    margin-bottom: 20px;
-}
-
-.nft-text ul li {
-    font-size: 18px;
-    color: #333333;
-    margin-bottom: 10px;
-    position: relative;
-    padding-left: 20px;
-}
-
-.nft-text ul li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #A3E4D7;
-}
-
-.lore {
-    background: #FFFFFF;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #D6EAF8;
-    color: #333333 !important;
-}
-
-.call-to-action {
-    font-weight: 700;
-    color: #F8E1E9;
-}
-
-.connect-wallet-btn {
-    background: linear-gradient(135deg, #A3E4D7, #D6EAF8);
-    color: #FFFFFF;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-right: 15px;
-}
-
-.mint-soon {
-    font-size: 14px;
-    color: #D6EAF8;
-    margin-top: 10px;
-}
-
-.wallet-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-    width: 100%;
-}
-
-.wallet-btn {
-    background: #FFFFFF;
-    border: 1px solid #A3E4D7;
-    color: #333333;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
 }
 
 @media (max-width: 767px) {
@@ -672,32 +570,6 @@ body.nft-page::before {
 
     .roadmap-box {
         max-width: 300px;
-    }
-
-    .nft-image img {
-        width: 160px;
-        height: 224px;
-    }
-
-    .nft-text h3 {
-        font-size: 20px;
-    }
-
-    .nft-text ul li {
-        font-size: 14px;
-    }
-
-    .subheading {
-        font-size: 16px;
-    }
-
-    .modal-content {
-        max-width: 300px;
-    }
-
-    .wallet-btn {
-        font-size: 14px;
-        padding: 8px;
     }
 }
 
@@ -781,59 +653,5 @@ body.nft-page::before {
         padding: 1px 3px; 
         line-height: 1.1; 
         margin: 1px 0; 
-    }
-
-    .nft-image img {
-        width: 130px;
-        height: 182px;
-    }
-
-    .nft-text h3 {
-        font-size: 18px;
-    }
-
-    .nft-text ul li {
-        font-size: 12px;
-    }
-
-    .subheading {
-        font-size: 14px;
-    }
-
-    .connect-wallet-btn {
-        padding: 8px 16px;
-        font-size: 14px;
-        margin-right: 8px;
-    }
-
-    .modal-content {
-        max-width: 260px;
-    }
-
-    .wallet-btn {
-        font-size: 12px;
-        padding: 6px;
-    }
-}
-
-@media (max-width: 320px) {
-    .modal-content {
-        max-width: 220px;
-        padding: 15px;
-    }
-
-    .wallet-btn {
-        font-size: 10px;
-        padding: 5px;
-    }
-
-    .modal-content p {
-        font-size: 14px;
-    }
-
-    .close {
-        font-size: 20px;
-        top: 8px;
-        right: 12px;
     }
 }
