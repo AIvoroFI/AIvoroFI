@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIvoroFI NFT Collection</title>
     <link rel="preload" href="assets/logo.png" as="image">
+    <link rel="preload" href="assets/nft2.png" as="image">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="nft-page">
@@ -22,7 +23,7 @@
             <h2>AIvoroFI NFT Collection</h2>
             <p class="subheading">Claim your role in the story</p>
             <div class="nft-image">
-                <img src="assets/nft1.png" alt="NFT Image">
+                <img src="assets/nft2.png" alt="NFT Image">
             </div>
             <div class="nft-text">
                 <h3>Benefits</h3>
@@ -55,12 +56,10 @@
         <div id="wallet-modal" class="modal">
             <div class="modal-content">
                 <span class="close" id="close-wallet-modal">×</span>
-                <p>Select a wallet to connect</p>
+                <p id="modal-message">Select a wallet to connect</p>
                 <div class="wallet-options">
                     <button class="wallet-btn" data-wallet="metamask">MetaMask</button>
                     <button class="wallet-btn" data-wallet="walletconnect">WalletConnect</button>
-                    <button class="wallet-btn" data-wallet="coinbase">Coinbase Wallet</button>
-                    <button class="wallet-btn" data-wallet="trust">Trust Wallet</button>
                 </div>
             </div>
         </div>
@@ -73,6 +72,8 @@
         </div>
     </div>
 
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/ethereum-provider@2.11.2/dist/index.umd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
