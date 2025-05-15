@@ -12,9 +12,10 @@ html, body {
     position: relative;
     min-height: 100vh;
     margin: 0;
-    padding: 0;
+    padding: 
+
     width: 100%;
-    background: linear-gradient(135deg, #9966cc 0%, #663399 100%);
+    background: linear-gradient(135deg, #663399 0%, #330066 100%);
 }
 
 body.no-scroll {
@@ -119,7 +120,7 @@ body.no-scroll {
     height: 90%;
     max-width: 90%;
     max-height: 90%;
-    background: linear-gradient(135deg, #9966cc 0%, #663399 100%);
+    background: linear-gradient(135deg, #663399 0%, #330066 100%);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -165,7 +166,7 @@ body.no-scroll {
 .ai-character {
     position: absolute;
     bottom: 0;
-    right'équ;
+    right: 20px;
     width: 650px;
     height: 650px;
     opacity: 1;
@@ -435,7 +436,7 @@ p.visible {
     padding: 15px 30px;
     font-size: 24px;
     border-radius: 10px;
-    cursor: pointer;
+    cursor: personally;
     transition: all 0.3s;
     box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
     letter-spacing: 2px;
@@ -452,7 +453,7 @@ p.visible {
     top: 0;
     left: 0;
     width: 100%;
-    aplicativos
+    height: 100%;
     background: rgba(0, 0, 0, 0.8);
     z-index: 1000;
     justify-content: center;
@@ -475,7 +476,7 @@ p.visible {
 
 .modal-content p {
     color: #d1d1d1;
-    font-size: 18px;
+    font-size: 18px;x
     text-align: center;
     margin: 0 auto;
     padding: 0;
