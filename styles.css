@@ -5,8 +5,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
 }
 
 html, body {
@@ -64,7 +62,7 @@ body.no-scroll {
     display: block;
     width: 100%;
     height: 2px;
-    background: #333333;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
     margin-top: 90px;
     position: absolute;
     left: 0;
@@ -88,8 +86,11 @@ body.no-scroll {
 .hero-slogan {
     font-size: 36px;
     font-weight: 900;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: center;
@@ -97,7 +98,6 @@ body.no-scroll {
     max-width: 80%;
     margin: 120px auto 0 auto;
     position: relative;
-    text-shadow: none;
 }
 
 .chat-overlay {
@@ -124,23 +124,22 @@ body.no-scroll {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    border: 1px solid #333333;
+    border: 1px solid;
+    border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1;
 }
 
 .chat-close {
     position: absolute;
     top: 20px;
     right: 20px;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    color: #333;
     font-size: 30px;
     cursor: pointer;
     z-index: 1001;
 }
 
 .chat-close:hover {
-    color: #666666;
-    -webkit-text-fill-color: #666666;
+    color: #00ccff;
 }
 
 .chat-messages {
@@ -158,8 +157,7 @@ body.no-scroll {
     max-width: 70%;
     font-size: 18px;
     line-height: 1.5;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    color: #1a0033;
     align-self: flex-start;
     background: none;
 }
@@ -167,7 +165,7 @@ body.no-scroll {
 .ai-character {
     position: absolute;
     bottom: 0;
-    right: 20px;
+    right'équ;
     width: 650px;
     height: 650px;
     opacity: 1;
@@ -188,13 +186,15 @@ h2 {
     font-size: 36px;
     text-align: center;
     margin-bottom: 40px;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    text-shadow: none;
 }
 
 h2.visible {
@@ -206,13 +206,11 @@ p {
     font-size: 18px;
     line-height: 1.8;
     text-align: center;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    color: #d1d1d1;
     margin-bottom: 20px;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    text-shadow: none;
 }
 
 p.visible {
@@ -221,9 +219,11 @@ p.visible {
 }
 
 .highlight {
-    color: #333333;
-    -webkit-text-fill-color: #333333;
-    text-shadow: none;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
 .nft-cards {
@@ -248,7 +248,7 @@ p.visible {
 }
 
 .nft-position-wrapper[data-position="center"] .nft-card {
-    box-shadow: inset 0 0 20px rgba(51, 51, 51, 0.8);
+    box-shadow: inset 0 0 20px rgba(0, 204, 255, 0.8);
 }
 
 .nft-position-wrapper[data-position="right"] {
@@ -272,7 +272,7 @@ p.visible {
     height: 378px;
     border-radius: 10px;
     background: linear-gradient(135deg, rgba(10, 0, 20, 0.2), rgba(0, 0, 0, 0.5));
-    box-shadow: inset 0 0 15px rgba(51, 51, 51, 0.5);
+    box-shadow: inset 0 0 15px rgba(0, 204, 255, 0.5);
     transition: transform 0.5s ease;
     transform-style: preserve-3d;
     cursor: pointer;
@@ -303,7 +303,7 @@ p.visible {
 }
 
 .nft-back {
-    background: linear-gradient(135deg, #9966cc 0%, #663399 100%);
+    background: linear-gradient(45deg, #4b0082, #b23cff);
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
@@ -316,19 +316,19 @@ p.visible {
 .nft-back h3 {
     font-size: 18px;
     margin-bottom: 5px;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
-    text-shadow: none;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
 .nft-back p {
     font-size: 12px;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    color: #d1d1d1;
     padding: 2px 5px;
     line-height: 1.2;
     margin: 2px 0;
-    text-shadow: none;
 }
 
 .roadmap-timeline {
@@ -353,26 +353,26 @@ p.visible {
 }
 
 .roadmap-box {
-    background: linear-gradient(135deg, #9966cc 0%, #663399 100%);
+    background: linear-gradient(45deg, #4b0082, #b23cff);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     max-width: 400px;
     margin: 0 auto;
-    box-shadow: 0 0 10px rgba(51, 51, 51, 0.7);
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
 }
 
 .roadmap-box h3 {
     margin-bottom: 10px;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
-    text-shadow: none;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
 .roadmap-box p {
-    color: #333333;
-    -webkit-text-fill-color: #333333;
-    text-shadow: none;
+    color: #d1d1d1;
 }
 
 .footer {
@@ -386,26 +386,24 @@ p.visible {
 
 .footer h2 {
     margin-bottom: 30px;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
-    text-shadow: none;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
 .footer p {
     margin-bottom: 15px;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
-    text-shadow: none;
+    color: #d1d1d1;
 }
 
 .footer a {
     text-decoration: none;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    color: #d1d1d1;
     position: relative;
     font-size: 20px;
     transition: transform 0.3s ease;
-    text-shadow: none;
 }
 
 .footer a::after {
@@ -413,7 +411,7 @@ p.visible {
     position: absolute;
     width: 0;
     height: 1px;
-    background: #666666;
+    background: #00ccff;
     bottom: -2px;
     left: 0;
     transition: width 0.3s ease;
@@ -424,30 +422,27 @@ p.visible {
 }
 
 .footer a:hover {
-    color: #666666;
-    -webkit-text-fill-color: #666666;
+    color: #00ccff;
     transform: scale(1.05);
 }
 
 .mint-btn {
     display: block;
     margin: 40px auto;
-    background: linear-gradient(135deg, #9966cc 0%, #663399 100%);
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    background: linear-gradient(45deg, #b23cff, #00ccff);
+    color: #d1d1d1;
     border: none;
     padding: 15px 30px;
     font-size: 24px;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 0 10px rgba(51, 51, 51, 0.7);
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
     letter-spacing: 2px;
-    text-shadow: none;
 }
 
 .mint-btn:hover {
-    background: linear-gradient(135deg, #663399 0%, #9966cc 100%);
+    background: linear-gradient(45deg, #00ccff, #b23cff);
     transform: scale(1.05);
 }
 
@@ -457,7 +452,7 @@ p.visible {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    aplicativos
     background: rgba(0, 0, 0, 0.8);
     z-index: 1000;
     justify-content: center;
@@ -465,7 +460,7 @@ p.visible {
 }
 
 .modal-content {
-    background: linear-gradient(135deg, #9966cc 0%, #663399 100%);
+    background: linear-gradient(45deg, #4b0082, #b23cff);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -475,33 +470,28 @@ p.visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px rgba(51, 51, 51, 0.7);
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
 }
 
 .modal-content p {
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    color: #d1d1d1;
     font-size: 18px;
     text-align: center;
     margin: 0 auto;
     padding: 0;
-    text-shadow: none;
 }
 
 .close {
     position: absolute;
     top: 10px;
-    right: initializer;
-    color: #333333;
-    -webkit-text-fill-color: #333333;
+    right: 15px;
+    color: #d1d1d1;
     font-size: 24px;
     cursor: pointer;
-    text-shadow: none;
 }
 
 .close:hover {
-    color: #666666;
-    -webkit-text-fill-color: #666666;
+    color: #00ccff;
 }
 
 @media (max-width: 767px) {
@@ -530,9 +520,6 @@ p.visible {
         font-size: 20px;
         margin-top: 100px;
         max-width: 90%;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
-        text-shadow: none;
     }
 
     .chat-messages {
@@ -543,8 +530,6 @@ p.visible {
 
     .message {
         font-size: 16px;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
     }
 
     .ai-character {
@@ -578,9 +563,6 @@ p.visible {
     .nft-back h3 {
         font-size: 14px;
         margin-bottom: 4px;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
-        text-shadow: none;
     }
 
     .nft-back p {
@@ -588,9 +570,6 @@ p.visible {
         padding: 1px 4px;
         line-height: 1.1;
         margin: 1px 0;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
-        text-shadow: none;
     }
 
     .roadmap-box {
@@ -608,7 +587,7 @@ p.visible {
 
     .assistant-icon {
         height: 60px;
-        right: 8 w;
+        right: 8px;
         top: -10px;
     }
 
@@ -620,9 +599,6 @@ p.visible {
         font-size: 16px;
         margin-top: 80px;
         max-width: 90%;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
-        text-shadow: none;
     }
 
     .chat-messages {
@@ -633,8 +609,6 @@ p.visible {
 
     .message {
         font-size: 14px;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
     }
 
     .ai-character {
@@ -645,17 +619,11 @@ p.visible {
     h2 {
         font-size: 24px;
         margin-bottom: 30px;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
-        text-shadow: none;
     }
 
     p {
         font-size: 14px;
         margin-bottom: 15px;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
-        text-shadow: none;
     }
 
     section {
@@ -684,9 +652,6 @@ p.visible {
     .nft-back h3 {
         font-size: 12px;
         margin-bottom: 3px;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
-        text-shadow: none;
     }
 
     .nft-back p {
@@ -694,8 +659,5 @@ p.visible {
         padding: 1px 3px;
         line-height: 1.1;
         margin: 1px 0;
-        color: #333333;
-        -webkit-text-fill-color: #333333;
-        text-shadow: none;
     }
-        }
+    }
