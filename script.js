@@ -1,206 +1,163 @@
+// Инициализация анимаций GSAP + ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
-gsap.ticker.fps(60);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const nftPositionWrappers = document.querySelectorAll('.nft-position-wrapper');
-    const nftCards = document.querySelectorAll('.nft-card');
-    let positions = ['center', 'right', 'left'];
-    let startX = 0;
-    let hasSwapped = false;
-    const threshold = 50;
+gsap.from(".hero-slogan", {
+    scrollTrigger: {
+        trigger: ".hero-slogan",
+        start: "top 80%"
+    },
+    opacity: 0,
+    y: 50,
+    duration: 1
+});
 
-    nftCards.forEach(card => {
-        card.dataset.clickState = '0';
-    });
-
-    nftPositionWrappers.forEach((wrapper, index) => {
-        wrapper.setAttribute('data-position', positions[index]);
-    });
-
-    const updatePositions = (direction) => {
-        if (direction === 'right') {
-            positions = positions.slice(1).concat(positions[0]);
-        } else if (direction === 'left') {
-            positions = [positions[2], ...positions.slice(0, 2)];
-        }
-        nftPositionWrappers.forEach((wrapper, index) => {
-            wrapper.setAttribute('data-position', positions[index]);
-            const card = wrapper.querySelector('.nft-card');
-            card.dataset.clickState = '0';
-            card.classList.remove('zoomed', 'flipped');
-        });
-    };
-
-    const nftContainer = document.querySelector('.nft-cards');
-    let isDragging = false;
-
-    nftContainer.addEventListener('mousedown', (e) => {
-        if (e.target.closest('.nft-position-wrapper') && e.target.closest('.nft-position-wrapper').getAttribute('data-position') === 'center') {
-            return;
-        }
-        isDragging = true;
-        startX = e.clientX;
-        hasSwapped = false;
-    });
-
-    nftContainer.addEventListener('mousemove', (e) => {
-        if (!isDragging || hasSwapped) return;
-        const currentX = e.clientX;
-        const deltaX = currentX - startX;
-
-        if (Math.abs(deltaX) > threshold) {
-            const direction = deltaX > 0 ? 'right' : 'left';
-            updatePositions(direction);
-            hasSwapped = true;
-        }
-    });
-
-    nftContainer.addEventListener('mouseup', () => {
-        isDragging = false;
-        hasSwapped = false;
-    });
-
-    nftContainer.addEventListener('mouseleave', () => {
-        isDragging = false;
-        hasSwapped = false;
-    });
-
-    nftContainer.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        hasSwapped = false;
-    });
-
-    nftContainer.addEventListener('touchmove', (e) => {
-        if (hasSwapped) return;
-        const currentX = e.touches[0].clientX;
-        const deltaX = currentX - startX;
-
-        if (Math.abs(deltaX) > threshold) {
-            const direction = deltaX > 0 ? 'right' : 'left';
-            updatePositions(direction);
-            hasSwapped = true;
-        }
-    });
-
-    nftContainer.addEventListener('touchend', () => {
-        hasSwapped = false;
-    });
-
-    nftCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const parentWrapper = card.closest('.nft-position-wrapper');
-            if (parentWrapper && parentWrapper.getAttribute('data-position') === 'center') {
-                let clickState = parseInt(card.dataset.clickState);
-
-                if (clickState === 0) {
-                    card.classList.add('zoomed');
-                    card.dataset.clickState = '1';
-                } else if (clickState === 1) {
-                    card.classList.add('flipped');
-                    card.dataset.clickState = '2';
-                } else if (clickState === 2) {
-                    card.classList.remove('flipped', 'zoomed');
-                    card.dataset.clickState = '0';
-                }
-            }
-        });
-    });
-
-    // === REPLACEMENT: MINT redirects to nft.html ===
-    const mintBtn = document.getElementById('mint-btn');
-    mintBtn.addEventListener('click', () => {
-        window.location.href = 'nft.html';
-    });
-
-    // === Assistant ===
-    const assistantIcon = document.querySelector('.assistant-icon');
-    const chatOverlay = document.getElementById('chat-overlay');
-    const chatClose = document.getElementById('chat-close');
-    const chatMessages = document.getElementById('chat-messages');
-
-    const monologue = [
-        "Let me tell you about AIvoroFI. We’re an innovative decentralized finance platform...",
-        "What sets us apart from other DeFi projects? Unlike most protocols that focus on single-chain...",
-        "Here’s how our aggregator works: you deposit funds and select a risk strategy...",
-        "Our NFTs play a big role. AIvoroFI NFTs provide real utility...",
-        "Don’t worry if you don’t own an NFT — you can still use the aggregator!",
-        "Speaking of NFT rentals, here’s how it works...",
-        "Let me explain what the AI does...",
-        "We support multiple blockchains to ensure broad access...",
-        "Wondering which wallets you can use? We support popular wallets like MetaMask...",
-        "Is it safe to use AIvoroFI? Absolutely...",
-        "Your yield comes from yield-bearing DeFi pools...",
-        "Our platform fees are minimal and transparent...",
-        "You might be wondering if we’ll have a token. The answer is no...",
-        "Why are we called AIvoroFI? The name combines 'AI' and 'FI'...",
-        "What makes AIvoroFI truly unique?...",
-        "That’s all I wanted to share! Stay tuned!"
-    ];
-
-    let currentStep = 0;
-
-    const typeMessage = (text, element, callback) => {
-        let index = 0;
-        element.textContent = '';
-        const type = () => {
-            if (index < text.length) {
-                element.textContent += text.charAt(index);
-                index++;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                setTimeout(type, 30);
-            } else if (callback) {
-                callback();
-            }
-        };
-        type();
-    };
-
-    const addMessage = (text, callback) => {
-        const message = document.createElement('div');
-        message.classList.add('message');
-        chatMessages.appendChild(message);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        typeMessage(text, message, callback);
-    };
-
-    const showNextMessage = () => {
-        if (currentStep < monologue.length) {
-            addMessage(monologue[currentStep], () => {
-                currentStep++;
-                setTimeout(showNextMessage, 2000);
-            });
-        }
-    };
-
-    assistantIcon.addEventListener('click', () => {
-        chatOverlay.style.display = 'flex';
-        document.body.classList.add('no-scroll');
-        chatMessages.innerHTML = '';
-        currentStep = 0;
-        setTimeout(() => {
-            addMessage("Hi, my name is Evangelina, your AI assistant. I’ll help you learn more about the AIvoroFI project.", () => {
-                setTimeout(showNextMessage, 2000);
-            });
-        }, 500);
-    });
-
-    chatClose.addEventListener('click', () => {
-        chatOverlay.style.display = 'none';
-        document.body.classList.remove('no-scroll');
-        chatMessages.innerHTML = '';
-        currentStep = 0;
-    });
-
-    const elementsToReveal = document.querySelectorAll('h2, p, .roadmap-item');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    elementsToReveal.forEach(element => {
-        observer.observe(element);
+gsap.utils.toArray(".feature-card").forEach(card => {
+    gsap.from(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: "top 90%"
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.6
     });
 });
+
+gsap.from(".nft-cards", {
+    scrollTrigger: {
+        trigger: ".nft-cards",
+        start: "top 80%"
+    },
+    opacity: 0,
+    y: 60,
+    duration: 1
+});
+
+gsap.from(".roadmap .step", {
+    scrollTrigger: {
+        trigger: ".roadmap .step",
+        start: "top 85%"
+    },
+    opacity: 0,
+    x: -50,
+    duration: 0.6,
+    stagger: 0.2
+});
+
+// ==== Ассистент Монолог ====
+const monologue = [
+    "What is AIvoroFI? AIvoroFI is an innovative decentralized finance platform. We’re building a smart liquidity aggregator that connects DeFi pools across multiple blockchains, powered by AI and enhanced with utility-driven NFTs.",
+    "How is AIvoroFI different from other DeFi projects? Unlike most protocols focused on single-chain or manual yield farming, AIvoroFI integrates multi-chain liquidity, automated AI-based optimization, NFT-based privileges, and an accessible interface for all levels of users.",
+    "How does the aggregator work? Users deposit funds and select a risk strategy — conservative, balanced, or aggressive. The AI module then analyzes dozens of pools and automatically reallocates funds for maximum yield, all from a single interface.",
+    "What role do NFTs play? AIvoroFI NFTs provide real utility: access to premium pools with higher yields, lower fees, and exclusive tools. They can also be staked or rented to generate passive income.",
+    "Can I use the aggregator without owning an NFT? Yes. While NFTs unlock more features and better rates, users can still participate in the aggregator and earn without owning one.",
+    "How does NFT rental work? Users can temporarily rent NFTs and gain all associated benefits without buying. NFT owners earn passive income from rentals. The process is safe and fully managed by smart contracts.",
+    "What does the AI actually do? The AI continuously monitors pool performance, risk, volatility, and user strategy. It rebalances funds across chains to achieve the best possible APR, automatically and transparently.",
+    "Which blockchains will be supported? The base network is Somnia, but we plan to support Ethereum, Arbitrum, Polygon, BNB Chain and others to ensure broad multi-chain access.",
+    "Which wallets can I use? Popular wallets like MetaMask, WalletConnect, and Tonkeeper will be supported. Mobile-friendly connection options will also be available for easy access.",
+    "Is it safe to use? Yes. All core functionality is secured by smart contracts. We’ll have audits, a bug bounty program, and no custody of your keys — only you control your funds.",
+    "How is my yield calculated? Your returns come from yield-bearing DeFi pools, boosted by compounding and NFT-based bonuses. The AI ensures you're always positioned for optimal yield based on your selected strategy.",
+    "What are the platform fees? Fees will be minimal and transparent. They only apply to profits, not deposits. NFT holders receive lower or zero fees depending on pool access level.",
+    "Will there be a token? No. We chose not to issue a native token because most tokens are used as speculative assets, and many people lose money on them. AIvoroFI is focused on creating real, sustainable earning opportunities — not speculation.",
+    "Why is it called AIvoroFI? The name combines 'AI' for artificial intelligence and 'FI' for finance — reflecting our mission to build intelligent, transparent and user-friendly financial tools for everyone.",
+    "What makes AIvoroFI truly unique? AIvoroFI combines smart automation, cross-chain liquidity, and NFT-based privileges into one seamless ecosystem. It’s designed to be both powerful and accessible, removing complexity from DeFi without sacrificing performance."
+];
+
+// Открытие/закрытие окна чата
+const assistantIcon = document.querySelector('.assistant-icon');
+const chatOverlay = document.querySelector('.chat-overlay');
+const chatClose = document.querySelector('.chat-close');
+
+assistantIcon.addEventListener('click', () => {
+    document.body.classList.add('no-scroll');
+    chatOverlay.style.display = 'flex';
+    startMonologue();
+});
+
+chatClose.addEventListener('click', () => {
+    document.body.classList.remove('no-scroll');
+    chatOverlay.style.display = 'none';
+    resetMessages();
+});
+
+const chatMessages = document.querySelector('.chat-messages');
+let currentLine = 0;
+let charIndex = 0;
+
+function startMonologue() {
+    if (currentLine >= monologue.length) return;
+    const line = monologue[currentLine];
+    const messageEl = document.createElement('div');
+    messageEl.classList.add('message');
+    chatMessages.appendChild(messageEl);
+
+    function typeChar() {
+        if (charIndex < line.length) {
+            messageEl.textContent += line.charAt(charIndex++);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            setTimeout(typeChar, 30);
+        } else {
+            charIndex = 0;
+            currentLine++;
+            setTimeout(startMonologue, 500);
+        }
+    }
+    typeChar();
+}
+
+function resetMessages() {
+    chatMessages.innerHTML = '';
+    currentLine = 0;
+    charIndex = 0;
+}
+
+// Логика Drag & Flip для NFT-карточек
+const cards = document.querySelectorAll('.nft-card');
+cards.forEach(card => {
+    let startX, currentX, isDragging = false;
+
+    card.addEventListener('mousedown', e => {
+        startX = e.clientX;
+        isDragging = true;
+        card.style.cursor = 'grabbing';
+    });
+    document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        currentX = e.clientX - startX;
+        card.style.transform = `translateX(${currentX}px)`;
+    });
+    document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.style.cursor = 'grab';
+        if (currentX > 50) card.classList.add('right');
+        else if (currentX < -50) card.classList.add('left');
+        else card.classList.add('center');
+        card.style.transform = '';
+        currentX = 0;
+    });
+
+    card.addEventListener('click', () => {
+        if (card.classList.contains('center')) {
+            card.classList.toggle('flipped');
+        }
+    });
+});
+
+// Кнопка Mint
+const mintBtn = document.querySelectorAll('.mint-btn');
+mintBtn.forEach(btn =>
+    btn.addEventListener('click', () => window.location.href = 'nft.html')
+);
+
+// Инициализация появления при скролле
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('h2, p').forEach(el => observer.observe(el));
