@@ -1,119 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>AIvoroFI – AI‑Powered DeFi on Somnia</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIvoroFI - AI-Powered DeFi on Somnia</title>
+    <link rel="preload" href="assets/logo.png" as="image">
+    <link rel="preload" href="assets/background.jpg" as="image">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- fixed chat button -->
-  <button id="chat-toggle" class="chat-toggle" aria-label="AI Chat">
-    <img src="assets/AI.png" alt="AI Chat" />
-  </button>
+    <div id="main-content">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-top">
+                    <img src="assets/logo.png" alt="AIvoroFI Logo" class="hero-logo" fetchpriority="high">
+                    <img src="assets/AI.png" class="assistant-icon" alt="AI Assistant">
+                    <div class="hero-slogan">Revolutionizing DeFi with AI and NFTs</div>
+                </div>
+            </div>
+        </section>
 
-  <div id="main-content">
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-top">
-          <img src="assets/logo.png" alt="AIvoroFI Logo" class="hero-logo" fetchpriority="high" />
-          <div class="hero-slogan">Revolutionizing DeFi with AI and NFTs</div>
+        <div class="chat-overlay" id="chat-overlay">
+            <div class="chat-content">
+                <span class="chat-close" id="chat-close">×</span>
+                <div class="chat-messages" id="chat-messages"></div>
+                <img src="assets/Evangelina.png" class="ai-character" alt="Evangelina">
+                <div class="chat-buttons" id="chat-buttons"></div>
+            </div>
         </div>
-      </div>
-    </section>
 
-    <div class="chat-overlay" id="chat-overlay">
-      <div class="chat-content">
-        <span class="chat-close" id="chat-close">×</span>
-        <div class="chat-messages" id="chat-messages"></div>
-        <img src="assets/Evangelina.png" class="ai-character" alt="Evangelina" />
-        <div class="chat-buttons" id="chat-buttons"></div>
-      </div>
+        <section class="about" id="about">
+            <h2>Redefining DeFi</h2>
+            <p>AIvoroFI is a cutting-edge platform on the <span class="highlight">Somnia blockchain</span>, merging artificial intelligence with decentralized finance. Our aggregator uses advanced AI algorithms to optimize liquidity across multiple chains, delivering maximum yield with minimal effort. Paired with a unique <span class="highlight">NFT ecosystem</span>, we’re building a future where finance is smarter, faster, and accessible to all.</p>
+        </section>
+
+        <section class="features" id="features">
+            <h2>What We Offer</h2>
+            <p><strong><span class="highlight">AI-Driven Aggregator:</span></strong> Seamlessly connects multi-chain liquidity pools, using real-time AI analysis to boost your returns.</p>
+            <p><strong><span class="highlight">NFT Utilities:</span></strong> Our NFTs grant access to premium pools, staking opportunities, and a rental system-unlocking benefits without ownership barriers.</p>
+            <p><strong><span class="highlight">Partnered Ecosystems:</span></strong> Integration with top NFT projects expands liquidity and creates a thriving DeFi network.</p>
+        </section>
+
+        <section class="nfts" id="nfts">
+            <h2>Our NFT Collection</h2>
+            <div class="nft-cards">
+                <div class="nft-position-wrapper" data-position="center">
+                    <div class="nft-wrapper">
+                        <div class="nft-card" data-nft="legendary">
+                            <div class="nft-front">
+                                <img src="assets/nft1.png" alt="NFT Legendary - Mister Mechanica" loading="lazy">
+                            </div>
+                            <div class="nft-back">
+                                <h3>Mister Mechanica</h3>
+                                <p><strong>Who:</strong> A visionary from a bygone era</p>
+                                <p><strong>Role:</strong> Inventor & Master of Illusions</p>
+                                <p><strong>Perk:</strong> Monocle reveals the true nature of people and objects</p>
+                                <p><strong>Style:</strong> Steampunk elegance - top hat, long coat</p>
+                                <p><strong>Weakness:</strong> A mysterious past that haunts him still</p>
+                                <p><strong>Special:</strong> Premium Pool AIvoroFI Aggregator</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nft-position-wrapper" data-position="right">
+                    <div class="nft-wrapper">
+                        <div class="nft-card" data-nft="epic">
+                            <div class="nft-front">
+                                <img src="assets/nft2.png" alt="NFT Epic - Cybernetic Fighter" loading="lazy">
+                            </div>
+                            <div class="nft-back">
+                                <h3>Cybernetic Fighter</h3>
+                                <p><strong>Who:</strong> A protector forged in a digital realm</p>
+                                <p><strong>Role:</strong> Cyber Guardian</p>
+                                <p><strong>Perk:</strong> Combat visor with predictive AI - spots danger before it happens</p>
+                                <p><strong>Style:</strong> Tech armor, neon purple highlights</p>
+                                <p><strong>Weakness:</strong> Hates water - causes system glitches</p>
+                                <p><strong>Special:</strong> Premium Pool AIvoroFI Aggregator</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nft-position-wrapper" data-position="left">
+                    <div class="nft-wrapper">
+                        <div class="nft-card" data-nft="common">
+                            <div class="nft-front">
+                                <img src="assets/nft3.png" alt="NFT Common - Data Archivist" loading="lazy">
+                            </div>
+                            <div class="nft-back">
+                                <h3>Data Archivist</h3>
+                                <p><strong>Who:</strong> A keeper of infinite knowledge</p>
+                                <p><strong>Role:</strong> Data Archivist</p>
+                                <p><strong>Perk:</strong> Remembers everything - even what you ate two years ago</p>
+                                <p><strong>Style:</strong> Mustache, suspenders, business casual</p>
+                                <p><strong>Weakness:</strong> Crashes when exposed to sarcasm</p>
+                                <p><strong>Special:</strong> Premium Pool AIvoroFI Aggregator</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>A collection of <span class="highlight">60,000 unique NFTs</span> with 3 rarity tiers, enhancing your DeFi experience with exclusive utilities. Each NFT is uniquely personalized, ensuring everyone finds something that matches their style and mood. Click the center card to view its attributes!</p>
+            <button class="mint-btn" id="mint-btn">MINT</button>
+        </section>
+
+        <section class="somnia" id="somnia">
+            <h2>Built on Somnia</h2>
+            <p>Somnia is a next-generation blockchain designed for speed and scalability. It powers AIvoroFI with low fees, high throughput, and robust support for DeFi and NFT innovation-making it the perfect foundation for our vision.</p>
+        </section>
+
+        <section class="roadmap" id="roadmap">
+            <h2>Our Roadmap</h2>
+            <div class="roadmap-timeline">
+                <div class="roadmap-item">
+                    <div class="roadmap-box">
+                        <h3>Q2 2025</h3>
+                        <p>Launch of Initial NFT Collection</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-box">
+                        <h3>Q4 2025</h3>
+                        <p>Launch of AI-Driven Aggregator.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer" id="footer">
+            <h2>Stay Connected</h2>
+            <p><a href="https://twitter.com/AIvoroFI">Twitter: @AIvoroFI</a></p>
+            <p><a href="mailto:AIvoroFI@gmail.com">Email: AIvoroFI@gmail.com</a></p>
+        </footer>
     </div>
 
-    <section class="about" id="about">
-      <h2>Redefining DeFi</h2>
-      <p>
-        AIvoroFI is a cutting‑edge platform on the <span class="highlight">Somnia blockchain</span>, merging artificial intelligence with decentralized finance. Our aggregator uses advanced AI algorithms to optimize liquidity across multiple chains, delivering maximum yield with minimal effort. Paired with a unique <span class="highlight">NFT ecosystem</span>, we’re building a future where finance is smarter, faster, and accessible to all.
-      </p>
-    </section>
-
-    <section class="features" id="features">
-      <h2>What We Offer</h2>
-      <p><strong><span class="highlight">AI‑Driven Aggregator:</span></strong> Seamlessly connects multi‑chain liquidity pools, using real‑time AI analysis to boost your returns.</p>
-      <p><strong><span class="highlight">NFT Utilities:</span></strong> Our NFTs grant access to premium pools, staking opportunities, and a rental system – unlocking benefits without ownership barriers.</p>
-      <p><strong><span class="highlight">Partnered Ecosystems:</span></strong> Integration with top NFT projects expands liquidity and creates a thriving DeFi network.</p>
-    </section>
-
-    <section class="nfts" id="nfts">
-      <h2>Our NFT Collection</h2>
-      <div class="nft-cards">
-        <div class="nft-position-wrapper" data-position="center">
-          <div class="nft-wrapper">
-            <div class="nft-card" data-nft="legendary">
-              <div class="nft-front"><img src="assets/nft1.png" alt="NFT #001" /></div>
-              <div class="nft-back">
-                <h3>Legendary #001</h3>
-                <p>Exclusive in‑app utilities</p>
-              </div>
-            </div>
-          </div>
+    <div id="mint-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">×</span>
+            <p>Mint will be available soon</p>
         </div>
-        <div class="nft-position-wrapper" data-position="right">
-          <div class="nft-wrapper">
-            <div class="nft-card" data-nft="epic">
-              <div class="nft-front"><img src="assets/nft2.png" alt="NFT #002" /></div>
-              <div class="nft-back">
-                <h3>Epic #002</h3>
-                <p>Boosted yield tiers</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="nft-position-wrapper" data-position="left">
-          <div class="nft-wrapper">
-            <div class="nft-card" data-nft="rare">
-              <div class="nft-front"><img src="assets/nft3.png" alt="NFT #003" /></div>
-              <div class="nft-back">
-                <h3>Rare #003</h3>
-                <p>Governance voting power</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
 
-    <section class="somnia" id="somnia">
-      <h2>Built on Somnia</h2>
-      <p>Somnia is a next‑generation blockchain designed for speed and scalability. It powers AIvoroFI with low fees, high throughput, and robust support for DeFi and NFT innovation – making it the perfect foundation for our vision.</p>
-    </section>
-
-    <section class="roadmap" id="roadmap">
-      <h2>Our Roadmap</h2>
-      <div class="roadmap-timeline">
-        <div class="roadmap-item"><div class="roadmap-box"><h3>Q2 2025</h3><p>Launch of Initial NFT Collection</p></div></div>
-        <div class="roadmap-item"><div class="roadmap-box"><h3>Q4 2025</h3><p>Launch of AI‑Driven Aggregator</p></div></div>
-      </div>
-    </section>
-
-    <footer class="footer" id="footer">
-      <h2>Stay Connected</h2>
-      <p><a href="https://twitter.com/AIvoroFI">Twitter: @AIvoroFI</a></p>
-      <p><a href="mailto:AIvoroFI@gmail.com">Email: AIvoroFI@gmail.com</a></p>
-      <a id="mint-btn" class="mint-btn">Mint</a>
-    </footer>
-  </div>
-
-  <!-- modal mint notice -->
-  <div id="mint-modal" class="modal">
-    <div class="modal-content"><span class="close" id="close-modal">×</span><p>Mint will be available soon</p></div>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
