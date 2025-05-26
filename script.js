@@ -25,7 +25,6 @@ function animate() {
   points.rotation.y += 0.001;
   renderer.render(scene, camera);
 }
-
 animate();
 
 gsap.registerPlugin(ScrollTrigger);
@@ -52,7 +51,7 @@ gsap.utils.toArray("section").forEach((sec, i) => {
 });
 
 document.getElementById("assistant").addEventListener("click", () => {
-  alert("Assistant activated.");
+  alert("Hello! I'm your AI assistant.");
 });
 
 document.getElementById("mint").addEventListener("click", () => {
