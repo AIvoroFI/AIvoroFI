@@ -1,12 +1,12 @@
 body { margin: 0; padding: 0; font-family: 'Orbitron', sans-serif; background-color: #000; color: #fff; }
 
-.container { width: 1140px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+.container { max-width: 1140px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
 
 .header { height: 80px; display: flex; align-items: center; background-color: #000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 
 .logo { height: 32px; }
 
-.nav { margin-left: auto; display: flex; gap: 40px; }
+.nav { margin-left: auto; display: flex; gap: 40px; flex-wrap: wrap; }
 
 .nav a { color: #fff; text-decoration: none; font-size: 16px; letter-spacing: 1px; }
 
@@ -28,9 +28,9 @@ body { margin: 0; padding: 0; font-family: 'Orbitron', sans-serif; background-co
 
 .cta-section { background: #111; padding: 100px 0; }
 
-.cta-container { display: flex; justify-content: space-between; gap: 60px; }
+.cta-container { display: flex; justify-content: space-between; gap: 60px; flex-wrap: wrap; }
 
-.cta-block { width: 50%; background-color: #1a1a1a; padding: 32px; border-radius: 12px; box-shadow: 0 0 24px rgba(162, 73, 245, 0.2); }
+.cta-block { flex: 1 1 100%; background-color: #1a1a1a; padding: 32px; border-radius: 12px; box-shadow: 0 0 24px rgba(162, 73, 245, 0.2); margin-bottom: 24px; }
 
 .cta-block h2 { font-size: 28px; color: #a249f5; margin-bottom: 16px; }
 
@@ -39,4 +39,20 @@ body { margin: 0; padding: 0; font-family: 'Orbitron', sans-serif; background-co
 .btn { display: inline-block; padding: 14px 28px; background: linear-gradient(90deg, #a249f5, #c96eff); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; transition: box-shadow 0.3s ease; }
 
 .btn:hover { box-shadow: 0 0 16px rgba(194, 110, 255, 0.6); }
+
+@media (max-width: 768px) { .header { flex-direction: column; align-items: flex-start; padding: 10px 20px; height: auto; }
+
+.nav { margin-left: 0; flex-direction: column; gap: 16px; margin-top: 10px; }
+
+.hero { padding: 60px 0; }
+
+.hero-title { font-size: 36px; }
+
+.hero-subtitle { font-size: 16px; }
+
+.hero-robot { position: static; width: 100%; margin-top: 40px; }
+
+.cta-container { flex-direction: column; }
+
+.cta-block { width: 100%; } }
 
