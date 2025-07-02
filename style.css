@@ -14,10 +14,13 @@ body {
 }
 
 .header {
+  padding: 12px 0;
+}
+
+.header-inner {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px 0;
+  justify-content: flex-start;
 }
 
 .logo {
@@ -25,12 +28,12 @@ body {
 }
 
 .main-content {
-  padding: 40px 0;
+  padding: 48px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 24px;
+  gap: 32px;
 }
 
 .hero-title {
@@ -49,7 +52,7 @@ body {
 
 .info-block {
   max-width: 700px;
-  margin: 16px 0;
+  margin: 24px 0;
 }
 
 .info-block h2 {
@@ -89,10 +92,11 @@ body {
 }
 
 .btn {
-  display: inline-block;
+  display: block;
   min-width: 180px;
   max-width: 220px;
   padding: 14px 32px;
+  margin: 0 auto;
   background: linear-gradient(90deg, #a249f5, #c96eff);
   color: #fff;
   text-decoration: none;
@@ -109,7 +113,7 @@ body {
 
 .footer {
   background-color: #111;
-  padding: 40px 0;
+  padding: 48px 0;
   text-align: center;
   font-size: 14px;
   color: #ccc;
@@ -150,11 +154,16 @@ body {
     font-size: 15px;
   }
 
-  .btn {
-    width: auto;
-  }
-
   .mint-section p {
     font-size: 15px;
   }
-}
+
+  .btn {
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .header-inner {
+    justify-content: center;
+  }
+} 
