@@ -7,7 +7,6 @@
   <link rel="icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@solana/wallet-adapter-base@0.9.20/ui/styles.css" />
 </head>
 <body>
   <header class="header">
@@ -70,11 +69,31 @@
   <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@latest/lib/index.iife.js"></script>
   <script>
     const connectBtn = document.getElementById('connect-btn');
+
     const wallets = [
-      { name: 'Phantom', provider: window?.phantom?.solana },
-      { name: 'Solflare', provider: window?.solflare },
-      { name: 'Backpack', provider: window?.backpack?.solana }
+      {
+        name: 'Phantom',
+        provider: window?.phantom?.solana,
+        installUrl: 'https://phantom.app/ul/v1/connect?app_url=https://alvorofi.com',
+        desktopInstall: 'https://phantom.app/'
+      },
+      {
+        name: 'Solflare',
+        provider: window?.solflare,
+        installUrl: 'https://solflare.com/access-wallet',
+        desktopInstall: 'https://solflare.com/download'
+      },
+      {
+        name: 'Backpack',
+        provider: window?.backpack?.solana,
+        installUrl: 'https://backpack.app/',
+        desktopInstall: 'https://backpack.app/'
+      }
     ];
+
+    function isMobile() {
+      return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    }
 
     function showWalletModal() {
       const modal = document.createElement('div');
@@ -83,27 +102,30 @@
       modal.style.left = '0';
       modal.style.width = '100vw';
       modal.style.height = '100vh';
-      modal.style.background = 'rgba(0,0,0,0.8)';
+      modal.style.background = 'rgba(0,0,0,0.85)';
       modal.style.display = 'flex';
       modal.style.flexDirection = 'column';
       modal.style.justifyContent = 'center';
       modal.style.alignItems = 'center';
       modal.style.zIndex = '9999';
 
-      wallets.forEach(({ name, provider }) => {
+      wallets.forEach(({ name, provider, installUrl, desktopInstall }) => {
         const btn = document.createElement('button');
-        btn.textContent = provider ? name : `${name} (not installed)`;
-        btn.disabled = !provider;
+        btn.textContent = name;
         btn.className = 'btn';
         btn.style.margin = '10px';
         btn.onclick = async () => {
-          try {
-            const resp = await provider.connect();
-            connectBtn.textContent = resp.publicKey.toString().slice(0, 4) + '...' + resp.publicKey.toString().slice(-4);
-          } catch (e) {
-            console.error(e);
-          } finally {
-            document.body.removeChild(modal);
+          if (provider) {
+            try {
+              const resp = await provider.connect();
+              connectBtn.textContent = resp.publicKey.toString().slice(0, 4) + '...' + resp.publicKey.toString().slice(-4);
+            } catch (e) {
+              console.error(e);
+            } finally {
+              document.body.removeChild(modal);
+            }
+          } else {
+            window.location.href = isMobile() ? installUrl : desktopInstall;
           }
         };
         modal.appendChild(btn);
